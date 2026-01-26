@@ -1,4 +1,4 @@
-import { NavLink } from 'react-router-dom'
+import { NavLink, useLocation } from 'react-router-dom'
 import {
   BsFillHouseFill,
   BsPeopleFill,
@@ -10,16 +10,40 @@ import {
   from "react-icons/bs";
 import { CgProfile } from "react-icons/cg";
 import s from './Navbar.module.scss';
+import { useEffect, useState } from 'react';
+import cn from 'classnames';
 
 export const Navbar = () => {
+  const [burgerIsOpen, setBurgerIsOpen] = useState(false);
+  const location = useLocation();
+
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (!(e.target as HTMLElement).closest(`.${s.navbar}`) && (window.innerWidth <= 1280)) {
+        setBurgerIsOpen(false);
+      }
+    }
+    document.addEventListener('mousedown', handleClickOutside);
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    }
+  }, [location.pathname]);
+
   return (
-    <nav className={s.navbar}>
+    <nav
+      className={cn(s.navbar, { [s.navbar_open]: burgerIsOpen })}
+
+    >
       <ul className={s.nav_items}>
-        <button className={s.burger_btn}>
-          <BsIndent className={s.icon} />
+        <button
+          className={s.burger_btn}
+          onClick={() => setBurgerIsOpen(!burgerIsOpen)}
+        >
+          <BsIndent className={`${s.icon} ${s.burger_icon}`} />
         </button>
         <li className={s.nav_item}>
-          <NavLink to="/kanban">
+          <NavLink to="/">
             <BsFillHouseFill className={s.icon} />
             <span>Kanban</span>
           </NavLink></li>

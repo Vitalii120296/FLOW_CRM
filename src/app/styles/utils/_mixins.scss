@@ -7,7 +7,7 @@
 }
 
 @mixin on-tablet {
-  @media (min-width: $tablet-min-width) and (max-width: ($desctop-min-width - 1)) {
+  @media (min-width: $tablet-min-width) and (max-width: ($desktop-min-width - 1)) {
     @content;
   }
 }
@@ -38,6 +38,6 @@
   @include on-desktop {
     padding-inline: 32px;
     margin-inline: auto;
-    max-width: 1200px;
+    max-width: 1280px;
   }
 }
