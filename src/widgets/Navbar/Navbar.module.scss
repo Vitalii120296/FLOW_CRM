@@ -4,70 +4,139 @@
 .navbar {
   color: $textSecondary;
   background-color: $bgc;
-  padding: 1rem;
+  padding: 0.5rem;
   border-radius: 12px;
-  width: 80px;
+  width: 60px;
   height: 100%;
+  box-sizing: border-box;
+  position: absolute;
+  top: 0;
+  left: 0;
+  transition: width 0.3s ease;
+  overflow: hidden;
+  box-shadow:
+    4px 0 10px $bgc,
+    4px 0 15px $bgc,
+    8px 0 25px $bgc;
 
-  &:hover .nav_items .nav_item a span {
-    width: 100px;
-    overflow: visible;
-    transition: width 0.3s ease;
+  @include on-desktop {
+    width: 225px;
   }
 
   .nav_items {
     display: flex;
     flex-direction: column;
     gap: 1rem;
+    align-items: start;
+    position: relative;
+    padding-top: 30px;
+    box-sizing: border-box;
+    width: 100%;
 
     .burger_btn {
       display: flex;
       align-items: center;
-      justify-content: end;
+      justify-content: right;
       background-color: $bgc;
       font-size: 20px;
-      transform: translateX(20px);
       color: $textSecondary;
+      background-color: #fff;
+      position: absolute;
+      height: 20px;
+      top: 0;
+      right: 0;
+      left: 0;
+      padding: 0;
+      background-color: transparent;
+
+      .burger_icon {
+        transition:
+          transform 0.5s ease,
+          color 0.3s ease;
+      }
+
+      @include on-desktop {
+        display: none;
+      }
     }
+
     .nav_item {
       display: flex;
+      justify-content: center;
       align-items: center;
+      width: inherit;
 
       a {
         display: flex;
         align-items: center;
         justify-content: center;
-        flex-direction: column;
         color: inherit;
         font-size: 16px;
-        gap: 10px;
         width: 100%;
-        padding: 8px 0 8px 8px;
+        padding: 8px 10px;
+        box-sizing: border-box;
         transition: all 0.3s ease;
 
+        @include on-desktop {
+          gap: 10px;
+        }
+
         .icon {
-          font-size: 30px;
+          flex-shrink: 0;
+          font-size: 25px;
           transition: all 0.3s ease;
         }
 
         span {
           display: flex;
+          opacity: 0;
           width: 0px;
-          overflow: hidden;
           transition: width 0.3s ease;
+          text-wrap: nowrap;
+          transition:
+            width 0.3s ease,
+            opacity 0.3s ease;
+
+          @include on-desktop {
+            opacity: 1;
+            width: 150px;
+          }
         }
       }
 
       a:hover {
         text-decoration: none;
         background-color: $bgBlock;
-        border-radius: 5px;
+        border-radius: 15px;
         color: $primary;
         transform: scale(1.05);
       }
 
       a:hover .icon {
         animation: icon_hover 0.8s ease;
+      }
+    }
+  }
+
+  &_open {
+    width: 225px;
+
+    .nav_items {
+      .burger_btn {
+        .burger_icon {
+          color: $primary;
+          transform: rotate(180deg);
+        }
+      }
+      .nav_item {
+        a {
+          gap: 10px;
+
+          span {
+            width: 150px;
+            opacity: 1;
+          }
+        }
       }
     }
   }

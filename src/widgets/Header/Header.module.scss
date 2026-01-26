@@ -1,6 +1,7 @@
 @use '@styles/index' as *;
 
 .header {
+  z-index: 1;
   height: 100px;
   background-color: $bgBlock;
   color: $text;
