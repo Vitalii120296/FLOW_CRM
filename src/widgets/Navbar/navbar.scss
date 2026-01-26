@@ -5,14 +5,30 @@
   color: $textSecondary;
   background-color: $bgc;
   padding: 1rem;
-  border-radius: 12px;
-  width: 80px;
+  border-radius: 8px;
+  width: 170px;
   height: 100%;
 
-  &:hover .nav_items .nav_item a span {
-    width: 100px;
-    overflow: visible;
-    transition: width 0.3s ease;
+  @include on-mobile {
+    width: 80px;
+
+    .nav_items .nav_item {
+      a {
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+      }
+    }
+
+    &:hover {
+      width: 80px;
+      transition: width 0.3s ease;
+    }
+    &:hover .nav_items .nav_item a span {
+      // width: 100%;
+      overflow: visible;
+      transition: width 0.3s ease;
+    }
   }
 
   .nav_items {
@@ -20,30 +36,24 @@
     flex-direction: column;
     gap: 1rem;
 
-    .burger_btn {
-      display: flex;
-      align-items: center;
-      justify-content: end;
-      background-color: $bgc;
-      font-size: 20px;
-      transform: translateX(20px);
-      color: $textSecondary;
-    }
     .nav_item {
       display: flex;
       align-items: center;
 
       a {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        flex-direction: column;
         color: inherit;
         font-size: 16px;
+        display: flex;
         gap: 10px;
+        align-items: center;
         width: 100%;
         padding: 8px 0 8px 8px;
         transition: all 0.3s ease;
+
+        @include on-mobile {
+          justify-content: center;
+          padding: 8px;
+        }
 
         .icon {
           font-size: 30px;
@@ -52,9 +62,12 @@
 
         span {
           display: flex;
-          width: 0px;
-          overflow: hidden;
-          transition: width 0.3s ease;
+          width: 100%;
+
+          @include on-mobile {
+            width: 0px;
+            overflow: hidden;
+          }
         }
       }
 
