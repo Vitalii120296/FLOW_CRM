@@ -1,6 +1,6 @@
 1. Запускаєш Docker
 2. Стартуєш проєкт -
-   copy .env.example .evv
+   copy .env.example .env
    docker compose up
 3. Відкриваєш браузер - http://localhost:5173
 4. Пишеш код як зазвичай VS Code
