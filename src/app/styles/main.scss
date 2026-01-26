@@ -1,6 +1,113 @@
-@forward './utils/extends';
-@forward './utils/mixins';
-@forward './utils/vars';
-@forward './utils/normalize';
-@forward './fonts';
-@forward './typography';
+@use './index' as *;
+@use './utils/normalize';
+
+#root {
+  // max-width: $desktop-min-width; // Зʼявляються края по боках коли > 1280px
+  margin: 0 auto;
+  text-align: center;
+  min-width: 320px;
+}
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background-color: $bgc;
+  color: $text;
+  // font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  transition:
+    background-color 0.3s,
+    color 0.3s;
+}
+
+.app {
+  min-height: 100vh;
+
+  display: flex;
+  flex-direction: column;
+
+  // header {
+  //   height: 100px;
+  //   box-sizing: border-box;
+  //   background-color: #fff;
+  // }
+
+  main {
+    display: flex;
+    flex: 1;
+    box-sizing: border-box;
+    gap: 15px;
+    @include on-tablet {
+      padding: 32px 0 64px;
+    }
+
+    @include on-desktop {
+      padding: 56px 0 80px;
+    }
+
+    nav {
+      background-color: $bgBlock;
+      padding: 1rem;
+      border-radius: 8px;
+      width: 190px;
+      height: 100%;
+    }
+  }
+
+  footer {
+    height: 100px;
+    box-sizing: border-box;
+  }
+}
+
+a {
+  color: $primary;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+button {
+  background-color: $primary;
+  color: $text;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition:
+    background-color 0.3s,
+    color 0.3s;
+
+  &:hover {
+    background-color: $primary;
+  }
+}
+input,
+textarea {
+  background-color: $bgBlock;
+  color: $text;
+  border: 1px solid $border;
+  padding: 0.5rem;
+  border-radius: 4px;
+  transition:
+    background-color 0.3s,
+    color 0.3s,
+    border-color 0.3s;
+  &:focus {
+    border-color: $primary;
+    outline: none;
+  }
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: $text;
+  margin-bottom: 1rem;
+}
+p {
+  color: $textSecondary;
+  margin-bottom: 1rem;
+}
