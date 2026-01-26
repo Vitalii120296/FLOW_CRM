@@ -30,6 +30,8 @@ export const Navbar = () => {
     }
   }, [location.pathname]);
 
+  const isActive = ({ isActive }: { isActive: boolean }) => isActive ? s.active : '';
+
   return (
     <nav
       className={cn(s.navbar, { [s.navbar_open]: burgerIsOpen })}
@@ -43,32 +45,32 @@ export const Navbar = () => {
           <BsIndent className={`${s.icon} ${s.burger_icon}`} />
         </button>
         <li className={s.nav_item}>
-          <NavLink to="/">
+          <NavLink to="/" className={isActive}>
             <BsFillHouseFill className={s.icon} />
             <span>Kanban</span>
           </NavLink></li>
         <li className={s.nav_item}>
-          <NavLink to="/clients">
+          <NavLink to="/clients" className={isActive}>
             <BsPeopleFill className={s.icon} />
             <span>Clients</span>
           </NavLink></li>
         <li className={s.nav_item}>
-          <NavLink to="/clients-details">
+          <NavLink to="/clients-details" className={isActive}>
             <BsPencilSquare className={s.icon} />
             <span>Clients details</span>
           </NavLink></li>
         <li className={s.nav_item}>
-          <NavLink to="/profile">
+          <NavLink to="/profile" className={isActive}>
             <CgProfile className={s.icon} />
             <span>Profile</span>
           </NavLink></li>
         <li className={s.nav_item}>
-          <NavLink to="/user-management">
+          <NavLink to="/user-management" className={isActive}>
             <BsGearFill className={s.icon} />
             <span>User Management</span>
           </NavLink></li>
         <li className={s.nav_item}>
-          <NavLink to="/properties">
+          <NavLink to="/properties" className={isActive}>
             <BsBuilding className={s.icon} />
             <span>Properties</span>
           </NavLink></li>

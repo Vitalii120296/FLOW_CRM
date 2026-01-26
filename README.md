@@ -8,6 +8,8 @@
    hot reload працює автоматично
 5. Закінчив роботу - Ctrl + C -> docker compose down
 
+icons - https://react-icons.github.io/react-icons/icons/bs/
+
 ШПАРГАЛКА
 Ситуація Команда
 Почати роботу docker compose up
