@@ -66,6 +66,10 @@
       align-items: center;
       width: inherit;
 
+      .active {
+        color: $primary;
+      }
+
       a {
         display: flex;
         align-items: center;
