@@ -1,0 +1,159 @@
+@use '@styles/index' as *;
+
+.header {
+  height: 100px;
+  background-color: $bgBlock;
+  color: $text;
+
+  &__inner {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  /* ===== LOGO ===== */
+  &__logo {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+
+    &::before,
+    &::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: linear-gradient(to right, #a9dfd8, #f2c8ed, #f2994a);
+      transform: scaleX(0);
+      transition: transform 0.4s ease;
+    }
+
+    &::before {
+      top: -6px;
+      transform-origin: left;
+    }
+
+    &::after {
+      bottom: -6px;
+      transform-origin: right;
+    }
+
+    &:hover::before,
+    &:hover::after {
+      transform: scaleX(1);
+    }
+
+    &_name {
+      font-weight: 800;
+      font-size: 32px;
+    }
+
+    &_type {
+      display: flex;
+      gap: 2px;
+      font-weight: 400;
+      font-size: 22px;
+    }
+  }
+
+  /* ===== PROFILE ===== */
+  &__profile {
+    display: flex;
+    align-items: center;
+  }
+
+  &__profileWrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  /* показываем дропдаун */
+  &__profileWrapper:hover &__profileDropdown {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+
+  &__profileAvatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: 2px solid #fff;
+    overflow: hidden;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+
+  /* ===== TRIGGER ===== */
+  &__profileTrigger {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    cursor: pointer;
+  }
+
+  &__profileUserName {
+    font-size: 16px;
+    font-weight: 500;
+    white-space: nowrap;
+  }
+
+  /* ===== DROPDOWN ===== */
+  &__profileDropdown {
+    position: absolute;
+    top: calc(100% + 6px);
+    left: 0;
+
+    min-width: 220px;
+    padding: 12px 14px;
+
+    background-color: $bgBlock;
+    border-radius: 8px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-6px);
+    transition: all 0.2s ease;
+
+    z-index: 20;
+  }
+
+  &__profileName {
+    font-size: 14px;
+    font-weight: 600;
+    // margin-bottom: 4px;
+  }
+
+  &__profileEmail {
+    font-size: 13px;
+  }
+}
+
+/* ===== CRM COLORS ===== */
+.c {
+  color: #a9dfd8;
+}
+
+.r {
+  color: #f2c8ed;
+}
+
+.m {
+  color: #f2994a;
+}
