@@ -1,6 +1,6 @@
 
 export const Kanban = () => {
   return (
-    <div>HomePage</div>
+    <div>kanban</div>
   )
 }
