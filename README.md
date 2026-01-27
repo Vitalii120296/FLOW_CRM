@@ -53,3 +53,5 @@ src/
 │
 ├─ index.css
 └─ main.tsx
+
+.
