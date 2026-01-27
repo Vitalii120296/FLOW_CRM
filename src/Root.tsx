@@ -1,7 +1,8 @@
 import { HashRouter as Router, Route, Routes } from 'react-router-dom'
 import { App } from './app/App.tsx'
-import { DashBoard } from './pages/DashBoard/DashBoard.tsx'
-import { Kanban } from './pages/Kanban/Kanban.tsx'
+import { DashBoard } from './pages/DashBoardPage/DashBoard.tsx'
+import { Kanban } from './pages/KanbanPage/Kanban.tsx'
+import { ClientsPage } from './pages/ClientsPage/ClientsPage.tsx'
 
 export const Root = () => {
   return (
@@ -11,6 +12,7 @@ export const Root = () => {
           <Route index element={<Kanban />} />
           <Route path="dashboard" element={<DashBoard />} />
           <Route path="profile" />
+          <Route path="clients" element={<ClientsPage />} />
         </Route>
       </Routes>
     </Router>
