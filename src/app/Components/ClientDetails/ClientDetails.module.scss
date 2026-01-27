@@ -1,0 +1,21 @@
+@use '../../styles/utils/vars' as *;
+
+.client_details {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+  background-color: rgba(0, 0, 0, 0.5);
+
+  &__popup {
+    position: relative;
+    z-index: 1;
+    background-color: $bgc;
+    border-radius: 12px;
+    padding: 24px;
+    max-width: 600px;
+    width: 100%;
+  }
+}

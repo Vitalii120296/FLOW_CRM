@@ -10,7 +10,7 @@ export const App = () => {
       <div className="app">
         <Header />
 
-        <main className='container'>
+        <main className="container">
           <Navbar />
           <Outlet />
         </main>
