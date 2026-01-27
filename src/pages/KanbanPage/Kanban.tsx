@@ -1,8 +1,8 @@
 import { useState } from 'react'
-import { ClientDetails } from '../../app/Components/ClientDetails/ClientDetails'
 import { ProgressCard } from '../../app/Components/ProgressCard/ProgressCard'
 import type { Client, ClientStatus } from '../../types'
 import s from './Kanban.module.scss'
+import { ClientDetails } from '../../widgets/ClientDetails/ClientDetails'
 
 export const Kanban = () => {
   const clientStatus: ClientStatus[] = ['new', 'in_progress', 'done']
