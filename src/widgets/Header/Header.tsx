@@ -1,7 +1,6 @@
 import { Link } from 'react-router-dom'
-
-import ArrowDown from '@/assets/icons/arrow-down.svg'
-import Avatar from '@/assets/icons/avatar.png'
+import { BsCaretDownFill } from 'react-icons/bs'
+import Avatar from '/public/icons/avatar.png'
 import styles from './Header.module.scss'
 
 export const Header = () => {
@@ -27,8 +26,7 @@ export const Header = () => {
               {/* ТРИГГЕР */}
               <div className={styles.header__profileTrigger}>
                 <p className={styles.header__profileUserName}>Name Surname</p>
-                <img src={ArrowDown} alt="arrow" className="icon" />
-
+                <BsCaretDownFill className="icon" />
                 {/* dropdown */}
                 <div className={styles.header__profileDropdown}>
                   <p className={styles.header__profileName}>Name Surname</p>
