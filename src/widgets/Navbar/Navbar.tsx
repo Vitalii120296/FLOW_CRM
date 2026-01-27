@@ -5,75 +5,74 @@ import {
   BsPencilSquare,
   BsGearFill,
   BsBuilding,
-  BsIndent
-}
-  from "react-icons/bs";
-import { CgProfile } from "react-icons/cg";
-import s from './Navbar.module.scss';
-import { useEffect, useState } from 'react';
-import cn from 'classnames';
+  BsIndent,
+} from 'react-icons/bs'
+import { CgProfile } from 'react-icons/cg'
+import s from './Navbar.module.scss'
+import { useEffect, useState } from 'react'
+import cn from 'classnames'
 
 export const Navbar = () => {
-  const [burgerIsOpen, setBurgerIsOpen] = useState(false);
-  const location = useLocation();
+  const [burgerIsOpen, setBurgerIsOpen] = useState(false)
+  const location = useLocation()
 
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
-      if (!(e.target as HTMLElement).closest(`.${s.navbar}`) && (window.innerWidth <= 1280)) {
-        setBurgerIsOpen(false);
+      if (!(e.target as HTMLElement).closest(`.${s.navbar}`) && window.innerWidth <= 1280) {
+        setBurgerIsOpen(false)
       }
     }
-    document.addEventListener('mousedown', handleClickOutside);
+    document.addEventListener('mousedown', handleClickOutside)
 
     return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener('mousedown', handleClickOutside)
     }
-  }, [location.pathname]);
+  }, [location.pathname])
 
-  const isActive = ({ isActive }: { isActive: boolean }) => isActive ? s.active : '';
+  const isActive = ({ isActive }: { isActive: boolean }) => (isActive ? s.active : '')
 
   return (
-    <nav
-      className={cn(s.navbar, { [s.navbar_open]: burgerIsOpen })}
-
-    >
+    <nav className={cn(s.navbar, { [s.navbar_open]: burgerIsOpen })}>
       <ul className={s.nav_items}>
-        <button
-          className={s.burger_btn}
-          onClick={() => setBurgerIsOpen(!burgerIsOpen)}
-        >
+        <button className={s.burger_btn} onClick={() => setBurgerIsOpen(!burgerIsOpen)}>
           <BsIndent className={`${s.icon} ${s.burger_icon}`} />
         </button>
         <li className={s.nav_item}>
           <NavLink to="/" className={isActive}>
             <BsFillHouseFill className={s.icon} />
             <span>Kanban</span>
-          </NavLink></li>
+          </NavLink>
+        </li>
         <li className={s.nav_item}>
           <NavLink to="/clients" className={isActive}>
             <BsPeopleFill className={s.icon} />
             <span>Clients</span>
-          </NavLink></li>
+          </NavLink>
+        </li>
         <li className={s.nav_item}>
           <NavLink to="/clients-details" className={isActive}>
             <BsPencilSquare className={s.icon} />
             <span>Clients details</span>
-          </NavLink></li>
+          </NavLink>
+        </li>
         <li className={s.nav_item}>
           <NavLink to="/profile" className={isActive}>
             <CgProfile className={s.icon} />
             <span>Profile</span>
-          </NavLink></li>
+          </NavLink>
+        </li>
         <li className={s.nav_item}>
           <NavLink to="/user-management" className={isActive}>
             <BsGearFill className={s.icon} />
             <span>User Management</span>
-          </NavLink></li>
+          </NavLink>
+        </li>
         <li className={s.nav_item}>
           <NavLink to="/properties" className={isActive}>
             <BsBuilding className={s.icon} />
             <span>Properties</span>
-          </NavLink></li>
+          </NavLink>
+        </li>
       </ul>
     </nav>
   )

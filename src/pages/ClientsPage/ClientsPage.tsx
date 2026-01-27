@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import type { Client, ClientFilters, ClientStatus } from '../../types'
 
@@ -30,10 +30,10 @@ export const ClientsPage = () => {
     })
   }, [clients, filters.search, filters.status])
 
+  // NOTE використовуємо page-container клас для сторінки (у міксинах є стилі для нього)
   return (
-    <div className="container">
+    <div className="page-container">
       <ClientsFilter filters={filters} onChange={setSearchParams} />
-
       <ClientsTable clients={filteredClients} />
     </div>
   )

@@ -7,7 +7,7 @@ export type Client = {
   name: string
   email: string
   phone?: string
-
+  sum?: number
   status: ClientStatus
 
   comment?: string
