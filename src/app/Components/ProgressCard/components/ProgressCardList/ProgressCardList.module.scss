@@ -1,0 +1,62 @@
+@use '../../../../styles/utils/vars' as *;
+@use '../../../../styles/utils/mixins' as *;
+
+/* ===== COLUMN ===== */
+.progress_card__column {
+  display: flex;
+  width: 100%;
+  max-height: 500px;
+  overflow: auto;
+
+  @include scroll-bar;
+}
+
+.progress_card__list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  width: 100%;
+  padding: 1rem 0.8rem 1rem 1rem;
+}
+
+/* ===== CLIENT ITEM ===== */
+.progress_card__client {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  padding: 0.5rem 0 0 1rem;
+  background-color: $border;
+  border-radius: 5px;
+  border-left: 1px solid $textSecondary;
+  cursor: pointer;
+}
+
+.progress_card__row {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 3px;
+}
+
+.progress_card__name {
+  color: $text;
+}
+
+/* ===== ICON ===== */
+.progress_card__icon {
+  flex-shrink: 0;
+  font-size: 14px;
+  transition: color 0.3s ease;
+
+  &--green {
+    color: $success;
+  }
+
+  &--yellow {
+    color: $warning;
+  }
+
+  &--blue {
+    color: $info;
+  }
+}

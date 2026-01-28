@@ -37,7 +37,7 @@ src/
 │ ├─ product/
 │ └─ order/
 │
-├─ features/ # конкретна бізнес-логіка
+├─ services/ # конкретна бізнес-логіка
 │ ├─ auth/
 │ ├─ add-to-cart/
 │ └─ checkout/

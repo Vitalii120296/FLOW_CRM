@@ -1,5 +1,4 @@
 @use '../../styles/utils/vars' as *;
-@use '../../styles/utils/mixins' as *;
 
 .progress_card {
   display: flex;
@@ -10,90 +9,33 @@
   border: 1px solid $border;
   max-height: 1000px;
   height: min-content;
-  &__top_bar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding-bottom: 1rem;
-    position: relative;
-    box-sizing: border-box;
-    padding: 1rem 1rem 1rem 1rem;
+}
 
-    &::after {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      height: 0px;
-      border: 1px solid $border;
-    }
+.progress_card__top_bar {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  box-sizing: border-box;
 
-    .status {
-      padding: 0;
-      margin: 0;
-      font-weight: 400;
-    }
-
-    .add_client {
-      background-color: transparent;
-      padding: 2px;
-      color: $info;
-    }
+  &::after {
+    content: '';
+    position: absolute;
+    inset-inline: 0;
+    bottom: 0;
+    border-bottom: 1px solid $border;
   }
+}
 
-  &__column {
-    display: flex;
-    width: 100%;
-    max-height: 500px;
-    overflow: auto;
+.progress_card__status {
+  margin: 0;
+  padding: 0;
+  font-weight: 400;
+}
 
-    @include scroll-bar;
-
-    ul {
-      display: flex;
-      flex-direction: column;
-      gap: 0.5rem;
-      width: 100%;
-      padding: 1rem 0.8rem 1rem 1rem;
-    }
-
-    .client {
-      display: flex;
-      flex-direction: column;
-      gap: 0.3rem;
-      align-items: flex-start;
-      padding: 0.5rem 0 0 1rem;
-      background-color: $border;
-      border-radius: 5px;
-      border-left: 1px solid $textSecondary;
-      cursor: pointer;
-
-      p {
-        display: flex;
-        gap: 15px;
-        padding: 3px;
-
-        .icon {
-          display: flex;
-          flex-shrink: 0;
-          font-size: 14px;
-
-          &.green {
-            color: $success;
-          }
-          &.yellow {
-            color: $warning;
-          }
-          &.blue {
-            color: $info;
-          }
-        }
-      }
-
-      .name {
-        color: $text;
-      }
-    }
-  }
+.progress_card__add_client {
+  background-color: transparent;
+  color: $info;
+  cursor: pointer;
 }

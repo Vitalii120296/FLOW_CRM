@@ -10,8 +10,8 @@ type Props = {
 export const ClientDetails: React.FC<Props> = ({ client, quit }) => {
   return (
     <>
-      <div className={s.client_details}>
-        <div className={s.client_details__popup}>
+      <div className={s.client_details} onClick={quit}>
+        <div className={s.client_details__popup} onClick={(e) => e.stopPropagation()}>
           <div>{client.name}</div>
           <button onClick={quit}>close</button>
         </div>
