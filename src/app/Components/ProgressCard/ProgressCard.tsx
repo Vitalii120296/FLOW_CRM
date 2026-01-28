@@ -5,6 +5,8 @@ import { getClientsTestApi } from '../../../shared/api/clients.test-api'
 import { BsFillCircleFill } from 'react-icons/bs'
 import cn from 'classnames'
 
+import { ClientCreate } from '../../../widgets/ClientCreate/ClientCreate'
+
 type Props = {
   clientStatus: ClientStatus
   setSelectedClient: (client: Client) => void
@@ -12,6 +14,9 @@ type Props = {
 
 export const ProgressCard: React.FC<Props> = ({ clientStatus, setSelectedClient }) => {
   const [clients, setClients] = useState<Client[]>([])
+
+  // NOTE: для модалки додавання
+  const [isModalOpen, setIsModalOpen] = useState(false)
 
   useEffect(() => {
     getClientsTestApi().then((data) => {
@@ -37,14 +42,14 @@ export const ProgressCard: React.FC<Props> = ({ clientStatus, setSelectedClient 
     setSelectedClient(client)
   }
 
-  const addClient = () => {}
+  // const addClient = () => {}
 
   return (
     <>
       <article className={s.progress_card}>
         <div className={s.progress_card__top_bar}>
           <h2 className={cn('h3', s.status)}>{status(clientStatus)}</h2>
-          <button type="button" className={s.add_client} onClick={addClient}>
+          <button type="button" className={s.add_client} onClick={() => setIsModalOpen(true)}>
             + Add Client
           </button>
         </div>
@@ -72,6 +77,9 @@ export const ProgressCard: React.FC<Props> = ({ clientStatus, setSelectedClient 
           </ul>
         </div>
       </article>
+
+      {/* // NOTE: модалка */}
+      {isModalOpen && <ClientCreate onClose={() => setIsModalOpen(false)} />}
     </>
   )
 }
