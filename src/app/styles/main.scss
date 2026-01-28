@@ -91,7 +91,8 @@ h4,
 h5,
 h6 {
   color: $text;
-  margin-bottom: 1rem;
+  // NOTE: поки шо прибрав, бо дуже не зручно, текст зʼїзжає
+  // margin-bottom: 1rem;
 }
 p {
   color: $textSecondary;

@@ -1,5 +1,5 @@
 import React from 'react'
-import type { Client } from '../../../types'
+import type { Client } from '../../types'
 import s from './ClientDetails.module.scss'
 
 type Props = {

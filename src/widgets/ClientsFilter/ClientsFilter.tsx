@@ -1,7 +1,9 @@
 import type React from 'react'
 import type { ClientFilters, ClientStatus } from '../../types'
+import { ClientCreate } from '../ClientCreate/ClientCreate'
 
 import styles from './ClientsFilter.module.scss'
+import { useState } from 'react'
 
 type Props = {
   filters: ClientFilters
@@ -9,6 +11,8 @@ type Props = {
 }
 
 export const ClientsFilter: React.FC<Props> = ({ filters, onChange }) => {
+  const [isModalOpen, setIsModalOpen] = useState(false)
+
   const handleSearchChange = (value: string) => {
     const params = new URLSearchParams()
 
@@ -37,23 +41,33 @@ export const ClientsFilter: React.FC<Props> = ({ filters, onChange }) => {
     onChange(params)
   }
   return (
-    <div className={styles.filters}>
-      <input
-        type="text"
-        placeholder="Search client"
-        value={filters.search ?? ''}
-        onChange={(e) => handleSearchChange(e.target.value)}
-      />
+    <>
+      <div className={styles.filters}>
+        <h1 className="h2">Leads</h1>
 
-      <select
-        value={filters.status ?? 'all'}
-        onChange={(e) => handleStatusChange(e.target.value as ClientStatus | 'all')}
-      >
-        <option value="all">All</option>
-        <option value="new">New</option>
-        <option value="in_progress">In progress</option>
-        <option value="done">Done</option>
-      </select>
-    </div>
+        <div className={styles.controls}>
+          <input
+            type="text"
+            placeholder="Search client"
+            value={filters.search ?? ''}
+            onChange={(e) => handleSearchChange(e.target.value)}
+          />
+
+          <select
+            value={filters.status ?? 'all'}
+            onChange={(e) => handleStatusChange(e.target.value as ClientStatus | 'all')}
+          >
+            <option value="all">All</option>
+            <option value="new">New</option>
+            <option value="in_progress">In progress</option>
+            <option value="done">Done</option>
+          </select>
+
+          <button onClick={() => setIsModalOpen(true)}>Add client</button>
+        </div>
+      </div>
+
+      {isModalOpen && <ClientCreate onClose={() => setIsModalOpen(false)} />}
+    </>
   )
 }
