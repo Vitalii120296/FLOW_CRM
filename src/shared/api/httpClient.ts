@@ -1,4 +1,4 @@
-import axios from 'axios'
+import axios, { AxiosError } from 'axios'
 
 export const httpClient = axios.create({
   baseURL: import.meta.env.VITE_API_URL,
@@ -14,24 +14,27 @@ httpClient.interceptors.request.use((request) => {
 
   return request
 })
+*/
 
 httpClient.interceptors.response.use(
-  (response) => response,
+  (res) => res.data,
   (error: AxiosError) => {
     const status = error.response?.status
 
     switch (status) {
+      case 400:
+        throw new Error('Bad Request')
       case 401:
         throw new Error('Unauthorized')
-        break
       case 403:
         throw new Error('Forbidden')
-        break
+      case 404:
+        throw new Error('Not Found')
+      case 409:
       case 500:
         throw new Error('Internal Server Error')
-        break
+      default:
+        throw new Error(`Unexpected error: ${status}`)
     }
-    return Promise.reject(error)
   }
 )
-*/
