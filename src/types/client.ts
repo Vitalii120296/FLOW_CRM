@@ -2,15 +2,21 @@ import type { SystemUser } from './auth'
 
 export type ClientStatus = 'new' | 'in_progress' | 'done'
 
+type ClientNote = {
+  id: string
+  content: string
+}
+
 export type Client = {
   id: string
   name: string
   email: string
   phone?: string
-  sum?: number
+  amount?: number
   status: ClientStatus
 
   comment?: string
+  notes?: ClientNote[]
 
   createdBy: Pick<SystemUser, 'id' | 'firstName' | 'lastName'>
   companyId: string

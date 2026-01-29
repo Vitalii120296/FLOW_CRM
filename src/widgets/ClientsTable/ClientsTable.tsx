@@ -4,6 +4,7 @@ import type { Client } from '../../types'
 
 import styles from './ClientsTable.module.scss'
 import { ClientDetails } from '../ClientDetails/ClientDetails'
+import { statusFormat } from '../../utils/statusFormat'
 
 type Props = {
   clients: Client[]
@@ -45,7 +46,7 @@ export const ClientsTable: React.FC<Props> = ({ clients }) => {
 
                 <td>
                   <span className={styles.status} data-status={client.status}>
-                    {client.status}
+                    {statusFormat(client.status)}
                   </span>
                 </td>
 

@@ -23,18 +23,16 @@ export const ProgressCardList = React.forwardRef<HTMLDivElement, Props>(
         <ul className={s.progress_card__list}>
           {clients.map((client, i) => (
             <Draggable draggableId={client.id} index={i} key={client.id}>
-              {(provided) => (
+              {(provided, snapshot) => (
                 <li
                   ref={provided.innerRef}
                   {...provided.draggableProps}
                   {...provided.dragHandleProps}
-                  style={{
-                    ...provided.draggableProps.style,
-                  }}
-                  className={s.progress_card__client}
+                  className={cn(s.progress_card__client, {
+                    [s.isDraggin]: snapshot.isDragging,
+                  })}
                   onClick={() => selectClient(client)}
                 >
-                  {}
                   <p className={s.progress_card__row}>
                     <BsFillCircleFill
                       aria-hidden="true"
