@@ -5,6 +5,7 @@ import cn from 'classnames'
 import { ClientCreate } from '../../../widgets/ClientCreate/ClientCreate'
 import { ProgressCardList } from './components/ProgressCardList/ProgressCardList'
 import { Droppable } from '@hello-pangea/dnd'
+import { statusFormat } from '../../../utils/statusFormat'
 
 type Props = {
   clients: Client[]
@@ -15,31 +16,23 @@ type Props = {
 export const ProgressCard: React.FC<Props> = ({ clients, columnId, setSelectedClient }) => {
   const [isModalOpen, setIsModalOpen] = useState(false)
 
-  const status = (clientStatus: ClientStatus) => {
-    switch (clientStatus) {
-      case 'new':
-        return 'New'
-      case 'in_progress':
-        return 'In Progress'
-      case 'done':
-        return 'Done'
-      default:
-        return ''
-    }
-  }
+  const status = statusFormat(columnId)
 
   return (
     <>
       <article className={s.progress_card}>
         <div className={s.progress_card__top_bar}>
-          <h2 className={cn('h3', s.progress_card__status)}>{status(columnId)}</h2>
-          <button
-            type="button"
-            className={s.progress_card__add_client}
-            onClick={() => setIsModalOpen(true)}
-          >
-            + Add Client
-          </button>
+          <h2 className={cn('h3', s.progress_card__status)}>{status}</h2>
+          {columnId === 'new' && (
+            <button
+              className={s.progress_card__add_client}
+              onClick={() => {
+                setIsModalOpen(true)
+              }}
+            >
+              + new client
+            </button>
+          )}
         </div>
         <Droppable droppableId={columnId}>
           {(provided) => (

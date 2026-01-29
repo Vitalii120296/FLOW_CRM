@@ -1,6 +1,8 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import type { Client } from '../../types'
 import s from './ClientDetails.module.scss'
+import cn from 'classnames'
+import { statusFormat } from '../../utils/statusFormat'
 
 type Props = {
   client: Client
@@ -8,12 +10,92 @@ type Props = {
 }
 
 export const ClientDetails: React.FC<Props> = ({ client, quit }) => {
+  const [showNotes, setShowNotes] = useState<boolean>(false)
+
+  useEffect(() => {
+    document.body.classList.add('no-scroll')
+
+    return () => {
+      document.body.classList.remove('no-scroll')
+    }
+  }, [])
+
   return (
     <>
-      <div className={s.client_details} onClick={quit}>
+      <div
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="client-title"
+        className={s.client_details}
+        onClick={quit}
+      >
         <div className={s.client_details__popup} onClick={(e) => e.stopPropagation()}>
-          <div>{client.name}</div>
-          <button onClick={quit}>close</button>
+          <div className={s.client_info}>
+            <div className={s.client_info__row}>
+              <label>Name: </label>
+              <p>{client.name}</p>
+            </div>
+            <div className={s.client_info__row}>
+              <label>Email: </label>
+              <p>
+                <a href={`mailto:${client.email}`}>{client.email}</a>
+              </p>
+            </div>
+
+            <div className={s.client_info__row}>
+              <label>Phone: </label>
+              <p>
+                <a href={`tel:+${client.phone}`}>{client.phone}</a>
+              </p>
+            </div>
+            <div className={s.client_info__row}>
+              <label>Status: </label>
+              <p
+                className={cn({
+                  [s.yellow]: client.status === 'in_progress',
+                  [s.green]: client.status === 'new',
+                  [s.blue]: client.status === 'done',
+                })}
+              >
+                {statusFormat(client.status)}
+              </p>
+            </div>
+            <div className={s.client_info__row}>
+              <label>Amount: </label>
+              <p>{client.amount}</p>
+            </div>
+            <div className={s.client_info__row}>
+              <label>Comment: </label>
+              <p>{client.comment}</p>
+            </div>
+          </div>
+          <div className={s.client_notes}>
+            <label>Notes</label>
+            <textarea name="createNote" placeholder="Write your note here"></textarea>
+            <div className={s.client_notes__buttons}>
+              <button onClick={() => {}}>Create</button>
+              <button
+                onClick={() => {
+                  setShowNotes((prev) => !prev)
+                }}
+              >
+                Show all notes
+              </button>
+            </div>
+            <div
+              className={cn(s.client_notes__wrapper, {
+                [s.show]: showNotes,
+              })}
+            >
+              {client.notes
+                ? client.notes.map((note) => (
+                    <div key={note.id} className={s.client_notes__row}>
+                      {note.content}
+                    </div>
+                  ))
+                : 'Empty'}
+            </div>
+          </div>
         </div>
       </div>
     </>
