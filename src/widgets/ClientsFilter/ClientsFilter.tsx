@@ -43,7 +43,7 @@ export const ClientsFilter: React.FC<Props> = ({ filters, onChange }) => {
   return (
     <>
       <div className={styles.filters}>
-        <h1 className="h2">Leads</h1>
+        <h1 className="h2">Clients</h1>
 
         <div className={styles.controls}>
           <input

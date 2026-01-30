@@ -33,7 +33,7 @@ export const ClientCreate: React.FC<Props> = ({ onClose }) => {
 
         <form onSubmit={handleSubmit}>
           <input
-            placeholder="Name"
+            placeholder="Full Name"
             value={name}
             onChange={(e) => setName(e.target.value)}
             required

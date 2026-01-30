@@ -19,12 +19,12 @@ export const ClientsTable: React.FC<Props> = ({ clients }) => {
         <thead>
           <tr>
             <th className={styles.thId}>#</th>
-            <th>Creator</th>
-            <th>Phone number</th>
-            <th>Preferences</th>
-            <th>Status</th>
             <th>Name</th>
             <th>Surname</th>
+            <th>Phone number</th>
+            <th>Comments</th>
+            <th>Status</th>
+            <th>Creator</th>
           </tr>
         </thead>
 
@@ -36,9 +36,8 @@ export const ClientsTable: React.FC<Props> = ({ clients }) => {
               <tr key={client.id} onClick={() => setSelectedClient(client)} className={styles.row}>
                 <td className={styles.tdIndex}>{index + 1}</td>
 
-                <td>
-                  {client.createdBy.firstName} {client.createdBy.lastName}
-                </td>
+                <td>{name}</td>
+                <td>{surname}</td>
 
                 <td>{client.phone ?? '—'}</td>
 
@@ -50,8 +49,9 @@ export const ClientsTable: React.FC<Props> = ({ clients }) => {
                   </span>
                 </td>
 
-                <td>{name}</td>
-                <td>{surname}</td>
+                <td>
+                  {client.createdBy.firstName} {client.createdBy.lastName}
+                </td>
               </tr>
             )
           })}
