@@ -46,7 +46,7 @@ export const ProgressCardList = React.forwardRef<HTMLDivElement, Props>(
                   </p>
                   {client.email && <p className={s.progress_card__row}>{client.email}</p>}
                   {client.phone && <p className={s.progress_card__row}>{client.phone}</p>}
-                  {client.sum && <p className={s.progress_card__row}>{client.sum}</p>}
+                  {client.amount && <p className={s.progress_card__row}>{client.amount}</p>}
                   {client.comment && <p className={s.progress_card__row}>{client.comment}</p>}
                 </li>
               )}

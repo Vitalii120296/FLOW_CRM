@@ -14,6 +14,7 @@ export type Client = {
   phone?: string
   amount?: number
   status: ClientStatus
+  kanbanIndex?: string
 
   comment?: string
   notes?: ClientNote[]
