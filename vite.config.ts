@@ -17,7 +17,7 @@ import react from '@vitejs/plugin-react'
 import path from 'path'
 
 export default defineConfig({
-  base: '/b2b_crm/',
+  base: '/FLOW_CRM/',
   plugins: [
     react({
       babel: {
