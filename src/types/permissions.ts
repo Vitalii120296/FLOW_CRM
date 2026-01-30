@@ -20,7 +20,7 @@ export const ROLE_PERMISSIONS: Record<UserRole, Permission[]> = {
     'client.edit',
   ],
 
-  admin: [
+  owner: [
     'profile.edit',
     'profile.changePassword',
     'profile.restore',
