@@ -34,6 +34,7 @@ export const ClientsPage = () => {
   return (
     <div className="page-container">
       <ClientsFilter filters={filters} onChange={setSearchParams} />
+
       <ClientsTable clients={filteredClients} />
     </div>
   )
