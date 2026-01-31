@@ -1,21 +1,39 @@
 @use '@styles/index' as *;
 
 .wrapper {
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+
   background: $bgBlock;
   border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
   border: 1px solid $border;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
 
+  /* скролл только здесь */
   overflow-x: auto;
+  overflow-y: hidden;
   -webkit-overflow-scrolling: touch;
+  overscroll-behavior-x: contain;
 
   @include scroll-bar;
 }
 
 .table {
   width: 100%;
-  min-width: 900px;
   border-collapse: collapse;
+
+  min-width: 720px;
+}
+
+@include on-mobile {
+  .wrapper {
+    width: calc(100vw - 100px); /* доступная зона справа от navbar */
+  }
+
+  .table {
+    min-width: max-content; /* 🔥 больше НИЧЕГО не режется */
+  }
 }
 
 th,
@@ -34,10 +52,7 @@ th {
   border-bottom: 1px solid #e5e7eb;
 }
 
-.thId {
-  color: $primary;
-}
-
+.thId,
 .tdIndex {
   color: $primary;
 }

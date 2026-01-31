@@ -30,7 +30,7 @@ export const ClientCreate: React.FC<Props> = ({ isOpen, onClose }) => {
 
   return (
     <Modal isOpen={isOpen} onClose={onClose} titleId="client-title" title="Create client">
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className={styles.content}>
         <input
           placeholder="Full Name"
           value={name}

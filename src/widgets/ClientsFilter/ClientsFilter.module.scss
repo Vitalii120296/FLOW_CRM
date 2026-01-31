@@ -35,3 +35,23 @@ select {
 .add_client {
   @extend .button;
 }
+
+@include on-mobile {
+  .filters {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+  }
+
+  .controls {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+  }
+
+  input,
+  select,
+  .add_client {
+    box-sizing: border-box;
+  }
+}

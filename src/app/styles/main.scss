@@ -68,6 +68,8 @@ body {
     width: 100%;
     position: relative;
     box-sizing: border-box;
+
+    // overflow-x: hidden;
   }
 
   footer {
@@ -91,6 +93,7 @@ textarea {
   border: 1px solid $border;
   padding: 0.5rem;
   border-radius: 4px;
+  resize: none;
   transition:
     background-color 0.3s,
     color 0.3s,
