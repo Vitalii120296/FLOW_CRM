@@ -6,6 +6,37 @@
   text-align: center;
   min-width: 320px;
 }
+
+html[data-theme='dark'] {
+  --primary: #a9dfd8;
+  --secondary: #f2c8ed;
+  --bgc: #171821;
+  --bgBlock: #21222d;
+  --text: #ffffff;
+  --textSecondary: #87888c;
+  --border: #2c2e3a;
+  --icons: #87888c;
+  --error: #ed2b19;
+  --warning: #f2994a;
+  --info: #2d9cdb;
+  --success: #27ae60;
+}
+
+html[data-theme='light'] {
+  --primary: #a9dfd8;
+  --secondary: #f2c8ed;
+  --bgc: #ffffff;
+  --bgBlock: #f5f5f5;
+  --text: #171821;
+  --textSecondary: #5a5d7c;
+  --border: #d1d1d6;
+  --icons: #5a5d7c;
+  --error: #ed2b19;
+  --warning: #f2994a;
+  --info: #2d9cdb;
+  --success: #27ae60;
+}
+
 html,
 body {
   margin: 0;

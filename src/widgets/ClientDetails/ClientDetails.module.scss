@@ -1,6 +1,4 @@
-@use '../../app/styles/utils/vars' as *;
-@use '../../app/styles/utils/mixins' as *;
-@use '../../app/styles/utils/extends' as *;
+@use '@styles/index' as *;
 
 .close_modal {
   display: flex;
@@ -50,6 +48,8 @@
   @extend .button;
 }
 .client_notes__show {
+  display: flex;
+  justify-content: space-between;
   @extend .button_secondary;
 }
 .client_notes__row {

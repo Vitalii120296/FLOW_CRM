@@ -1,5 +1,4 @@
-@use './../../app/styles/utils/vars' as *;
-@use './../../app/styles/utils/mixins' as *;
+@use '@styles/index' as *;
 
 .navbar {
   color: $textSecondary;
@@ -50,6 +49,7 @@
       left: 0;
       padding: 0;
       background-color: transparent;
+      border: none;
 
       .burger_icon {
         transition:

@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import type { Client } from '../../types'
 import s from './ClientDetails.module.scss'
 import cn from 'classnames'
 import { statusFormat } from '../../utils/statusFormat'
 import { Modal } from '../../shared/ui/Modal/Modal'
+import { BsCaretDownFill } from 'react-icons/bs'
 
 type Props = {
   client: Client
@@ -12,6 +13,8 @@ type Props = {
 
 export const ClientDetails: React.FC<Props> = ({ client, quit }) => {
   const [showNotes, setShowNotes] = useState<boolean>(false)
+  const [editingField, setEditingField] = useState<keyof Client | null>(null)
+  const [form, setForm] = useState<Client>(client)
 
   useEffect(() => {
     document.body.classList.add('no-scroll')
@@ -21,30 +24,63 @@ export const ClientDetails: React.FC<Props> = ({ client, quit }) => {
     }
   }, [])
 
+  const handleChange = <K extends keyof Client>(field: K, value: Client[K]) => {
+    setForm((prev) => ({
+      ...prev,
+      [field]: value,
+    }))
+  }
+
   return (
     <>
       <Modal isOpen={Boolean(client)} onClose={quit} titleId="client-title" title="Client details">
         <div className={s.client_info}>
-          <div className={s.client_info__row}>
+          <div
+            className={s.client_info__row}
+            onDoubleClick={() => {
+              setEditingField('name')
+            }}
+            onBlur={() => {
+              setEditingField(null)
+            }}
+          >
             <label>Name: </label>
-            <p>{client.name}</p>
+            {editingField === 'name' ? (
+              <input
+                type="text"
+                value={form.name}
+                onChange={(e) => handleChange('name', e.target.value)}
+                onBlur={() => setEditingField(null)}
+                autoFocus
+              />
+            ) : (
+              <span>{client.name}</span>
+            )}
           </div>
-          <div className={s.client_info__row}>
+          <div
+            className={s.client_info__row}
+            onDoubleClick={() => {
+              setEditingField('name')
+            }}
+            onBlur={() => {
+              setEditingField(null)
+            }}
+          >
             <label>Email: </label>
-            <p>
+            <span>
               <a href={`mailto:${client.email}`}>{client.email}</a>
-            </p>
+            </span>
           </div>
 
           <div className={s.client_info__row}>
             <label>Phone: </label>
-            <p>
+            <span>
               <a href={`tel:+${client.phone}`}>{client.phone}</a>
-            </p>
+            </span>
           </div>
           <div className={s.client_info__row}>
             <label>Status: </label>
-            <p
+            <span
               className={cn({
                 [s.yellow]: client.status === 'in_progress',
                 [s.green]: client.status === 'new',
@@ -52,15 +88,15 @@ export const ClientDetails: React.FC<Props> = ({ client, quit }) => {
               })}
             >
               {statusFormat(client.status)}
-            </p>
+            </span>
           </div>
           <div className={s.client_info__row}>
             <label>Amount: </label>
-            <p>{client.amount}</p>
+            <span>{client.amount}</span>
           </div>
           <div className={s.client_info__row}>
             <label>Comment: </label>
-            <p>{client.comment}</p>
+            <span>{client.comment}</span>
           </div>
         </div>
         <div className={s.client_notes}>
@@ -76,6 +112,7 @@ export const ClientDetails: React.FC<Props> = ({ client, quit }) => {
                 setShowNotes((prev) => !prev)
               }}
             >
+              <BsCaretDownFill className="icon" />
               Show all notes
             </button>
           </div>

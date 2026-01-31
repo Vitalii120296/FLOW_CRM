@@ -1,5 +1,4 @@
-@use '../../styles/utils/vars' as *;
-@use '../../styles/utils/extends' as *;
+@use '@styles/index' as *;
 
 .progress_card {
   display: flex;
