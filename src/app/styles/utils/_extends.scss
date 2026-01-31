@@ -1,0 +1,25 @@
+@use '../../styles/utils/vars' as *;
+
+.button {
+  background-color: $primary;
+  color: $bgBlock;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition:
+    background-color 0.3s,
+    color 0.3s;
+
+  &:hover {
+    background-color: $primary;
+  }
+}
+
+.button_secondary {
+  padding: 0.5rem 1rem;
+  border: none;
+  cursor: pointer;
+  background-color: transparent;
+  color: $info;
+}

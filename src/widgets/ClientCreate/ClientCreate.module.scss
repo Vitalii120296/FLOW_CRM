@@ -23,3 +23,8 @@
   justify-content: flex-end;
   gap: 12px;
 }
+
+.create_client,
+.cancel {
+  @extend .button;
+}

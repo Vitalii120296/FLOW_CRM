@@ -10,7 +10,6 @@ html,
 body {
   margin: 0;
   padding: 0;
-  // overflow: hidden;
   background-color: $bgc;
   color: $text;
   font-family: 'Mont', Arial, Helvetica, sans-serif;
@@ -24,6 +23,7 @@ body {
   display: flex;
   flex-direction: column;
   overflow-x: hidden;
+  box-sizing: border-box;
 
   header {
     z-index: 10;
@@ -53,21 +53,6 @@ a {
   text-decoration: none;
 }
 
-button {
-  background-color: $primary;
-  color: $bgBlock;
-  border: none;
-  padding: 0.5rem 1rem;
-  border-radius: 4px;
-  cursor: pointer;
-  transition:
-    background-color 0.3s,
-    color 0.3s;
-
-  &:hover {
-    background-color: $primary;
-  }
-}
 input,
 textarea {
   background-color: $bgBlock;
@@ -99,10 +84,17 @@ p {
 }
 
 .icon {
+  display: flex;
+  flex: 0 0;
   width: 14px;
   height: 14px;
 }
 
 .no-scroll {
   overflow: hidden;
+}
+
+button,
+a {
+  cursor: pointer;
 }
