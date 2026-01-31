@@ -125,6 +125,7 @@ export const ClientDetails: React.FC<Props> = ({ client, quit }) => {
             >
               <BsCaretDownFill className="icon" />
               Show all notes
+              {client.notes && <span>{client.notes.length}</span>}
             </button>
           </div>
           <div
