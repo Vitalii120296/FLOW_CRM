@@ -50,6 +50,7 @@
 .client_notes__show {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   @extend .button_secondary;
 }
 .client_notes__row {
