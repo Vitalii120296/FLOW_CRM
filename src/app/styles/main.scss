@@ -62,6 +62,7 @@ textarea {
   border: 1px solid $border;
   padding: 0.5rem;
   border-radius: 4px;
+  resize: none;
   transition:
     background-color 0.3s,
     color 0.3s,
