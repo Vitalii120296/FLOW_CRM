@@ -1,13 +1,13 @@
 @use './vars' as *;
 
 @mixin on-mobile {
-  @media (min-width: $mobile-min-width) and (max-width: ($tablet-min-width - 1)) {
+  @media (min-width: $mobile-min-width) {
     @content;
   }
 }
 
 @mixin on-tablet {
-  @media (min-width: $tablet-min-width) and (max-width: ($desktop-min-width - 1)) {
+  @media (min-width: $tablet-min-width) {
     @content;
   }
 }
