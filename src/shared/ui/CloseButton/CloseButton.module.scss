@@ -1,0 +1,19 @@
+@use '../../../app/styles/utils/vars' as *;
+
+.close_button {
+  display: flex;
+  flex-shrink: 0;
+  position: absolute;
+  right: 24px;
+  top: 24px;
+  padding: 0;
+  background-color: transparent;
+  color: $primary;
+  border: none;
+}
+
+.icon {
+  display: flex;
+  font-size: 30px;
+  flex-shrink: 0;
+}

@@ -31,3 +31,7 @@ select {
   color: $text;
   background-color: $bgBlock;
 }
+
+.add_client {
+  @extend .button;
+}

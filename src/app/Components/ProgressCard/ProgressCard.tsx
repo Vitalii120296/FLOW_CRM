@@ -30,7 +30,7 @@ export const ProgressCard: React.FC<Props> = ({ clients, columnId, setSelectedCl
                 setIsModalOpen(true)
               }}
             >
-              + new client
+              + Add client
             </button>
           )}
         </div>
@@ -49,7 +49,7 @@ export const ProgressCard: React.FC<Props> = ({ clients, columnId, setSelectedCl
         </Droppable>
       </article>
 
-      {isModalOpen && <ClientCreate onClose={() => setIsModalOpen(false)} />}
+      <ClientCreate isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
     </>
   )
 }

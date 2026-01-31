@@ -63,11 +63,13 @@ export const ClientsFilter: React.FC<Props> = ({ filters, onChange }) => {
             <option value="done">Done</option>
           </select>
 
-          <button onClick={() => setIsModalOpen(true)}>Add client</button>
+          <button className={styles.add_client} onClick={() => setIsModalOpen(true)}>
+            Add client
+          </button>
         </div>
       </div>
 
-      {isModalOpen && <ClientCreate onClose={() => setIsModalOpen(false)} />}
+      <ClientCreate isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
     </>
   )
 }
