@@ -1,0 +1,8 @@
+.clients-page {
+  flex: 1; // 🔥 ключевая строка
+  display: flex;
+  flex-direction: column;
+
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
