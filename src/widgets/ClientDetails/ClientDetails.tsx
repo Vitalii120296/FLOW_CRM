@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import type { Client } from '../../types'
 import s from './ClientDetails.module.scss'
 import cn from 'classnames'
@@ -31,52 +31,57 @@ export const ClientDetails: React.FC<Props> = ({ client, quit }) => {
     }))
   }
 
+  const editingAtr = (key: keyof Client) => {
+    return {
+      onDoubleClick: () => {
+        setEditingField(key)
+      },
+      onBlur: () => {
+        setEditingField(null)
+      },
+    }
+  }
+
+  const inputAtr = (key: keyof Client) => {
+    return {
+      onChange: (e: React.ChangeEvent<HTMLInputElement>) => handleChange(key, e.target.value),
+      onBlur: () => setEditingField(null),
+      autoFocus: true,
+    }
+  }
+
   return (
     <>
       <Modal isOpen={Boolean(client)} onClose={quit} titleId="client-title" title="Client details">
         <div className={s.client_info}>
-          <div
-            className={s.client_info__row}
-            onDoubleClick={() => {
-              setEditingField('name')
-            }}
-            onBlur={() => {
-              setEditingField(null)
-            }}
-          >
+          <div className={s.client_info__row} {...editingAtr('name')}>
             <label>Name: </label>
             {editingField === 'name' ? (
-              <input
-                type="text"
-                value={form.name}
-                onChange={(e) => handleChange('name', e.target.value)}
-                onBlur={() => setEditingField(null)}
-                autoFocus
-              />
+              <input type="text" value={form.name} {...inputAtr('name')} />
             ) : (
               <span>{client.name}</span>
             )}
           </div>
-          <div
-            className={s.client_info__row}
-            onDoubleClick={() => {
-              setEditingField('name')
-            }}
-            onBlur={() => {
-              setEditingField(null)
-            }}
-          >
+          <div className={s.client_info__row} {...editingAtr('email')}>
             <label>Email: </label>
-            <span>
-              <a href={`mailto:${client.email}`}>{client.email}</a>
-            </span>
+            {editingField === 'email' ? (
+              <input type="text" value={form.email} {...inputAtr('email')} />
+            ) : (
+              <span>
+                <a href={`mailto:${client.email}`}>{client.email}</a>
+              </span>
+            )}
           </div>
 
-          <div className={s.client_info__row}>
+          <div className={s.client_info__row} {...editingAtr('phone')}>
             <label>Phone: </label>
-            <span>
-              <a href={`tel:+${client.phone}`}>{client.phone}</a>
-            </span>
+            {editingField === 'phone' ? (
+              <input type="text" value={form.phone} {...inputAtr('phone')} />
+            ) : (
+              <span>
+                <a href={`tel:+${client.phone}`}>{client.phone}</a>
+              </span>
+            )}
           </div>
           <div className={s.client_info__row}>
             <label>Status: </label>
@@ -90,9 +95,15 @@ export const ClientDetails: React.FC<Props> = ({ client, quit }) => {
               {statusFormat(client.status)}
             </span>
           </div>
-          <div className={s.client_info__row}>
+          <div className={s.client_info__row} {...editingAtr('amount')}>
             <label>Amount: </label>
-            <span>{client.amount}</span>
+            {editingField === 'amount' ? (
+              <input type="text" value={form.amount} {...inputAtr('amount')} />
+            ) : (
+              <span>
+                <span>{client.amount}</span>
+              </span>
+            )}
           </div>
           <div className={s.client_info__row}>
             <label>Comment: </label>

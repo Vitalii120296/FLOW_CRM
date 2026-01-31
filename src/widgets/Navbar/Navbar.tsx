@@ -1,12 +1,5 @@
 import { NavLink, useLocation } from 'react-router-dom'
-import {
-  BsFillHouseFill,
-  BsPeopleFill,
-  BsPencilSquare,
-  BsGearFill,
-  BsBuilding,
-  BsIndent,
-} from 'react-icons/bs'
+import { BsFillHouseFill, BsPeopleFill, BsGearFill, BsBuilding, BsIndent } from 'react-icons/bs'
 import { CgProfile } from 'react-icons/cg'
 import s from './Navbar.module.scss'
 import { useEffect, useState } from 'react'
@@ -47,12 +40,6 @@ export const Navbar = () => {
           <NavLink to="/clients" className={isActive}>
             <BsPeopleFill className={s.icon} />
             <span>Clients</span>
-          </NavLink>
-        </li>
-        <li className={s.nav_item}>
-          <NavLink to="/clients-details" className={isActive}>
-            <BsPencilSquare className={s.icon} />
-            <span>Clients details</span>
           </NavLink>
         </li>
         <li className={s.nav_item}>
