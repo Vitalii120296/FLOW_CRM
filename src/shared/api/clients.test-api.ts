@@ -28,7 +28,6 @@ export const getClientsTestApi = async (): Promise<Client[]> => {
         firstName: 'Admin',
         lastName: 'User',
       },
-      companyId: 'c1',
       createdAt: new Date().toISOString(),
     },
     {
@@ -43,7 +42,6 @@ export const getClientsTestApi = async (): Promise<Client[]> => {
         firstName: 'Admin',
         lastName: 'User',
       },
-      companyId: 'c1',
       createdAt: new Date().toISOString(),
     },
     {
@@ -58,7 +56,6 @@ export const getClientsTestApi = async (): Promise<Client[]> => {
         firstName: 'Sarah',
         lastName: 'Connor',
       },
-      companyId: 'c2',
       createdAt: new Date().toISOString(),
     },
     {
@@ -73,7 +70,6 @@ export const getClientsTestApi = async (): Promise<Client[]> => {
         firstName: 'Sarah',
         lastName: 'Connor',
       },
-      companyId: 'c2',
       createdAt: new Date().toISOString(),
     },
     {
@@ -88,7 +84,6 @@ export const getClientsTestApi = async (): Promise<Client[]> => {
         firstName: 'Mike',
         lastName: 'Taylor',
       },
-      companyId: 'c3',
       createdAt: new Date().toISOString(),
     },
     {
@@ -103,7 +98,6 @@ export const getClientsTestApi = async (): Promise<Client[]> => {
         firstName: 'Mike',
         lastName: 'Taylor',
       },
-      companyId: 'c3',
       createdAt: new Date().toISOString(),
     },
     {
@@ -118,7 +112,6 @@ export const getClientsTestApi = async (): Promise<Client[]> => {
         firstName: 'Admin',
         lastName: 'User',
       },
-      companyId: 'c1',
       createdAt: new Date().toISOString(),
     },
     {
@@ -133,7 +126,6 @@ export const getClientsTestApi = async (): Promise<Client[]> => {
         firstName: 'Sarah',
         lastName: 'Connor',
       },
-      companyId: 'c2',
       createdAt: new Date().toISOString(),
     },
     {
@@ -148,7 +140,6 @@ export const getClientsTestApi = async (): Promise<Client[]> => {
         firstName: 'Mike',
         lastName: 'Taylor',
       },
-      companyId: 'c3',
       createdAt: new Date().toISOString(),
     },
     {
@@ -163,7 +154,6 @@ export const getClientsTestApi = async (): Promise<Client[]> => {
         firstName: 'Admin',
         lastName: 'User',
       },
-      companyId: 'c1',
       createdAt: new Date().toISOString(),
     },
     {
@@ -178,7 +168,6 @@ export const getClientsTestApi = async (): Promise<Client[]> => {
         firstName: 'Sarah',
         lastName: 'Connor',
       },
-      companyId: 'c2',
       createdAt: new Date().toISOString(),
     },
     {
@@ -193,7 +182,6 @@ export const getClientsTestApi = async (): Promise<Client[]> => {
         firstName: 'Mike',
         lastName: 'Taylor',
       },
-      companyId: 'c3',
       createdAt: new Date().toISOString(),
     },
     {
@@ -208,7 +196,6 @@ export const getClientsTestApi = async (): Promise<Client[]> => {
         firstName: 'Admin',
         lastName: 'User',
       },
-      companyId: 'c1',
       createdAt: new Date().toISOString(),
     },
     {
@@ -223,7 +210,6 @@ export const getClientsTestApi = async (): Promise<Client[]> => {
         firstName: 'Sarah',
         lastName: 'Connor',
       },
-      companyId: 'c2',
       createdAt: new Date().toISOString(),
     },
     {
@@ -238,7 +224,6 @@ export const getClientsTestApi = async (): Promise<Client[]> => {
         firstName: 'Mike',
         lastName: 'Taylor',
       },
-      companyId: 'c3',
       createdAt: new Date().toISOString(),
     },
   ])
