@@ -20,7 +20,6 @@ export type Client = {
   notes?: ClientNote[]
 
   createdBy: Pick<SystemUser, 'id' | 'firstName' | 'lastName'>
-  companyId: string
   createdAt: string
 }
 

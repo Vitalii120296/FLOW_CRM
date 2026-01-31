@@ -6,12 +6,24 @@
   justify-content: space-between;
   gap: 16px;
   padding-bottom: 5px;
+
+  @include on-mobile {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+  }
 }
 
 .controls {
   display: flex;
   align-items: center;
   gap: 12px;
+
+  @include on-mobile {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+  }
 }
 
 input {
@@ -20,6 +32,11 @@ input {
   border-radius: 8px;
   border: 1px solid $border;
   font-size: 14px;
+
+  @include on-mobile {
+    width: 100%;
+    box-sizing: border-box;
+  }
 }
 
 select {
@@ -30,28 +47,18 @@ select {
   font-size: 14px;
   color: $text;
   background-color: $bgBlock;
+
+  @include on-mobile {
+    width: 100%;
+    box-sizing: border-box;
+  }
 }
 
 .add_client {
   @extend .button;
-}
 
-@include on-mobile {
-  .filters {
-    flex-direction: column;
-    align-items: stretch;
-    gap: 12px;
-  }
-
-  .controls {
-    flex-direction: column;
-    align-items: stretch;
-    gap: 10px;
-  }
-
-  input,
-  select,
-  .add_client {
+  @include on-mobile {
+    width: 100%;
     box-sizing: border-box;
   }
 }

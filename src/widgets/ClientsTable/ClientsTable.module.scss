@@ -1,7 +1,8 @@
 @use '@styles/index' as *;
 
 .wrapper {
-  width: 100%;
+  width: calc(100vw - 100px);
+
   max-width: 100%;
   box-sizing: border-box;
 
@@ -10,11 +11,14 @@
   border: 1px solid $border;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
 
-  /* скролл только здесь */
   overflow-x: auto;
   overflow-y: hidden;
   -webkit-overflow-scrolling: touch;
   overscroll-behavior-x: contain;
+
+  @include on-desktop {
+    width: 100%;
+  }
 
   @include scroll-bar;
 }
@@ -23,16 +27,14 @@
   width: 100%;
   border-collapse: collapse;
 
-  min-width: 720px;
-}
+  min-width: max-content;
 
-@include on-mobile {
-  .wrapper {
-    width: calc(100vw - 100px); /* доступная зона справа от navbar */
+  @include on-tablet {
+    min-width: 720px;
   }
 
-  .table {
-    min-width: max-content; /* 🔥 больше НИЧЕГО не режется */
+  @include on-desktop {
+    min-width: 720px;
   }
 }
 
