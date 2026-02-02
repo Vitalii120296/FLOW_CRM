@@ -3,26 +3,34 @@
 .filters {
   display: flex;
   align-items: center;
-  justify-content: space-between;
   gap: 16px;
   padding-bottom: 5px;
 
-  @include on-mobile {
-    flex-direction: column;
-    align-items: stretch;
-    gap: 12px;
+  flex-direction: column;
+  align-items: stretch;
+
+  @include on-tablet {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding-right: 20px;
+  }
+
+  @include on-desktop {
+    padding-right: 0;
   }
 }
 
 .controls {
   display: flex;
-  align-items: center;
   gap: 12px;
 
-  @include on-mobile {
-    flex-direction: column;
-    align-items: stretch;
-    gap: 10px;
+  flex-direction: column;
+  align-items: stretch;
+
+  @include on-tablet {
+    flex-direction: row;
+    align-items: center;
   }
 }
 
