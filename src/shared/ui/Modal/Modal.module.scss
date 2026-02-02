@@ -9,6 +9,7 @@
   z-index: 999;
   background-color: rgba(0, 0, 0, 0.5);
   padding: 12px;
+  box-sizing: border-box;
 }
 .modal__content {
   position: relative;
@@ -23,6 +24,7 @@
   align-items: start;
   box-sizing: border-box;
   overflow-y: auto;
+  max-height: 100dvh;
 }
 
 .modal_title {
