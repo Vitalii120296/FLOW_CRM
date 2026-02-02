@@ -123,7 +123,7 @@ export const ClientDetails: React.FC<Props> = ({ client, quit }) => {
                 setShowNotes((prev) => !prev)
               }}
             >
-              <BsCaretDownFill className="icon" />
+              <BsCaretDownFill className="icon" aria-label="hidden" />
               Show all notes
               {client.notes && <span>{client.notes.length}</span>}
             </button>
