@@ -10,8 +10,8 @@ type ClientNote = {
 export type Client = {
   id: string
   name: string
-  email: string
-  phone?: string
+  email?: string
+  phone: string
   amount?: number
   status: ClientStatus
   kanbanIndex?: string

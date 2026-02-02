@@ -17,14 +17,6 @@ export const ClientDetails: React.FC<Props> = ({ client, setClient, exit }) => {
   const [editingField, setEditingField] = useState<keyof Client | null>(null)
   const [form, setForm] = useState<Client>(client)
 
-  // useEffect(() => {
-  //   document.body.classList.add('no-scroll')
-
-  //   return () => {
-  //     document.body.classList.remove('no-scroll')
-  //   }
-  // }, [])
-
   const handleChange = <K extends keyof Client>(field: K, value: Client[K]) => {
     setForm((prev) => ({
       ...prev,
@@ -40,7 +32,7 @@ export const ClientDetails: React.FC<Props> = ({ client, setClient, exit }) => {
     }
   }
 
-  const inputAtr = (key: keyof Client) => ({
+  const changeAtributes = (key: keyof Client) => ({
     onChange: (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) =>
       handleChange(key, e.target.value),
     onBlur: () => setEditingField(null),
@@ -64,7 +56,7 @@ export const ClientDetails: React.FC<Props> = ({ client, setClient, exit }) => {
           <div className={s.client_info__row} {...editingAtr('name')}>
             <label id="name">Name: </label>
             {editingField === 'name' ? (
-              <input type="text" value={form.name} {...inputAtr('name')} />
+              <input type="text" value={form.name} {...changeAtributes('name')} />
             ) : (
               <span>{form.name}</span>
             )}
@@ -72,7 +64,7 @@ export const ClientDetails: React.FC<Props> = ({ client, setClient, exit }) => {
           <div className={s.client_info__row} {...editingAtr('email')}>
             <label>Email: </label>
             {editingField === 'email' ? (
-              <input type="text" value={form.email} {...inputAtr('email')} />
+              <input type="text" value={form.email} {...changeAtributes('email')} />
             ) : (
               <span>
                 <a href={`mailto:${form.email}`}>{form.email}</a>
@@ -83,7 +75,7 @@ export const ClientDetails: React.FC<Props> = ({ client, setClient, exit }) => {
           <div className={s.client_info__row} {...editingAtr('phone')}>
             <label>Phone: </label>
             {editingField === 'phone' ? (
-              <input type="text" value={form.phone} {...inputAtr('phone')} />
+              <input type="text" value={form.phone} {...changeAtributes('phone')} />
             ) : (
               <span>
                 <a href={`tel:+${form.phone}`}>{form.phone}</a>
@@ -97,7 +89,7 @@ export const ClientDetails: React.FC<Props> = ({ client, setClient, exit }) => {
                 name="client status"
                 id="client_status"
                 value={form.status}
-                {...inputAtr('status')}
+                {...changeAtributes('status')}
               >
                 {CLIENT_STATUSES.map((status) => (
                   <option value={status} key={status}>
@@ -120,7 +112,7 @@ export const ClientDetails: React.FC<Props> = ({ client, setClient, exit }) => {
           <div className={s.client_info__row} {...editingAtr('amount')}>
             <label>Amount: </label>
             {editingField === 'amount' ? (
-              <input type="text" value={form.amount} {...inputAtr('amount')} />
+              <input type="text" value={form.amount} {...changeAtributes('amount')} />
             ) : (
               <span>
                 <span>{form.amount}</span>
@@ -130,7 +122,12 @@ export const ClientDetails: React.FC<Props> = ({ client, setClient, exit }) => {
           <div className={s.client_info__row} {...editingAtr('comment')}>
             <label>Comment: </label>
             {editingField === 'comment' ? (
-              <textarea name="comment" value={form.comment} {...inputAtr('comment')} />
+              <textarea
+                maxLength={100}
+                name="comment"
+                value={form.comment}
+                {...changeAtributes('comment')}
+              />
             ) : (
               <span>{form.comment}</span>
             )}
