@@ -1,15 +1,25 @@
 @use '@styles/index' as *;
 
-.close_modal {
-  display: flex;
-  flex: 0 0;
-  font-size: 20px;
-  color: red;
-}
 .client_info {
   display: flex;
   flex-direction: column;
   width: 100%;
+
+  input {
+    text-align: end;
+    border: none;
+    background-color: transparent;
+    height: auto;
+    width: auto;
+    font-size: inherit;
+  }
+
+  select {
+    width: auto;
+    height: auto;
+    border: none;
+    outline: none;
+  }
 }
 .client_info__row {
   display: flex;
@@ -17,6 +27,23 @@
   gap: 20px;
   padding: 0.5rem;
   border-bottom: 1px solid $border;
+
+  &:hover {
+    background-color: $primary;
+    border-radius: 12px;
+
+    input,
+    span,
+    label {
+      font-weight: 600;
+      color: $bgc;
+    }
+
+    select {
+      background-color: $primary;
+      color: $bgc;
+    }
+  }
 }
 .client_notes {
   display: flex;
@@ -25,15 +52,6 @@
   width: 100%;
   gap: 1rem;
   padding-top: 10px;
-
-  span,
-  textarea {
-    padding: 0.5rem;
-    box-sizing: border-box;
-  }
-
-  textarea {
-  }
 
   button {
     align-self: end;
@@ -65,10 +83,6 @@
   padding-top: 20px;
 }
 
-textarea {
-  width: 100%;
-  text-overflow: auto;
-}
 .client_notes__wrapper {
   display: flex;
   flex-direction: column;
@@ -103,14 +117,27 @@ a {
 .client_info__row p {
   color: $text;
 }
-.client_info__row p.green {
+.client_info__row span.green {
   color: $success;
 }
 
-.client_info__row p.yellow {
+.client_info__row span.yellow {
   color: $warning;
 }
 
-.client_info__row p.blue {
+.client_info__row span.blue {
   color: $info;
+}
+span,
+textarea {
+  box-sizing: border-box;
+  text-align: start;
+  max-width: 100%;
+}
+textarea {
+  text-overflow: auto;
+}
+
+span {
+  overflow: hidden;
 }

@@ -4,14 +4,15 @@ import s from './ClientDetails.module.scss'
 import cn from 'classnames'
 import { statusFormat } from '../../utils/statusFormat'
 import { Modal } from '../../shared/ui/Modal/Modal'
-import { BsCaretDownFill } from 'react-icons/bs'
+import { CLIENT_STATUSES } from '../../shared/constants/constants'
 
 type Props = {
   client: Client
-  quit: () => void
+  exit: () => void
+  setClient: (updatedClient: Client) => void
 }
 
-export const ClientDetails: React.FC<Props> = ({ client, quit }) => {
+export const ClientDetails: React.FC<Props> = ({ client, setClient, exit }) => {
   const [showNotes, setShowNotes] = useState<boolean>(false)
   const [editingField, setEditingField] = useState<keyof Client | null>(null)
   const [form, setForm] = useState<Client>(client)
@@ -33,33 +34,39 @@ export const ClientDetails: React.FC<Props> = ({ client, quit }) => {
 
   const editingAtr = (key: keyof Client) => {
     return {
-      onDoubleClick: () => {
+      onClick: () => {
         setEditingField(key)
-      },
-      onBlur: () => {
-        setEditingField(null)
       },
     }
   }
 
-  const inputAtr = (key: keyof Client) => {
-    return {
-      onChange: (e: React.ChangeEvent<HTMLInputElement>) => handleChange(key, e.target.value),
-      onBlur: () => setEditingField(null),
-      autoFocus: true,
-    }
+  const inputAtr = (key: keyof Client) => ({
+    onChange: (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) =>
+      handleChange(key, e.target.value),
+    onBlur: () => setEditingField(null),
+    autoFocus: true,
+  })
+
+  const handleClose = () => {
+    setClient(form)
+    exit()
   }
 
   return (
     <>
-      <Modal isOpen={Boolean(client)} onClose={quit} titleId="client-title" title="Client details">
+      <Modal
+        isOpen={Boolean(client)}
+        onClose={handleClose}
+        titleId="client-title"
+        title="Client details"
+      >
         <div className={s.client_info}>
           <div className={s.client_info__row} {...editingAtr('name')}>
-            <label>Name: </label>
+            <label id="name">Name: </label>
             {editingField === 'name' ? (
               <input type="text" value={form.name} {...inputAtr('name')} />
             ) : (
-              <span>{client.name}</span>
+              <span>{form.name}</span>
             )}
           </div>
           <div className={s.client_info__row} {...editingAtr('email')}>
@@ -68,7 +75,7 @@ export const ClientDetails: React.FC<Props> = ({ client, quit }) => {
               <input type="text" value={form.email} {...inputAtr('email')} />
             ) : (
               <span>
-                <a href={`mailto:${client.email}`}>{client.email}</a>
+                <a href={`mailto:${form.email}`}>{form.email}</a>
               </span>
             )}
           </div>
@@ -79,21 +86,36 @@ export const ClientDetails: React.FC<Props> = ({ client, quit }) => {
               <input type="text" value={form.phone} {...inputAtr('phone')} />
             ) : (
               <span>
-                <a href={`tel:+${client.phone}`}>{client.phone}</a>
+                <a href={`tel:+${form.phone}`}>{form.phone}</a>
               </span>
             )}
           </div>
-          <div className={s.client_info__row}>
+          <div className={s.client_info__row} {...editingAtr('status')}>
             <label>Status: </label>
-            <span
-              className={cn({
-                [s.yellow]: client.status === 'in_progress',
-                [s.green]: client.status === 'new',
-                [s.blue]: client.status === 'done',
-              })}
-            >
-              {statusFormat(client.status)}
-            </span>
+            {editingField === 'status' ? (
+              <select
+                name="client status"
+                id="client_status"
+                value={form.status}
+                {...inputAtr('status')}
+              >
+                {CLIENT_STATUSES.map((status) => (
+                  <option value={status} key={status}>
+                    {statusFormat(status)}
+                  </option>
+                ))}
+              </select>
+            ) : (
+              <span
+                className={cn({
+                  [s.yellow]: form.status === 'in_progress',
+                  [s.green]: form.status === 'new',
+                  [s.blue]: form.status === 'done',
+                })}
+              >
+                {statusFormat(form.status)}
+              </span>
+            )}
           </div>
           <div className={s.client_info__row} {...editingAtr('amount')}>
             <label>Amount: </label>
@@ -101,13 +123,17 @@ export const ClientDetails: React.FC<Props> = ({ client, quit }) => {
               <input type="text" value={form.amount} {...inputAtr('amount')} />
             ) : (
               <span>
-                <span>{client.amount}</span>
+                <span>{form.amount}</span>
               </span>
             )}
           </div>
-          <div className={s.client_info__row}>
+          <div className={s.client_info__row} {...editingAtr('comment')}>
             <label>Comment: </label>
-            <span>{client.comment}</span>
+            {editingField === 'comment' ? (
+              <textarea name="comment" value={form.comment} {...inputAtr('comment')} />
+            ) : (
+              <span>{form.comment}</span>
+            )}
           </div>
         </div>
         <div className={s.client_notes}>
@@ -123,9 +149,7 @@ export const ClientDetails: React.FC<Props> = ({ client, quit }) => {
                 setShowNotes((prev) => !prev)
               }}
             >
-              <BsCaretDownFill className="icon" />
-              Show all notes
-              {client.notes && <span>{client.notes.length}</span>}
+              {`Show all notes (${form.notes ? form.notes!.length : ''})`}
             </button>
           </div>
           <div
@@ -133,8 +157,8 @@ export const ClientDetails: React.FC<Props> = ({ client, quit }) => {
               [s.show]: showNotes,
             })}
           >
-            {client.notes
-              ? client.notes.map((note) => (
+            {form.notes
+              ? form.notes.map((note) => (
                   <div key={note.id} className={s.client_notes__row}>
                     {note.content}
                   </div>

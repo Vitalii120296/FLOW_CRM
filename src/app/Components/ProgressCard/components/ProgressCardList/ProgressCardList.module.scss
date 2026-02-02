@@ -17,6 +17,7 @@
   gap: 0.5rem;
   width: 100%;
   padding: 1rem 0.8rem 1rem 1rem;
+  box-sizing: border-box;
 }
 
 /* ===== CLIENT ITEM ===== */
@@ -28,7 +29,7 @@
   background-color: $border;
   border-radius: 0.5rem;
   border-left: 1px solid $textSecondary;
-  cursor: pointer;
+  box-sizing: border-box;
 
   &.isDraggin {
     box-shadow:
@@ -40,12 +41,11 @@
 .progress_card__row {
   display: flex;
   align-items: center;
+  text-align: start;
   gap: 15px;
   padding: 3px;
-}
-
-.progress_card__name {
-  color: $text;
+  overflow: hidden;
+  box-sizing: border-box;
 }
 
 /* ===== ICON ===== */
