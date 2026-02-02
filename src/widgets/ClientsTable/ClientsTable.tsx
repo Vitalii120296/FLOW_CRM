@@ -67,7 +67,11 @@ export const ClientsTable: React.FC<Props> = ({ clients }) => {
       </table>
 
       {selectedClient && (
-        <ClientDetails client={selectedClient} quit={() => setSelectedClient(null)} />
+        <ClientDetails
+          setClient={() => {}}
+          client={selectedClient}
+          exit={() => setSelectedClient(null)}
+        />
       )}
     </div>
   )

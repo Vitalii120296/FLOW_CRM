@@ -17,7 +17,7 @@ type KanbanData = {
 }
 
 export const Kanban = () => {
-  const [columnsData, setColumnsData] = useState<KanbanData | null>()
+  const [columnsData, setColumnsData] = useState<KanbanData | null>(null)
   const [selectedClient, setSelectedClient] = useState<Client | null>(null)
 
   useEffect(() => {
@@ -92,7 +92,47 @@ export const Kanban = () => {
       <h1 className="h1">Kanban Board</h1>
       <div className={s.kanban}>
         {selectedClient && (
-          <ClientDetails client={selectedClient} quit={() => setSelectedClient(null)} />
+          <ClientDetails
+            client={selectedClient}
+            exit={() => setSelectedClient(null)}
+            setClient={(updatedClient) => {
+              setColumnsData((prev) => {
+                if (!prev) return prev
+
+                const oldClient = prev.clients[updatedClient.id]
+                const newColumns = { ...prev.columns }
+
+                // Якщо статус змінився, переміщаємо клієнта між колонками
+                if (oldClient.status !== updatedClient.status) {
+                  // видаляємо зі старої колонки
+                  newColumns[oldClient.status] = {
+                    ...newColumns[oldClient.status],
+                    columnClients: newColumns[oldClient.status].columnClients.filter(
+                      (id) => id !== updatedClient.id
+                    ),
+                  }
+
+                  // додаємо у нову колонку
+                  newColumns[updatedClient.status] = {
+                    ...newColumns[updatedClient.status],
+                    columnClients: [
+                      updatedClient.id,
+                      ...newColumns[updatedClient.status].columnClients,
+                    ],
+                  }
+                }
+
+                return {
+                  ...prev,
+                  clients: {
+                    ...prev.clients,
+                    [updatedClient.id]: updatedClient,
+                  },
+                  columns: newColumns,
+                }
+              })
+            }}
+          />
         )}
         <DragDropContext onDragEnd={onDragEnd}>
           {(Object.keys(columnsData.columns) as ClientStatus[]).map((status) => {
