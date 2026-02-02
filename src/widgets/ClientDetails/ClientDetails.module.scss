@@ -24,19 +24,20 @@
 .client_info__row {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   gap: 20px;
-  padding: 0.5rem;
+  padding: 0.5rem 0.7rem;
   border-bottom: 1px solid $border;
 
   &:hover {
-    background-color: $primary;
+    background-color: $border;
     border-radius: 12px;
 
     input,
     span,
     label {
       font-weight: 600;
-      color: $bgc;
+      color: $primary;
     }
 
     select {
