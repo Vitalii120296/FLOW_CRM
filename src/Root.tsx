@@ -13,6 +13,7 @@ export const Root = () => {
           <Route path="clients" element={<ClientsPage />} />
           <Route path="dashboard" element={<DashBoard />} />
           <Route path="profile" />
+          <Route path="user-management" />
         </Route>
       </Routes>
     </Router>
