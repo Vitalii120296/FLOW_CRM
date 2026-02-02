@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import type { Client } from '../../types'
 import s from './ClientDetails.module.scss'
 import cn from 'classnames'
@@ -16,13 +16,13 @@ export const ClientDetails: React.FC<Props> = ({ client, quit }) => {
   const [editingField, setEditingField] = useState<keyof Client | null>(null)
   const [form, setForm] = useState<Client>(client)
 
-  // useEffect(() => {
-  //   document.body.classList.add('no-scroll')
+  useEffect(() => {
+    document.body.classList.add('no-scroll')
 
-  //   return () => {
-  //     document.body.classList.remove('no-scroll')
-  //   }
-  // }, [])
+    return () => {
+      document.body.classList.remove('no-scroll')
+    }
+  }, [])
 
   const handleChange = <K extends keyof Client>(field: K, value: Client[K]) => {
     setForm((prev) => ({
