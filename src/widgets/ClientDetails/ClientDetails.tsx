@@ -16,6 +16,7 @@ export const ClientDetails: React.FC<Props> = ({ client, setClient, exit }) => {
   const [showNotes, setShowNotes] = useState<boolean>(false)
   const [editingField, setEditingField] = useState<keyof Client | null>(null)
   const [form, setForm] = useState<Client>(client)
+  const [newNote, setNewNote] = useState<string>('')
 
   const handleChange = <K extends keyof Client>(field: K, value: Client[K]) => {
     setForm((prev) => ({
@@ -39,19 +40,30 @@ export const ClientDetails: React.FC<Props> = ({ client, setClient, exit }) => {
     autoFocus: true,
   })
 
-  const handleClose = () => {
+  const handleSubmitClient = () => {
     setClient(form)
     exit()
   }
 
+  const handleSubmitNote = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    if (!newNote.trim()) return
+
+    const noteToAdd = {
+      id: Date.now().toString(),
+      content: newNote.trim(),
+    }
+
+    setForm((prev) => ({
+      ...prev,
+      notes: prev.notes ? [noteToAdd, ...prev.notes] : [noteToAdd],
+    }))
+    setNewNote('')
+  }
+
   return (
     <>
-      <Modal
-        isOpen={Boolean(client)}
-        onClose={handleClose}
-        titleId="client-title"
-        title="Client details"
-      >
+      <Modal isOpen={Boolean(client)} onClose={exit} titleId="client-title" title="Client details">
         <div className={s.client_info}>
           <div className={s.client_info__row} {...editingAtr('name')}>
             <label id="name">Name: </label>
@@ -133,27 +145,40 @@ export const ClientDetails: React.FC<Props> = ({ client, setClient, exit }) => {
             )}
           </div>
         </div>
+        <div className={s.client_notes__buttons}>
+          <button onClick={handleSubmitClient}>Save</button>
+          <button onClick={exit}>Cancel</button>
+        </div>
+        <button
+          className={s.client_notes__show}
+          onClick={() => {
+            setShowNotes((prev) => !prev)
+          }}
+        >
+          {!showNotes ? `Show notes (${form.notes ? form.notes!.length : '0'})` : 'Hide notes'}
+        </button>
+
         <div className={s.client_notes}>
-          <label>Notes</label>
-          <textarea name="createNote" placeholder="Write your note here"></textarea>
-          <div className={s.client_notes__buttons}>
-            <button className={s.client_notes__create} onClick={() => {}}>
-              Create
-            </button>
-            <button
-              className={s.client_notes__show}
-              onClick={() => {
-                setShowNotes((prev) => !prev)
-              }}
-            >
-              {`Show all notes (${form.notes ? form.notes!.length : ''})`}
-            </button>
-          </div>
           <div
             className={cn(s.client_notes__wrapper, {
               [s.show]: showNotes,
             })}
           >
+            <form onSubmit={handleSubmitNote} className={s.client__create_note}>
+              <label>Notes</label>
+              <textarea
+                name="createNote"
+                placeholder="Write your note here"
+                value={newNote}
+                onChange={(e) => setNewNote(e.target.value)}
+              />
+              <div className={s.client_note__create_buttons}>
+                <button type="submit">Save</button>
+                <button type="button" onClick={() => setNewNote('')}>
+                  Cancel
+                </button>
+              </div>
+            </form>
             {form.notes
               ? form.notes.map((note) => (
                   <div key={note.id} className={s.client_notes__row}>
