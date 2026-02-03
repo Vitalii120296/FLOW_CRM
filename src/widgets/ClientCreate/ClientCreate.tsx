@@ -2,9 +2,10 @@ import React, { useState } from 'react'
 import styles from './ClientCreate.module.scss'
 import { Modal } from '../../shared/ui/Modal/Modal'
 
+import { getValidationErrorMessage } from '../../types/validationMessages'
 import { validateService } from '../../services/validateServices'
 import type { ValidationError } from '../../types/ValidationErrorType'
-import { ValidationErrorType } from '../../types/ValidationErrorType'
+// import { ValidationErrorType } from '../../types/ValidationErrorType'
 
 type Props = {
   onClose: () => void
@@ -83,21 +84,20 @@ export const ClientCreate: React.FC<Props> = ({ isOpen, onClose }) => {
           className={errors.name ? styles.errorInput : ''}
         />
 
-        {errors.name && <p className={styles.errorText}>Name is required</p>}
+        {errors.name && (
+          <p className={styles.errorText}>{getValidationErrorMessage(errors.name)}</p>
+        )}
 
         <input
           placeholder="Email"
-          type="email"
+          // type="email"
           value={email}
           onChange={handleChange('email', setEmail)}
           className={errors.email ? styles.errorInput : ''}
         />
 
         {errors.email && (
-          <p className={styles.errorText}>
-            {errors.email.type === ValidationErrorType.REQUIRED && 'Email is required'}
-            {errors.email.type === ValidationErrorType.INVALID && 'Email is not valid'}
-          </p>
+          <p className={styles.errorText}>{getValidationErrorMessage(errors.email)}</p>
         )}
 
         <input
@@ -108,10 +108,7 @@ export const ClientCreate: React.FC<Props> = ({ isOpen, onClose }) => {
         />
 
         {errors.phone && (
-          <p className={styles.errorText}>
-            {errors.phone.type === ValidationErrorType.REQUIRED && 'Phone is required'}
-            {errors.phone.type === ValidationErrorType.INVALID && 'Phone is not valid'}
-          </p>
+          <p className={styles.errorText}>{getValidationErrorMessage(errors.phone)}</p>
         )}
 
         <textarea
@@ -122,12 +119,7 @@ export const ClientCreate: React.FC<Props> = ({ isOpen, onClose }) => {
         />
 
         {errors.comment && (
-          <p className={styles.errorText}>
-            {errors.comment.type === ValidationErrorType.MIN_LENGTH &&
-              `Min ${errors.comment.min} characters`}
-            {errors.comment.type === ValidationErrorType.MAX_LENGTH &&
-              `Max ${errors.comment.max} characters`}
-          </p>
+          <p className={styles.errorText}>{getValidationErrorMessage(errors.comment)}</p>
         )}
 
         <div className={styles.actions}>
