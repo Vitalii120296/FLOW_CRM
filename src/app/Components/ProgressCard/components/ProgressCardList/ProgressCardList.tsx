@@ -17,6 +17,9 @@ export const ProgressCardList = React.forwardRef<HTMLDivElement, Props>(
     const selectClient = (client: Client) => {
       setSelectedClient(client)
     }
+    const sortedClients = () => {
+      clients.sort
+    }
 
     return (
       <div className={s.progress_card__column} ref={ref}>

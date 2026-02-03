@@ -23,6 +23,7 @@ export const getClientsTestApi = async (): Promise<Client[]> => {
         { id: '11', content: 'edbwebdwev ed we dvew dvwev dytwev cxyvew t' },
         { id: '12', content: 'edbwebdwev ed we dvew dvwev dytwev cxyvew t' },
       ],
+      orderIndex: '1',
       createdBy: {
         id: 'u1',
         firstName: 'Admin',
@@ -37,6 +38,7 @@ export const getClientsTestApi = async (): Promise<Client[]> => {
       phone: '+380000000001',
       status: 'in_progress',
       comment: 'Waiting for reply',
+      orderIndex: '2',
       createdBy: {
         id: 'u1',
         firstName: 'Admin',
@@ -51,6 +53,8 @@ export const getClientsTestApi = async (): Promise<Client[]> => {
       phone: '+380000000002',
       status: 'done',
       comment: 'Deal closed',
+      orderIndex: '3',
+
       createdBy: {
         id: 'u2',
         firstName: 'Sarah',
@@ -65,6 +69,7 @@ export const getClientsTestApi = async (): Promise<Client[]> => {
       phone: '+380000000003',
       status: 'new',
       comment: 'Requested demo',
+      orderIndex: '4',
       createdBy: {
         id: 'u2',
         firstName: 'Sarah',
@@ -79,6 +84,7 @@ export const getClientsTestApi = async (): Promise<Client[]> => {
       phone: '+380000000004',
       status: 'in_progress',
       comment: 'Negotiation stage',
+      orderIndex: '5',
       createdBy: {
         id: 'u3',
         firstName: 'Mike',
@@ -93,6 +99,7 @@ export const getClientsTestApi = async (): Promise<Client[]> => {
       phone: '+380000000005',
       status: 'new',
       comment: 'Left contact form',
+      orderIndex: '6',
       createdBy: {
         id: 'u3',
         firstName: 'Mike',
@@ -107,6 +114,7 @@ export const getClientsTestApi = async (): Promise<Client[]> => {
       phone: '+380000000006',
       status: 'done',
       comment: 'Signed contract',
+      orderIndex: '7',
       createdBy: {
         id: 'u1',
         firstName: 'Admin',
@@ -121,6 +129,7 @@ export const getClientsTestApi = async (): Promise<Client[]> => {
       phone: '+380000000007',
       status: 'in_progress',
       comment: 'Preparing proposal',
+      orderIndex: '8',
       createdBy: {
         id: 'u2',
         firstName: 'Sarah',
@@ -135,6 +144,7 @@ export const getClientsTestApi = async (): Promise<Client[]> => {
       phone: '+380000000008',
       status: 'new',
       comment: 'Cold lead',
+      orderIndex: '9',
       createdBy: {
         id: 'u3',
         firstName: 'Mike',
@@ -149,6 +159,7 @@ export const getClientsTestApi = async (): Promise<Client[]> => {
       phone: '+380000000009',
       status: 'done',
       comment: 'Repeat client',
+      orderIndex: '10',
       createdBy: {
         id: 'u1',
         firstName: 'Admin',
@@ -163,6 +174,7 @@ export const getClientsTestApi = async (): Promise<Client[]> => {
       phone: '+380000000010',
       status: 'in_progress',
       comment: 'Call scheduled',
+      orderIndex: '11',
       createdBy: {
         id: 'u2',
         firstName: 'Sarah',
@@ -177,6 +189,7 @@ export const getClientsTestApi = async (): Promise<Client[]> => {
       phone: '+380000000011',
       status: 'new',
       comment: 'Instagram lead',
+      orderIndex: '12',
       createdBy: {
         id: 'u3',
         firstName: 'Mike',
@@ -191,6 +204,7 @@ export const getClientsTestApi = async (): Promise<Client[]> => {
       phone: '+380000000012',
       status: 'done',
       comment: 'Upsell successful',
+      orderIndex: '13',
       createdBy: {
         id: 'u1',
         firstName: 'Admin',
@@ -205,6 +219,7 @@ export const getClientsTestApi = async (): Promise<Client[]> => {
       phone: '+380000000013',
       status: 'in_progress',
       comment: 'Needs approval',
+      orderIndex: '15',
       createdBy: {
         id: 'u2',
         firstName: 'Sarah',
@@ -219,6 +234,7 @@ export const getClientsTestApi = async (): Promise<Client[]> => {
       phone: '+380000000014',
       status: 'new',
       comment: 'Referred by partner',
+      orderIndex: '16',
       createdBy: {
         id: 'u3',
         firstName: 'Mike',
