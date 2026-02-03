@@ -87,6 +87,41 @@ export const Kanban = () => {
     })
   }
 
+  const updateColumnsData = (updatedClient: Client) => {
+    setColumnsData((prev) => {
+      if (!prev) return prev
+
+      const oldClient = prev.clients[updatedClient.id]
+      const newColumns = { ...prev.columns }
+
+      // Якщо статус змінився, переміщаємо клієнта між колонками
+      if (oldClient.status !== updatedClient.status) {
+        // видаляємо зі старої колонки
+        newColumns[oldClient.status] = {
+          ...newColumns[oldClient.status],
+          columnClients: newColumns[oldClient.status].columnClients.filter(
+            (id) => id !== updatedClient.id
+          ),
+        }
+
+        // додаємо у нову колонку
+        newColumns[updatedClient.status] = {
+          ...newColumns[updatedClient.status],
+          columnClients: [updatedClient.id, ...newColumns[updatedClient.status].columnClients],
+        }
+      }
+
+      return {
+        ...prev,
+        clients: {
+          ...prev.clients,
+          [updatedClient.id]: updatedClient,
+        },
+        columns: newColumns,
+      }
+    })
+  }
+
   return (
     <section className="page-container">
       <h1 className="h1">Kanban Board</h1>
@@ -95,43 +130,7 @@ export const Kanban = () => {
           <ClientDetails
             client={selectedClient}
             exit={() => setSelectedClient(null)}
-            setClient={(updatedClient) => {
-              setColumnsData((prev) => {
-                if (!prev) return prev
-
-                const oldClient = prev.clients[updatedClient.id]
-                const newColumns = { ...prev.columns }
-
-                // Якщо статус змінився, переміщаємо клієнта між колонками
-                if (oldClient.status !== updatedClient.status) {
-                  // видаляємо зі старої колонки
-                  newColumns[oldClient.status] = {
-                    ...newColumns[oldClient.status],
-                    columnClients: newColumns[oldClient.status].columnClients.filter(
-                      (id) => id !== updatedClient.id
-                    ),
-                  }
-
-                  // додаємо у нову колонку
-                  newColumns[updatedClient.status] = {
-                    ...newColumns[updatedClient.status],
-                    columnClients: [
-                      updatedClient.id,
-                      ...newColumns[updatedClient.status].columnClients,
-                    ],
-                  }
-                }
-
-                return {
-                  ...prev,
-                  clients: {
-                    ...prev.clients,
-                    [updatedClient.id]: updatedClient,
-                  },
-                  columns: newColumns,
-                }
-              })
-            }}
+            setClient={updateColumnsData}
           />
         )}
         <DragDropContext onDragEnd={onDragEnd}>
