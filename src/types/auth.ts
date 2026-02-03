@@ -1,16 +1,12 @@
 export type UserRole = 'owner' | 'user'
+export type UserStatus = 'active' | 'inactive'
 
 export type SystemUser = {
   id: string
   email: string
 
-  firstName: string
-  lastName: string
+  name: string
 
   role: UserRole
-
-  avatarUrl?: string
-
-  companyId: string
-  createdAt: string
+  status: UserStatus
 }

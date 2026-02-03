@@ -1,5 +1,11 @@
 import type { Client } from '../../types'
 
+const users = {
+  u1: { id: 'u1', name: 'Admin User' },
+  u2: { id: 'u2', name: 'Sarah Connor' },
+  u3: { id: 'u3', name: 'Mike Taylor' },
+}
+
 export const getClientsTestApi = async (): Promise<Client[]> => {
   return Promise.resolve([
     {
@@ -12,23 +18,9 @@ export const getClientsTestApi = async (): Promise<Client[]> => {
       notes: [
         { id: '1', content: 'mdewd,ekwdneuwn cuwen cunweuicnewuicbw' },
         { id: '2', content: 'dnuewbdybwe dcewybc eywbcu ewcybew ucbew bcyw be' },
-        { id: '3', content: 'edbwebdwev ed we dvew dvwev dytwev cxyvew t' },
-        { id: '4', content: 'edbwebdwev ed we dvew dvwev dytwev cxyvew t' },
-        { id: '5', content: 'edbwebdwev ed we dvew dvwev dytwev cxyvew t' },
-        { id: '6', content: 'edbwebdwev ed we dvew dvwev dytwev cxyvew t' },
-        { id: '7', content: 'edbwebdwev ed we dvew dvwev dytwev cxyvew t' },
-        { id: '8', content: 'edbwebdwev ed we dvew dvwev dytwev cxyvew t' },
-        { id: '9', content: 'edbwebdwev ed we dvew dvwev dytwev cxyvew t' },
-        { id: '10', content: 'edbwebdwev ed we dvew dvwev dytwev cxyvew t' },
-        { id: '11', content: 'edbwebdwev ed we dvew dvwev dytwev cxyvew t' },
-        { id: '12', content: 'edbwebdwev ed we dvew dvwev dytwev cxyvew t' },
       ],
       orderIndex: '1',
-      createdBy: {
-        id: 'u1',
-        firstName: 'Admin',
-        lastName: 'User',
-      },
+      createdBy: users.u1,
       createdAt: new Date().toISOString(),
     },
     {
@@ -39,11 +31,7 @@ export const getClientsTestApi = async (): Promise<Client[]> => {
       status: 'in_progress',
       comment: 'Waiting for reply',
       orderIndex: '2',
-      createdBy: {
-        id: 'u1',
-        firstName: 'Admin',
-        lastName: 'User',
-      },
+      createdBy: users.u1,
       createdAt: new Date().toISOString(),
     },
     {
@@ -54,12 +42,7 @@ export const getClientsTestApi = async (): Promise<Client[]> => {
       status: 'done',
       comment: 'Deal closed',
       orderIndex: '3',
-
-      createdBy: {
-        id: 'u2',
-        firstName: 'Sarah',
-        lastName: 'Connor',
-      },
+      createdBy: users.u2,
       createdAt: new Date().toISOString(),
     },
     {
@@ -70,11 +53,7 @@ export const getClientsTestApi = async (): Promise<Client[]> => {
       status: 'new',
       comment: 'Requested demo',
       orderIndex: '4',
-      createdBy: {
-        id: 'u2',
-        firstName: 'Sarah',
-        lastName: 'Connor',
-      },
+      createdBy: users.u2,
       createdAt: new Date().toISOString(),
     },
     {
@@ -85,11 +64,7 @@ export const getClientsTestApi = async (): Promise<Client[]> => {
       status: 'in_progress',
       comment: 'Negotiation stage',
       orderIndex: '5',
-      createdBy: {
-        id: 'u3',
-        firstName: 'Mike',
-        lastName: 'Taylor',
-      },
+      createdBy: users.u3,
       createdAt: new Date().toISOString(),
     },
     {
@@ -100,11 +75,7 @@ export const getClientsTestApi = async (): Promise<Client[]> => {
       status: 'new',
       comment: 'Left contact form',
       orderIndex: '6',
-      createdBy: {
-        id: 'u3',
-        firstName: 'Mike',
-        lastName: 'Taylor',
-      },
+      createdBy: users.u3,
       createdAt: new Date().toISOString(),
     },
     {
@@ -115,11 +86,7 @@ export const getClientsTestApi = async (): Promise<Client[]> => {
       status: 'done',
       comment: 'Signed contract',
       orderIndex: '7',
-      createdBy: {
-        id: 'u1',
-        firstName: 'Admin',
-        lastName: 'User',
-      },
+      createdBy: users.u1,
       createdAt: new Date().toISOString(),
     },
     {
@@ -130,11 +97,7 @@ export const getClientsTestApi = async (): Promise<Client[]> => {
       status: 'in_progress',
       comment: 'Preparing proposal',
       orderIndex: '8',
-      createdBy: {
-        id: 'u2',
-        firstName: 'Sarah',
-        lastName: 'Connor',
-      },
+      createdBy: users.u2,
       createdAt: new Date().toISOString(),
     },
     {
@@ -145,11 +108,7 @@ export const getClientsTestApi = async (): Promise<Client[]> => {
       status: 'new',
       comment: 'Cold lead',
       orderIndex: '9',
-      createdBy: {
-        id: 'u3',
-        firstName: 'Mike',
-        lastName: 'Taylor',
-      },
+      createdBy: users.u3,
       createdAt: new Date().toISOString(),
     },
     {
@@ -160,86 +119,7 @@ export const getClientsTestApi = async (): Promise<Client[]> => {
       status: 'done',
       comment: 'Repeat client',
       orderIndex: '10',
-      createdBy: {
-        id: 'u1',
-        firstName: 'Admin',
-        lastName: 'User',
-      },
-      createdAt: new Date().toISOString(),
-    },
-    {
-      id: '11',
-      name: 'Benjamin Clark',
-      email: 'ben@mail.com',
-      phone: '+380000000010',
-      status: 'in_progress',
-      comment: 'Call scheduled',
-      orderIndex: '11',
-      createdBy: {
-        id: 'u2',
-        firstName: 'Sarah',
-        lastName: 'Connor',
-      },
-      createdAt: new Date().toISOString(),
-    },
-    {
-      id: '12',
-      name: 'Mia Lewis',
-      email: 'mia@mail.com',
-      phone: '+380000000011',
-      status: 'new',
-      comment: 'Instagram lead',
-      orderIndex: '12',
-      createdBy: {
-        id: 'u3',
-        firstName: 'Mike',
-        lastName: 'Taylor',
-      },
-      createdAt: new Date().toISOString(),
-    },
-    {
-      id: '13',
-      name: 'Lucas King',
-      email: 'lucas@mail.com',
-      phone: '+380000000012',
-      status: 'done',
-      comment: 'Upsell successful',
-      orderIndex: '13',
-      createdBy: {
-        id: 'u1',
-        firstName: 'Admin',
-        lastName: 'User',
-      },
-      createdAt: new Date().toISOString(),
-    },
-    {
-      id: '14',
-      name: 'Charlotte Wright',
-      email: 'charlotte@mail.com',
-      phone: '+380000000013',
-      status: 'in_progress',
-      comment: 'Needs approval',
-      orderIndex: '15',
-      createdBy: {
-        id: 'u2',
-        firstName: 'Sarah',
-        lastName: 'Connor',
-      },
-      createdAt: new Date().toISOString(),
-    },
-    {
-      id: '15',
-      name: 'Henry Scott',
-      email: 'henry@mail.com',
-      phone: '+380000000014',
-      status: 'new',
-      comment: 'Referred by partner',
-      orderIndex: '16',
-      createdBy: {
-        id: 'u3',
-        firstName: 'Mike',
-        lastName: 'Taylor',
-      },
+      createdBy: users.u1,
       createdAt: new Date().toISOString(),
     },
   ])

@@ -56,9 +56,7 @@ export const ClientsTable: React.FC<Props> = ({ clients, setClients }) => {
                   </span>
                 </td>
 
-                <td>
-                  {client.createdBy.firstName} {client.createdBy.lastName}
-                </td>
+                <td>{client.createdBy.name}</td>
               </tr>
             )
           })}

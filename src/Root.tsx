@@ -3,6 +3,7 @@ import { App } from './app/App.tsx'
 import { DashBoard } from './pages/DashBoardPage/DashBoard.tsx'
 import { Kanban } from './pages/KanbanPage/Kanban.tsx'
 import { ClientsPage } from './pages/ClientsPage/ClientsPage.tsx'
+import { UserManagmentPage } from './pages/UserManagmentPage/UserManagmentPage.tsx'
 
 export const Root = () => {
   return (
@@ -13,7 +14,7 @@ export const Root = () => {
           <Route path="clients" element={<ClientsPage />} />
           <Route path="dashboard" element={<DashBoard />} />
           <Route path="profile" />
-          <Route path="user-management" />
+          <Route path="user-management" element={<UserManagmentPage />} />
         </Route>
       </Routes>
     </Router>

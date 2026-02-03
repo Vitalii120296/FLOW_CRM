@@ -23,3 +23,23 @@
   background-color: transparent;
   color: $info;
 }
+
+.errorContainer {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+
+  .errorText {
+    color: #ff4d4f;
+    font-size: 12px;
+    margin-top: 4px;
+  }
+
+  .errorIcon {
+    color: $error;
+  }
+}
+
+.errorInput {
+  border: 1px solid #ff4d4f;
+}
