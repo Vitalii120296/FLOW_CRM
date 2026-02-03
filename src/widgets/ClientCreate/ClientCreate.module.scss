@@ -24,3 +24,13 @@
 .cancel {
   @extend .button;
 }
+
+.errorInput {
+  border: 1px solid #ff4d4f;
+}
+
+.errorText {
+  color: #ff4d4f;
+  font-size: 12px;
+  margin-top: 4px;
+}
