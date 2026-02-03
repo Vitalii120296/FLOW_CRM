@@ -8,10 +8,17 @@ import { statusFormat } from '../../utils/statusFormat'
 
 type Props = {
   clients: Client[]
+  setClients: React.Dispatch<React.SetStateAction<Client[]>>
 }
 
-export const ClientsTable: React.FC<Props> = ({ clients }) => {
+export const ClientsTable: React.FC<Props> = ({ clients, setClients }) => {
   const [selectedClient, setSelectedClient] = useState<Client | null>(null)
+
+  const updateClients = (updatedClient: Client) => {
+    setClients((prev) =>
+      prev.map((client) => (client.id === updatedClient.id ? updatedClient : client))
+    )
+  }
 
   return (
     <div className={styles.wrapper}>
@@ -68,7 +75,7 @@ export const ClientsTable: React.FC<Props> = ({ clients }) => {
 
       {selectedClient && (
         <ClientDetails
-          setClient={() => {}}
+          setClient={updateClients}
           client={selectedClient}
           exit={() => setSelectedClient(null)}
         />
