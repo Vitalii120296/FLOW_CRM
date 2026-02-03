@@ -1,12 +1,15 @@
 import { ValidationErrorType, type ValidationError } from '../types/ValidationErrorType'
 
+//#region PATTERN
 const EMAIL_PATTERN = /^[\w.+-]+@([\w-]+\.){1,3}[\w-]{2,}$/
 const PHONE_PATTERN = /^\+?\d{10,15}$/ // +380XXXXXXXXX или 380XXXXXXXXX или 0XXXXXXXXX
 
 function normalizePhone(value: string): string {
   return value.replace(/[^\d+]/g, '')
 }
+//#endregion
 
+//#region Length
 function validateLength(
   value: string,
   options: { min?: number; max?: number }
@@ -21,8 +24,9 @@ function validateLength(
 
   return undefined
 }
+//#endregion
 
-/* ---------------- EMAIL ---------------- */
+//#region EMAIL
 
 export function validateEmail(value: string): ValidationError | undefined {
   if (!value) {
@@ -35,8 +39,9 @@ export function validateEmail(value: string): ValidationError | undefined {
 
   return undefined
 }
+//#endregion
 
-/* ---------------- PHONE ---------------- */
+//#region PHONE
 
 export function validatePhone(value: string): ValidationError | undefined {
   if (!value) {
@@ -51,8 +56,9 @@ export function validatePhone(value: string): ValidationError | undefined {
 
   return undefined
 }
+//#endregion
 
-/* ---------------- COMMENT ---------------- */
+//#region COMMENT
 
 export function validateComment(value: string): ValidationError | undefined {
   if (!value) {
@@ -75,8 +81,9 @@ export function validateComment(value: string): ValidationError | undefined {
 
   return undefined
 }
+//#endregion
 
-/* ---------------- NAME ---------------- */
+//#region NAME
 
 export function validateName(value: string): ValidationError | undefined {
   if (!value.trim()) {
@@ -85,8 +92,9 @@ export function validateName(value: string): ValidationError | undefined {
 
   return validateLength(value, { min: 2, max: 50 })
 }
+//#endregion
 
-/* ---------------- PUBLIC API ---------------- */
+//#region PUBLIC API
 
 export const validateService = {
   validateEmail,
@@ -94,3 +102,4 @@ export const validateService = {
   validateComment,
   validateName,
 }
+//#endregion
