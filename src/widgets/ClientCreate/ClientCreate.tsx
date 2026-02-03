@@ -1,11 +1,12 @@
 import React, { useState } from 'react'
-import styles from './ClientCreate.module.scss'
 import { Modal } from '../../shared/ui/Modal/Modal'
 
 import { getValidationErrorMessage } from '../../types/validationMessages'
 import { validateService } from '../../services/validateServices'
 import type { ValidationError } from '../../types/ValidationErrorType'
-// import { ValidationErrorType } from '../../types/ValidationErrorType'
+
+import styles from './ClientCreate.module.scss'
+import { BiSolidError } from 'react-icons/bi'
 
 type Props = {
   onClose: () => void
@@ -81,11 +82,15 @@ export const ClientCreate: React.FC<Props> = ({ isOpen, onClose }) => {
           placeholder="Full Name"
           value={name}
           onChange={handleChange('name', setName)}
-          className={errors.name ? styles.errorInput : ''}
+          className={errors.name ? 'errorInput' : ''}
         />
 
         {errors.name && (
-          <p className={styles.errorText}>{getValidationErrorMessage(errors.name)}</p>
+          <div className="errorContainer">
+            <BiSolidError className="errorIcon" />
+
+            <p className="errorText">{getValidationErrorMessage(errors.name)}</p>
+          </div>
         )}
 
         <input
@@ -93,33 +98,45 @@ export const ClientCreate: React.FC<Props> = ({ isOpen, onClose }) => {
           // type="email"
           value={email}
           onChange={handleChange('email', setEmail)}
-          className={errors.email ? styles.errorInput : ''}
+          className={errors.email ? 'errorInput' : ''}
         />
 
         {errors.email && (
-          <p className={styles.errorText}>{getValidationErrorMessage(errors.email)}</p>
+          <div className="errorContainer">
+            <BiSolidError className="errorIcon" />
+
+            <p className="errorText">{getValidationErrorMessage(errors.email)}</p>
+          </div>
         )}
 
         <input
           placeholder="Phone"
           value={phone}
           onChange={handleChange('phone', setPhone)}
-          className={errors.phone ? styles.errorInput : ''}
+          className={errors.phone ? 'errorInput' : ''}
         />
 
         {errors.phone && (
-          <p className={styles.errorText}>{getValidationErrorMessage(errors.phone)}</p>
+          <div className="errorContainer">
+            <BiSolidError className="errorIcon" />
+
+            <p className="errorText">{getValidationErrorMessage(errors.phone)}</p>
+          </div>
         )}
 
         <textarea
           placeholder="Comment"
           value={comment}
           onChange={handleChange('comment', setComment)}
-          className={errors.comment ? styles.errorInput : ''}
+          className={errors.comment ? 'errorInput' : ''}
         />
 
         {errors.comment && (
-          <p className={styles.errorText}>{getValidationErrorMessage(errors.comment)}</p>
+          <div className="errorContainer">
+            <BiSolidError className="errorIcon" />
+
+            <p className="errorText">{getValidationErrorMessage(errors.comment)}</p>
+          </div>
         )}
 
         <div className={styles.actions}>
