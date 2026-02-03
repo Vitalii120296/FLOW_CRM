@@ -2,9 +2,20 @@ import React, { useState } from 'react'
 import styles from './ClientCreate.module.scss'
 import { Modal } from '../../shared/ui/Modal/Modal'
 
+import { validateService } from '../../services/validateServices'
+import type { ValidationError } from '../../types/ValidationErrorType'
+import { ValidationErrorType } from '../../types/ValidationErrorType'
+
 type Props = {
   onClose: () => void
   isOpen: boolean
+}
+
+type FormErrors = {
+  name?: ValidationError
+  email?: ValidationError
+  phone?: ValidationError
+  comment?: ValidationError
 }
 
 export const ClientCreate: React.FC<Props> = ({ isOpen, onClose }) => {
@@ -13,20 +24,54 @@ export const ClientCreate: React.FC<Props> = ({ isOpen, onClose }) => {
   const [phone, setPhone] = useState('')
   const [comment, setComment] = useState('')
 
+  const [errors, setErrors] = useState<FormErrors>({})
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
 
-    const payload = {
-      name,
-      email,
-      phone,
-      comment,
+    const newErrors: FormErrors = {}
+
+    // name
+    const nameError = validateService.validateName(name)
+    if (nameError) {
+      newErrors.name = nameError
     }
 
+    // email
+    const emailError = validateService.validateEmail(email)
+    if (emailError) {
+      newErrors.email = emailError
+    }
+
+    // phone
+    const phoneError = validateService.validatePhone(phone)
+    if (phoneError) {
+      newErrors.phone = phoneError
+    }
+
+    // comment
+    const commentError = validateService.validateComment(comment)
+    if (commentError) {
+      newErrors.comment = commentError
+    }
+
+    if (Object.keys(newErrors).length > 0) {
+      setErrors(newErrors)
+      return
+    }
+
+    const payload = { name, email, phone, comment }
     console.log('Create client:', payload)
 
     onClose()
   }
+
+  const handleChange =
+    (field: keyof FormErrors, setter: (value: string) => void) =>
+    (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+      setter(e.target.value)
+      setErrors((prev) => ({ ...prev, [field]: undefined }))
+    }
 
   return (
     <Modal isOpen={isOpen} onClose={onClose} titleId="client-title" title="Create client">
@@ -34,25 +79,56 @@ export const ClientCreate: React.FC<Props> = ({ isOpen, onClose }) => {
         <input
           placeholder="Full Name"
           value={name}
-          onChange={(e) => setName(e.target.value)}
-          required
+          onChange={handleChange('name', setName)}
+          className={errors.name ? styles.errorInput : ''}
         />
+
+        {errors.name && <p className={styles.errorText}>Name is required</p>}
 
         <input
           placeholder="Email"
           type="email"
           value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
+          onChange={handleChange('email', setEmail)}
+          className={errors.email ? styles.errorInput : ''}
         />
 
-        <input placeholder="Phone" value={phone} onChange={(e) => setPhone(e.target.value)} />
+        {errors.email && (
+          <p className={styles.errorText}>
+            {errors.email.type === ValidationErrorType.REQUIRED && 'Email is required'}
+            {errors.email.type === ValidationErrorType.INVALID && 'Email is not valid'}
+          </p>
+        )}
+
+        <input
+          placeholder="Phone"
+          value={phone}
+          onChange={handleChange('phone', setPhone)}
+          className={errors.phone ? styles.errorInput : ''}
+        />
+
+        {errors.phone && (
+          <p className={styles.errorText}>
+            {errors.phone.type === ValidationErrorType.REQUIRED && 'Phone is required'}
+            {errors.phone.type === ValidationErrorType.INVALID && 'Phone is not valid'}
+          </p>
+        )}
 
         <textarea
           placeholder="Comment"
           value={comment}
-          onChange={(e) => setComment(e.target.value)}
+          onChange={handleChange('comment', setComment)}
+          className={errors.comment ? styles.errorInput : ''}
         />
+
+        {errors.comment && (
+          <p className={styles.errorText}>
+            {errors.comment.type === ValidationErrorType.MIN_LENGTH &&
+              `Min ${errors.comment.min} characters`}
+            {errors.comment.type === ValidationErrorType.MAX_LENGTH &&
+              `Max ${errors.comment.max} characters`}
+          </p>
+        )}
 
         <div className={styles.actions}>
           <button className={styles.cancel} type="button" onClick={onClose}>
