@@ -19,7 +19,7 @@ export type Client = {
   comment?: string
   notes?: ClientNote[]
 
-  createdBy: Pick<SystemUser, 'id' | 'firstName' | 'lastName'>
+  createdBy: Pick<SystemUser, 'id' | 'name'>
   createdAt: string
 }
 
