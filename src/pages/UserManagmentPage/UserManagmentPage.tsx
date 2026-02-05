@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import type { SystemUser } from '../../types'
+import cn from 'classnames'
 
 import styles from './UserManagmentPage.module.scss'
 
@@ -29,6 +30,7 @@ export const UserManagmentPage = () => {
 
   return (
     <div className="page-container">
+      <h1 className={cn('h2', styles.title)}>Users</h1>
       <div className={styles.wrapper}>
         <UsersTable users={users} onToggleStatus={handleToggleStatus} />
         <UsersCreate />

@@ -55,12 +55,11 @@
   tbody tr:not(.inactiveRow):hover td {
     color: $primary;
   }
-}
 
-/* ==== INDEX COLUMN ==== */
-.thId,
-.tdIndex {
-  color: $primary;
+  .thId,
+  .tdIndex {
+    color: $primary;
+  }
 }
 
 /* ==== INACTIVE ROW ==== */

@@ -1,15 +1,27 @@
 import React, { useState } from 'react'
 import type { Client } from '../../types'
 import s from './ClientDetails.module.scss'
+import { BiSolidError } from 'react-icons/bi'
 import cn from 'classnames'
 import { statusFormat } from '../../utils/statusFormat'
 import { Modal } from '../../shared/ui/Modal/Modal'
 import { CLIENT_STATUSES } from '../../shared/constants/constants'
 
+import { getValidationErrorMessage } from '../../types/validationMessages'
+import { validateService } from '../../services/validateServices'
+import type { ValidationError } from '../../types/ValidationErrorType'
+
 type Props = {
   client: Client
   exit: () => void
   setClient: (updatedClient: Client) => void
+}
+
+type FormErrors = {
+  name?: ValidationError
+  email?: ValidationError
+  phone?: ValidationError
+  comment?: ValidationError
 }
 
 export const ClientDetails: React.FC<Props> = ({ client, setClient, exit }) => {
@@ -18,10 +30,40 @@ export const ClientDetails: React.FC<Props> = ({ client, setClient, exit }) => {
   const [form, setForm] = useState<Client>(client)
   const [newNote, setNewNote] = useState<string>('')
 
+  const [errors, setErrors] = useState<FormErrors>({})
+
+  //#region Validate
+  const validateForm = (): boolean => {
+    const newErrors: FormErrors = {}
+
+    const nameError = validateService.validateName(form.name ?? '')
+    if (nameError) newErrors.name = nameError
+
+    const emailError = validateService.validateEmail(form.email ?? '')
+    if (emailError) newErrors.email = emailError
+
+    const phoneError = validateService.validatePhone(form.phone ?? '')
+    if (phoneError) newErrors.phone = phoneError
+
+    const commentError = validateService.validateComment(form.comment ?? '')
+    if (commentError) newErrors.comment = commentError
+
+    setErrors(newErrors)
+
+    return Object.keys(newErrors).length === 0
+  }
+
+  //#endregion
+
   const handleChange = <K extends keyof Client>(field: K, value: Client[K]) => {
     setForm((prev) => ({
       ...prev,
       [field]: value,
+    }))
+
+    setErrors((prev) => ({
+      ...prev,
+      [field]: undefined,
     }))
   }
 
@@ -41,6 +83,8 @@ export const ClientDetails: React.FC<Props> = ({ client, setClient, exit }) => {
   })
 
   const handleSubmitClient = () => {
+    if (!validateForm()) return
+
     setClient(form)
     exit()
   }
@@ -66,34 +110,75 @@ export const ClientDetails: React.FC<Props> = ({ client, setClient, exit }) => {
       <Modal isOpen={Boolean(client)} onClose={exit} titleId="client-title" title="Client details">
         <div className={s.client_info}>
           <div className={s.client_info__row} {...editingAtr('name')}>
-            <label id="name">Name: </label>
+            <label>Name:</label>
+
             {editingField === 'name' ? (
-              <input type="text" value={form.name} {...changeAtributes('name')} />
+              <input
+                type="text"
+                value={form.name ?? ''}
+                {...changeAtributes('name')}
+                className={errors.name ? 'errorInput' : ''}
+              />
             ) : (
               <span>{form.name}</span>
             )}
+
+            {errors.name && (
+              <div className="errorContainer">
+                <BiSolidError className="errorIcon" />
+                <p className="errorText">{getValidationErrorMessage(errors.name)}</p>
+              </div>
+            )}
           </div>
+
           <div className={s.client_info__row} {...editingAtr('email')}>
             <label>Email: </label>
+
             {editingField === 'email' ? (
-              <input type="text" value={form.email} {...changeAtributes('email')} />
+              <input
+                type="text"
+                value={form.email ?? ''}
+                {...changeAtributes('email')}
+                className={errors.email ? 'errorInput' : ''}
+              />
             ) : (
               <span>
                 <a href={`mailto:${form.email}`}>{form.email}</a>
               </span>
             )}
+
+            {errors.email && (
+              <div className="errorContainer">
+                <BiSolidError className="errorIcon" />
+                <p className="errorText">{getValidationErrorMessage(errors.email)}</p>
+              </div>
+            )}
           </div>
 
           <div className={s.client_info__row} {...editingAtr('phone')}>
-            <label>Phone: </label>
+            <label>Phone:</label>
+
             {editingField === 'phone' ? (
-              <input type="text" value={form.phone} {...changeAtributes('phone')} />
+              <input
+                type="text"
+                value={form.phone ?? ''}
+                {...changeAtributes('phone')}
+                className={errors.phone ? 'errorInput' : ''}
+              />
             ) : (
               <span>
                 <a href={`tel:+${form.phone}`}>{form.phone}</a>
               </span>
             )}
+
+            {errors.phone && (
+              <div className="errorContainer">
+                <BiSolidError className="errorIcon" />
+                <p className="errorText">{getValidationErrorMessage(errors.phone)}</p>
+              </div>
+            )}
           </div>
+
           <div className={s.client_info__row} {...editingAtr('status')}>
             <label>Status: </label>
             {editingField === 'status' ? (
@@ -131,17 +216,26 @@ export const ClientDetails: React.FC<Props> = ({ client, setClient, exit }) => {
               </span>
             )}
           </div>
+
           <div className={s.client_info__row} {...editingAtr('comment')}>
-            <label>Comment: </label>
+            <label>Comment:</label>
+
             {editingField === 'comment' ? (
               <textarea
                 maxLength={100}
-                name="comment"
-                value={form.comment}
+                value={form.comment ?? ''}
                 {...changeAtributes('comment')}
+                className={errors.comment ? 'errorInput' : ''}
               />
             ) : (
               <span>{form.comment}</span>
+            )}
+
+            {errors.comment && (
+              <div className="errorContainer">
+                <BiSolidError className="errorIcon" />
+                <p className="errorText">{getValidationErrorMessage(errors.comment)}</p>
+              </div>
             )}
           </div>
         </div>

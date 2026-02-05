@@ -25,7 +25,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 20px;
+  // gap: 20px;
   padding: 0.5rem 0.7rem;
   border-bottom: 1px solid $border;
 
@@ -36,7 +36,7 @@
     input,
     span,
     label {
-      font-weight: 600;
+      // font-weight: 600;
       color: $primary;
     }
 

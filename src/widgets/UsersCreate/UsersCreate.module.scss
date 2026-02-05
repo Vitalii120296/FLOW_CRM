@@ -14,6 +14,10 @@
   @include on-tablet {
     width: 350px;
   }
+
+  .title {
+    color: $info;
+  }
 }
 
 .content {
