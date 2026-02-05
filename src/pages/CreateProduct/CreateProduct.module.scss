@@ -1,0 +1,63 @@
+@use '@styles/index' as *;
+
+.create_product__wrapper {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 24px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 20px;
+  background-color: $bgBlock;
+  border-radius: 12px;
+
+  input,
+  textarea {
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid $border;
+    background-color: $bgc;
+    color: $text;
+  }
+
+  .file_input_wrapper {
+    display: flex;
+    .custom_file_button {
+      @extend .button_secondary;
+
+      input[type='file'] {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 1px;
+        height: 1px;
+        opacity: 0;
+        cursor: pointer;
+      }
+    }
+  }
+
+  textarea {
+    resize: vertical;
+    min-height: 80px;
+  }
+
+  button {
+    @extend .button;
+  }
+}
+
+.preview {
+  display: flex;
+  width: 200px;
+  flex-direction: column;
+  gap: 12px;
+  margin-inline: auto;
+
+  h3 {
+    color: $textSecondary;
+  }
+}

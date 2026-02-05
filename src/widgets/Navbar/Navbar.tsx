@@ -49,6 +49,12 @@ export const Navbar = () => {
           </NavLink>
         </li>
         <li className={s.nav_item}>
+          <NavLink to="/products" className={isActive}>
+            <CgProfile className={s.icon} />
+            <span>Products</span>
+          </NavLink>
+        </li>
+        <li className={s.nav_item}>
           <NavLink to="/user-management" className={isActive}>
             <BsGearFill className={s.icon} />
             <span>User Management</span>
