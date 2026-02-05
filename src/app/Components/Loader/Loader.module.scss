@@ -1,0 +1,29 @@
+@use '@styles/index' as *;
+
+.loader_wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin: auto;
+  height: 50%;
+}
+
+.loader {
+  width: 20px;
+  height: 20px;
+  border-top: 3px solid $primary;
+  border-inline: 3px solid $textSecondary;
+  border-bottom: 3px solid $textSecondary;
+  animation: loader 0.8s linear infinite;
+  border-radius: 50%;
+}
+
+@keyframes loader {
+  0% {
+    transform: rotate(0deg);
+  }
+  0% {
+    transform: rotate(360deg);
+  }
+}

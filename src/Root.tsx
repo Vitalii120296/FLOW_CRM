@@ -1,9 +1,10 @@
 import { HashRouter as Router, Route, Routes } from 'react-router-dom'
 import { App } from './app/App.tsx'
-import { DashBoard } from './pages/DashBoardPage/DashBoard.tsx'
 import { Kanban } from './pages/KanbanPage/Kanban.tsx'
 import { ClientsPage } from './pages/ClientsPage/ClientsPage.tsx'
 import { UserManagmentPage } from './pages/UserManagmentPage/UserManagmentPage.tsx'
+import { ProductsPage } from './pages/ProductsPage/ProductsPage.tsx'
+import { CreateProductPage } from './pages/CreateProduct/CreateProduct.tsx'
 
 export const Root = () => {
   return (
@@ -12,8 +13,10 @@ export const Root = () => {
         <Route path="/" element={<App />}>
           <Route index element={<Kanban />} />
           <Route path="clients" element={<ClientsPage />} />
-          <Route path="dashboard" element={<DashBoard />} />
           <Route path="profile" />
+          <Route path="products" element={<ProductsPage />} />
+          <Route path="products/create" element={<CreateProductPage />} />
+
           <Route path="user-management" element={<UserManagmentPage />} />
         </Route>
       </Routes>

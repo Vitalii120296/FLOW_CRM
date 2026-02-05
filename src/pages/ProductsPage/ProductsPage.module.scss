@@ -1,0 +1,20 @@
+@use '@styles/index' as *;
+
+.products_list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 20px;
+  width: 100%;
+}
+.product_buttons {
+  display: flex;
+  justify-content: flex-end;
+
+  button {
+    @extend .button_secondary;
+  }
+}
+
+h2 {
+  text-align: left;
+}
