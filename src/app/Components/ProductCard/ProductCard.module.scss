@@ -1,0 +1,91 @@
+@use '@styles/index' as *;
+
+.product_card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  overflow: hidden;
+  max-height: 300px;
+  padding: 12px;
+  gap: 10px;
+  background-color: $bgBlock;
+  box-sizing: border-box;
+  border-radius: 10px;
+  height: 100%;
+  position: relative;
+}
+
+.delete,
+.edit {
+  display: flex;
+  position: absolute;
+  top: 5px;
+  z-index: 1;
+  width: 20px;
+  height: 20px;
+  background-color: transparent;
+  border: none;
+  font-size: 1rem;
+  padding: 0;
+  flex: 0 0;
+  font-size: 20px;
+  transform: scale(0);
+  transition: transform 0.3s ease;
+
+  button {
+    width: 100%;
+    height: 100%;
+  }
+
+  &.show {
+    transform: scale(1);
+  }
+}
+.delete {
+  right: 5px;
+  color: $error;
+}
+.edit {
+  left: 5px;
+  color: $success;
+}
+
+.product_image {
+  width: 100%;
+  overflow: hidden;
+  box-sizing: border-box;
+
+  img {
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+    max-height: 180px;
+    border-radius: 12px;
+  }
+}
+
+.product_title,
+.product_price,
+.product_description {
+  display: flex;
+  width: 100%;
+}
+
+.product_title {
+  justify-content: center;
+  color: $primary;
+}
+
+.product_price {
+  display: flex;
+  justify-content: space-between;
+}
+
+.product_description {
+  display: flex;
+  flex: 1 0;
+  font-size: 0.8rem;
+  color: $textSecondary;
+}
