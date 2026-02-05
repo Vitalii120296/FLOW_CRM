@@ -41,6 +41,18 @@ export function validateEmail(value: string): ValidationError | undefined {
 }
 //#endregion
 
+//#region PASSWORD
+
+export function validatePassword(value: string): ValidationError | undefined {
+  if (!value) {
+    return { type: ValidationErrorType.REQUIRED }
+  }
+
+  return validateLength(value, { min: 6, max: 50 })
+}
+
+//#endregion
+
 //#region PHONE
 
 export function validatePhone(value: string): ValidationError | undefined {
@@ -101,5 +113,6 @@ export const validateService = {
   validatePhone,
   validateComment,
   validateName,
+  validatePassword,
 }
 //#endregion

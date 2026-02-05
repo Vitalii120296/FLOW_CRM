@@ -1,11 +1,14 @@
-/* UsersTable.module.scss */
-.table {
-  width: 100%;
-  border-collapse: collapse;
-}
+@use '@styles/index' as *;
 
-.table th,
-.table td {
-  border: 1px solid #ddd;
-  padding: 8px;
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+
+  @include on-tablet {
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 50px;
+    width: calc(100vw - 125px);
+  }
 }
