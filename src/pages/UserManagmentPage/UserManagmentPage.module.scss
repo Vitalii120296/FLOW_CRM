@@ -1,5 +1,11 @@
 @use '@styles/index' as *;
 
+.title {
+  display: flex;
+  justify-content: start;
+  padding-bottom: 15px;
+}
+
 .wrapper {
   display: flex;
   flex-direction: column;

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { BiSolidError } from 'react-icons/bi'
 
 import styles from './UsersCreate.module.scss'
+import cn from 'classnames'
 
 import { validateService } from '../../services/validateServices'
 import { getValidationErrorMessage } from '../../types/validationMessages'
@@ -16,7 +17,9 @@ export const UsersCreate: React.FC = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [errors, setErrors] = useState<FormErrors>({})
+
   const [isSuccess, setIsSuccess] = useState(false)
+  const [countdown, setCountdown] = useState(0)
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
@@ -45,6 +48,7 @@ export const UsersCreate: React.FC = () => {
     console.log('Create user:', payload)
 
     setIsSuccess(true)
+    setCountdown(5)
 
     setEmail('')
     setPassword('')
@@ -62,15 +66,23 @@ export const UsersCreate: React.FC = () => {
   useEffect(() => {
     if (!isSuccess) return
 
-    const timer = setTimeout(() => {
-      setIsSuccess(false)
-    }, 5000)
-    return () => clearTimeout(timer)
+    const interval = setInterval(() => {
+      setCountdown((prev) => {
+        if (prev <= 1) {
+          clearInterval(interval)
+          setIsSuccess(false)
+          return 0
+        }
+        return prev - 1
+      })
+    }, 1000)
+
+    return () => clearInterval(interval)
   }, [isSuccess])
 
   return (
     <div className={styles.wrapper}>
-      <h1 className="h3">Create User</h1>
+      <h1 className={cn('h3', styles.title)}>Create User</h1>
       <form onSubmit={handleSubmit} className={styles.content}>
         {/* EMAIL */}
         <input
@@ -109,7 +121,7 @@ export const UsersCreate: React.FC = () => {
 
         {isSuccess && (
           <div className={styles.sucessContainer}>
-            <p className={styles.successText}>User created ✅</p>
+            <p className={styles.successText}>User created ✅ {countdown}</p>
           </div>
         )}
       </form>
