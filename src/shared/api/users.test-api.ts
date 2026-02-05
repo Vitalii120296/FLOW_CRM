@@ -6,7 +6,7 @@ export const getUsersTestApi = async (): Promise<SystemUser[]> => {
       id: '1',
       email: 'owner@flowcrm.com',
       name: 'Admin Owner',
-      role: 'owner',
+      role: 'user',
       status: 'active',
     },
     {
@@ -34,7 +34,7 @@ export const getUsersTestApi = async (): Promise<SystemUser[]> => {
       id: '5',
       email: 'support@flowcrm.com',
       name: 'Support Bot',
-      role: 'owner',
+      role: 'user',
       status: 'inactive',
     },
   ])

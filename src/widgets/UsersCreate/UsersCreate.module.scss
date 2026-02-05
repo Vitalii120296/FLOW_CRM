@@ -1,0 +1,46 @@
+@use '@styles/index' as *;
+
+.wrapper {
+  width: auto;
+  border: solid 1px $border;
+  border-radius: 12px;
+  background-color: $bgBlock;
+
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 10px;
+
+  @include on-tablet {
+    width: 350px;
+  }
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 20px; // расстояние между инпутами, ошибками и кнопкой
+
+  .sucessContainer {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+
+    align-self: center;
+
+    // width: 100px;
+    padding: 5px;
+    border: 1px solid $success;
+    border-radius: 12px;
+    background-color: $primary;
+    // opacity: 50%;
+
+    .successText {
+      color: $success;
+    }
+  }
+}
+
+.create {
+  @extend .button;
+}
