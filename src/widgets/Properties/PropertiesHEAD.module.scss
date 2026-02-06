@@ -1,0 +1,109 @@
+@use '@styles/index' as *;
+
+/* ===== WRAPPER ===== */
+.wrapperHead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 32px;
+  width: 100%;
+
+  @include on-tablet {
+    align-items: flex-end;
+  }
+}
+
+/* ===== TITLE ===== */
+.titleWrapper {
+  position: relative;
+}
+
+.title {
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+
+  &:hover .editHint {
+    opacity: 1;
+  }
+}
+
+.editHint {
+  font-size: 14px;
+  color: $info;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.titleInput {
+  font-size: 32px;
+  font-weight: 600;
+  border: none;
+  outline: none;
+  background: transparent;
+  padding: 0;
+  width: 100%;
+  color: $primary;
+}
+
+/* ===== LOGO ===== */
+.logoBlock {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 8px;
+}
+
+.label {
+  color: $info;
+}
+
+.logoPreview {
+  display: flex;
+}
+
+.imageWrapper {
+  position: relative;
+  width: 80px;
+  height: 80px;
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+.imageWrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.imageWrapper:hover .overlay {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  align-items: center;
+  justify-content: center;
+
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+}
+
+/* ===== ACTIONS ===== */
+.change,
+.remove,
+.upload {
+  @extend .button;
+  padding: 4px 8px;
+  font-size: 12px;
+}

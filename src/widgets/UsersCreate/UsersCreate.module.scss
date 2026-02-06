@@ -25,6 +25,13 @@
   flex-direction: column;
   gap: 20px; // расстояние между инпутами, ошибками и кнопкой
 
+  input,
+  textarea {
+    border-radius: 8px;
+    background-color: $bgc;
+    color: $text;
+  }
+
   .sucessContainer {
     display: inline-flex;
     justify-content: center;
