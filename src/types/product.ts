@@ -2,7 +2,7 @@ export type Product = {
   id: string
   image: string
   title: string
-  price: number //NOTE: було стрінг, а в апі числа
+  price: string
   description: string
   file?: File
 }

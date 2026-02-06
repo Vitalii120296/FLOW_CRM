@@ -1,5 +1,12 @@
 import { NavLink, useLocation } from 'react-router-dom'
-import { BsFillHouseFill, BsPeopleFill, BsGearFill, BsBuilding, BsIndent } from 'react-icons/bs'
+import {
+  BsFillHouseFill,
+  BsBoxSeam,
+  BsPeopleFill,
+  BsGearFill,
+  BsBuilding,
+  BsIndent,
+} from 'react-icons/bs'
 import { CgProfile } from 'react-icons/cg'
 import s from './Navbar.module.scss'
 import { useEffect, useState } from 'react'
@@ -50,7 +57,7 @@ export const Navbar = () => {
         </li>
         <li className={s.nav_item}>
           <NavLink to="/products" className={isActive}>
-            <CgProfile className={s.icon} />
+            <BsBoxSeam className={s.icon} />
             <span>Products</span>
           </NavLink>
         </li>
