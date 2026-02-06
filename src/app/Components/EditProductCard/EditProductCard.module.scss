@@ -1,0 +1,77 @@
+@use '@styles/index' as *;
+
+.product_card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-inline: auto;
+  width: 250px;
+  overflow: hidden;
+  max-height: 400px;
+  padding: 12px;
+  gap: 10px;
+  background-color: $bgBlock;
+  box-sizing: border-box;
+  border-radius: 10px;
+  height: 100%;
+  position: relative;
+}
+
+.product_image {
+  width: 100%;
+  overflow: hidden;
+  box-sizing: border-box;
+  height: minmax(100px, 180px);
+  border-radius: 12px;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center center;
+  }
+}
+
+.product_title,
+.product_price,
+.product_description {
+  display: flex;
+  width: 100%;
+  gap: 10%;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.product_title {
+  justify-content: center;
+  color: $primary;
+}
+
+.product_price {
+  label {
+    display: inline-block;
+  }
+}
+
+.product_description {
+  display: flex;
+  flex: 1 0;
+  font-size: 0.8rem;
+
+  textarea {
+    color: $textSecondary;
+    width: 100%;
+  }
+}
+
+.edit_product_buttons {
+  display: flex;
+  padding-top: 20px;
+  width: 100%;
+  justify-content: space-between;
+
+  button {
+    @extend .button;
+  }
+}

@@ -7,7 +7,7 @@
   align-items: center;
   width: 100%;
   overflow: hidden;
-  max-height: 300px;
+  max-height: 450px;
   padding: 12px;
   gap: 10px;
   background-color: $bgBlock;
@@ -18,14 +18,15 @@
 }
 
 .delete,
-.edit {
+.edit,
+.save {
   display: flex;
   position: absolute;
   top: 5px;
   z-index: 1;
-  width: 20px;
-  height: 20px;
-  background-color: transparent;
+  width: 25px;
+  height: 25px;
+  background-color: $bgBlock;
   border: none;
   font-size: 1rem;
   padding: 0;
@@ -33,6 +34,7 @@
   font-size: 20px;
   transform: scale(0);
   transition: transform 0.3s ease;
+  padding: 3px;
 
   button {
     width: 100%;
@@ -41,15 +43,27 @@
 
   &.show {
     transform: scale(1);
+
+    &:hover {
+      transform: scale(1.15);
+    }
   }
 }
+.edit,
+.save {
+  left: 5px;
+  color: $success;
+  border-radius: 5px;
+}
+
+.save,
+.delete {
+  border-radius: 50%;
+}
+
 .delete {
   right: 5px;
   color: $error;
-}
-.edit {
-  left: 5px;
-  color: $success;
 }
 
 .product_image {
@@ -81,6 +95,10 @@
 .product_price {
   display: flex;
   justify-content: space-between;
+
+  span {
+    display: inline-block;
+  }
 }
 
 .product_description {

@@ -5,6 +5,7 @@ import { ClientsPage } from './pages/ClientsPage/ClientsPage.tsx'
 import { UserManagmentPage } from './pages/UserManagmentPage/UserManagmentPage.tsx'
 import { ProductsPage } from './pages/ProductsPage/ProductsPage.tsx'
 import { CreateProductPage } from './pages/CreateProduct/CreateProduct.tsx'
+import { PropertiesPage } from './pages/PropertiesPage/PropertiesPage.tsx'
 
 export const Root = () => {
   return (
@@ -18,6 +19,7 @@ export const Root = () => {
           <Route path="products/create" element={<CreateProductPage />} />
 
           <Route path="user-management" element={<UserManagmentPage />} />
+          <Route path="properties" element={<PropertiesPage />} />
         </Route>
       </Routes>
     </Router>

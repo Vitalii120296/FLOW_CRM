@@ -1,0 +1,19 @@
+@use '@styles/index' as *;
+
+.titleContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  padding-bottom: 20px;
+
+  .title {
+    color: $info;
+  }
+
+  .icon {
+    width: 24px;
+    height: 24px;
+    color: $info;
+  }
+}
