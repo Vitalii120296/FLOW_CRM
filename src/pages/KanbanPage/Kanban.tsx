@@ -40,7 +40,6 @@ export const Kanban = () => {
     })
   }, [])
 
-  console.log(columnsData)
   if (!columnsData) return <p>Loading...</p>
 
   const onDragEnd = (result: DropResult) => {
