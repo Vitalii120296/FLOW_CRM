@@ -4,6 +4,7 @@ import type { Product } from '../../../types/product'
 import s from './EditProductCard.module.scss'
 
 type Props = {
+  isOpen: boolean
   product: Product
   saveProduct: React.Dispatch<React.SetStateAction<Product[]>>
   exit: () => void
@@ -18,6 +19,14 @@ export const EditProductCard: React.FC<Props> = ({ product, saveProduct, exit })
       ...prev,
       [key]: value,
     }))
+  }
+
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0]
+    if (file) {
+      const imageUrl = URL.createObjectURL(file)
+      setEditProduct((prev) => ({ ...prev, image: imageUrl, file }))
+    }
   }
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -61,6 +70,10 @@ export const EditProductCard: React.FC<Props> = ({ product, saveProduct, exit })
         <form className={s.product_card} onSubmit={handleSubmit}>
           <div className={s.product_image}>
             <img src={editProduct.image} alt={editProduct.title} />
+            <label className={s.custom_file_button} htmlFor="product-image">
+              {product.file ? product.file.name : 'Choose image'}
+              <input type="file" accept="image/*" onChange={handleFileChange} id="product-image" />
+            </label>
           </div>
           <div className={s.product_title}>
             <label>Title</label>

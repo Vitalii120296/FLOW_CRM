@@ -1,0 +1,13 @@
+@use '@styles/index' as *;
+
+.confirm_buttons {
+  padding-top: 20px;
+  display: flex;
+  justify-content: space-evenly;
+  width: 100%;
+  gap: 12px;
+
+  button {
+    @extend .button;
+  }
+}

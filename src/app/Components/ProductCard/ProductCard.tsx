@@ -4,6 +4,7 @@ import { BsXCircleFill, BsPencilSquare } from 'react-icons/bs'
 import cn from 'classnames'
 import { useState } from 'react'
 import { EditProductCard } from '../EditProductCard/EditProductCard'
+import { ConfirmationDialog } from '../../../shared/ui/ConfirmationDialog/ConfirmationDialog'
 
 type Props = {
   product: Product
@@ -12,20 +13,22 @@ type Props = {
 }
 
 export const ProductCard: React.FC<Props> = ({ product, showEditIcons, setProducts }) => {
-  const [isEditing, setIsEditing] = useState<string | null>(null)
-
+  const [isDeleteConfirmOpen, setIsDeleteConfirmOpen] = useState(false)
+  const [isEditingModalOpen, setIsEditingModalOpen] = useState(false)
   const handleDelete = () => {
     if (!setProducts) return
     setProducts((prev) => prev.filter((item) => item.id !== product.id))
   }
 
+  const editModalOpen = () => {
+    setIsEditingModalOpen(true)
+  }
+
   return (
     <>
-      <div className={s.product_card}>
+      <div className={s.product_card} onClick={editModalOpen}>
         <button
-          onClick={() => {
-            setIsEditing(product.id)
-          }}
+          onClick={editModalOpen}
           className={cn(s.edit, {
             [s.show]: showEditIcons,
           })}
@@ -36,7 +39,10 @@ export const ProductCard: React.FC<Props> = ({ product, showEditIcons, setProduc
           className={cn(s.delete, {
             [s.show]: showEditIcons,
           })}
-          onClick={handleDelete}
+          onClick={(e) => {
+            e.stopPropagation()
+            setIsDeleteConfirmOpen(true)
+          }}
         >
           <BsXCircleFill />
         </button>
@@ -54,11 +60,22 @@ export const ProductCard: React.FC<Props> = ({ product, showEditIcons, setProduc
           <span>{product.description}</span>
         </div>
       </div>
-      {isEditing && (
+      {isEditingModalOpen && (
         <EditProductCard
+          isOpen={isEditingModalOpen}
           product={product}
           saveProduct={setProducts!}
-          exit={() => setIsEditing(null)}
+          exit={() => {
+            setIsEditingModalOpen(false)
+          }}
+        />
+      )}
+      {isDeleteConfirmOpen && (
+        <ConfirmationDialog
+          isOpen={isDeleteConfirmOpen}
+          onClose={() => setIsDeleteConfirmOpen(false)}
+          product={product}
+          handleDelete={handleDelete}
         />
       )}
     </>
