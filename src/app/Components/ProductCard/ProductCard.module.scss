@@ -15,11 +15,16 @@
   border-radius: 10px;
   height: 100%;
   position: relative;
+  transition: transform 0.3s ease;
+  cursor: pointer;
+
+  &:hover {
+    transform: scale(1.02);
+  }
 }
 
 .delete,
-.edit,
-.save {
+.edit {
   display: flex;
   position: absolute;
   top: 5px;
@@ -49,21 +54,16 @@
     }
   }
 }
-.edit,
-.save {
+.edit {
   left: 5px;
   color: $success;
   border-radius: 5px;
 }
 
-.save,
-.delete {
-  border-radius: 50%;
-}
-
 .delete {
   right: 5px;
   color: $error;
+  border-radius: 50%;
 }
 
 .product_image {
