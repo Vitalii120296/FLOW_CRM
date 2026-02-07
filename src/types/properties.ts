@@ -8,4 +8,5 @@ export interface PropertiesInfo {
   type: string
   email: string
   phone: string
+  logo: PropertiesLogo
 }

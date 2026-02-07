@@ -23,6 +23,7 @@
   display: inline-flex;
   align-items: center;
   gap: 8px;
+  color: $info;
 
   &:hover .editHint {
     opacity: 1;

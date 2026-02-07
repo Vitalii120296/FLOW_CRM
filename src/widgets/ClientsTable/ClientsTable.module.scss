@@ -66,4 +66,34 @@
   .tdIndex {
     color: $primary;
   }
+
+  .status {
+    display: inline-block;
+    padding: 4px 10px;
+    border-radius: 9999px;
+    font-size: 12px;
+    font-weight: 500;
+    text-transform: capitalize;
+  }
+
+  .status[data-status='new'] {
+    background: #e0f2fe;
+    color: #0369a1;
+  }
+
+  .status[data-status='in_progress'] {
+    background: #fef3c7;
+    color: #92400e;
+  }
+
+  .status[data-status='done'] {
+    background: #dcfce7;
+    color: #166534;
+  }
+
+  .empty {
+    padding: 24px;
+    text-align: center;
+    color: #6b7280;
+  }
 }

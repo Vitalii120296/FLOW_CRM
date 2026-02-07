@@ -7,17 +7,24 @@ import cn from 'classnames'
 import { validateService } from '../../services/validateServices'
 import { getValidationErrorMessage } from '../../types/validationMessages'
 import type { ValidationError } from '../../types/ValidationErrorType'
+import type { SystemUser } from '../../types'
 
 type FormErrors = {
   email?: ValidationError
   password?: ValidationError
 }
 
-export const UsersCreate: React.FC = () => {
+type UsersCreateProps = {
+  onAddUser: (user: SystemUser) => void
+}
+
+// Новый тип для локального хранения созданного пользователя
+type LocalUser = SystemUser & { password: string }
+
+export const UsersCreate: React.FC<UsersCreateProps> = ({ onAddUser }) => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [errors, setErrors] = useState<FormErrors>({})
-
   const [isSuccess, setIsSuccess] = useState(false)
   const [countdown, setCountdown] = useState(0)
 
@@ -38,18 +45,20 @@ export const UsersCreate: React.FC = () => {
       return
     }
 
-    const payload = {
+    const newUser: LocalUser = {
+      id: crypto.randomUUID(), // уникальный id
+      name: email.split('@')[0], // временное имя
       email,
       password,
-      role: 'user' as const,
-      status: 'active' as const,
+      role: 'user',
+      status: 'active',
     }
 
-    console.log('Create user:', payload)
+    // добавляем пользователя в таблицу
+    onAddUser(newUser)
 
     setIsSuccess(true)
     setCountdown(5)
-
     setEmail('')
     setPassword('')
     setErrors({})
@@ -84,14 +93,12 @@ export const UsersCreate: React.FC = () => {
     <div className={styles.wrapper}>
       <h1 className={cn('h3', styles.title)}>Create User</h1>
       <form onSubmit={handleSubmit} className={styles.content}>
-        {/* EMAIL */}
         <input
           placeholder="Email"
           value={email}
           onChange={handleChange('email', setEmail)}
           className={errors.email ? 'errorInput' : ''}
         />
-
         {errors.email && (
           <div className="errorContainer">
             <BiSolidError className="errorIcon" />
@@ -99,7 +106,6 @@ export const UsersCreate: React.FC = () => {
           </div>
         )}
 
-        {/* PASSWORD */}
         <input
           type="password"
           placeholder="Password"
@@ -107,7 +113,6 @@ export const UsersCreate: React.FC = () => {
           onChange={handleChange('password', setPassword)}
           className={errors.password ? 'errorInput' : ''}
         />
-
         {errors.password && (
           <div className="errorContainer">
             <BiSolidError className="errorIcon" />
