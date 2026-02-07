@@ -1,0 +1,50 @@
+@use '@styles/index' as *;
+
+.wrapper {
+  padding-top: 20px;
+}
+
+.form {
+  display: flex;
+
+  flex-direction: column;
+  gap: 16px;
+}
+
+.field {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 0;
+  // gap: 16px;
+  border-bottom: 1px solid $textSecondary;
+  .labelText {
+    color: $text;
+    white-space: nowrap;
+  }
+
+  .titleInput {
+    width: auto;
+    font-size: 20px;
+    font-weight: 600;
+    border: none;
+    border-radius: 6px;
+    padding: 8px 12px;
+    outline: none;
+    background: transparent;
+    color: $text; // цвет по умолчанию (например белый)
+    transition: color 0.2s;
+
+    &:focus {
+      color: $primary; // цвет текста при вводе / фокусе
+    }
+  }
+}
+
+.saveButton {
+  padding: 8px 16px;
+  width: 120px;
+  margin-left: auto;
+
+  @extend .button;
+}

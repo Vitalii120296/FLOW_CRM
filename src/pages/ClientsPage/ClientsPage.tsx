@@ -5,10 +5,12 @@ import type { Client, ClientFilters, ClientStatus } from '../../types'
 import { ClientsFilter } from '../../widgets/ClientsFilter/ClientsFilter'
 import { ClientsTable } from '../../widgets/ClientsTable/ClientsTable'
 import { getClientsTestApi } from '../../shared/api/clients.test-api'
+import { Loader } from '../../app/Components/Loader/Loader'
 
 export const ClientsPage = () => {
   const [clients, setClients] = useState<Client[]>([])
   const [searchParams, setSearchParams] = useSearchParams()
+  const [loading, setLoading] = useState(true)
 
   const filters: ClientFilters = {
     search: searchParams.get('search') ?? '',
@@ -17,7 +19,11 @@ export const ClientsPage = () => {
 
   // 2️⃣ загружаем клиентов (тестовый API)
   useEffect(() => {
-    getClientsTestApi().then(setClients)
+    setTimeout(() => {
+      getClientsTestApi()
+        .then(setClients)
+        .finally(() => setLoading(false))
+    }, 800)
   }, [])
 
   const filteredClients = useMemo(() => {
@@ -34,8 +40,7 @@ export const ClientsPage = () => {
   return (
     <div className="page-container">
       <ClientsFilter filters={filters} onChange={setSearchParams} />
-
-      <ClientsTable setClients={setClients} clients={filteredClients} />
+      {loading ? <Loader /> : <ClientsTable setClients={setClients} clients={filteredClients} />}
     </div>
   )
 }
