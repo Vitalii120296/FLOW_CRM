@@ -24,6 +24,10 @@ export const UserManagmentPage = () => {
     )
   }
 
+  const handleAddUser = (newUser: SystemUser) => {
+    setUsers((prev) => [...prev, newUser])
+  }
+
   useEffect(() => {
     getUsersTestApi().then(setUsers)
   }, [])
@@ -33,7 +37,7 @@ export const UserManagmentPage = () => {
       <h1 className={cn('h2', styles.title)}>Users</h1>
       <div className={styles.wrapper}>
         <UsersTable users={users} onToggleStatus={handleToggleStatus} />
-        <UsersCreate />
+        <UsersCreate onAddUser={handleAddUser} />
       </div>
     </div>
   )
