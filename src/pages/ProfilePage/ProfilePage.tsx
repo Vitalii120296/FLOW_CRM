@@ -82,7 +82,7 @@ export const ProfilePage = () => {
                 src={
                   userProfile.photo
                     ? userProfile.photo
-                    : '/public/productImages/defaultProductImage.WebP'
+                    : 'public/productImages/defaultProductImage.WebP'
                 }
                 alt="user photo"
               />
