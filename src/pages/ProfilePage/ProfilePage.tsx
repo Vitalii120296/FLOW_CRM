@@ -3,7 +3,6 @@ import type { SystemUser } from '../../types'
 import s from './ProfilePage.module.scss'
 import { Loader } from '../../app/Components/Loader/Loader'
 import { getUsersTestApi } from '../../shared/api/users.test-api'
-import defaultUserImage from '../../../public/productImages/defaultProductImage.webp'
 
 export const ProfilePage = () => {
   const [userProfile, setUserProfile] = useState<SystemUser | null>(null)
@@ -80,7 +79,11 @@ export const ProfilePage = () => {
           <div className={s.photo}>
             <div className={s.user_photo}>
               <img
-                src={userProfile.photo ? userProfile.photo : defaultUserImage}
+                src={
+                  userProfile.photo
+                    ? userProfile.photo
+                    : 'public/productImages/defaultProductImage.WebP'
+                }
                 alt="user photo"
               />
             </div>
