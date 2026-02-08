@@ -11,7 +11,7 @@ type Props = {
 }
 
 export const EditProductCard: React.FC<Props> = ({ product, saveProduct, exit }) => {
-  const [editProduct, setEditProduct] = useState<Product>(product)
+  const [editProduct, setEditProduct] = useState<Product>({ ...product })
   const [loading, setLoading] = useState(false)
 
   const handleChange = <K extends keyof Product>(key: K, value: Product[K]) => {
@@ -59,6 +59,10 @@ export const EditProductCard: React.FC<Props> = ({ product, saveProduct, exit })
     }
   }
 
+  const isProductEdited = () => {
+    return JSON.stringify(product) === JSON.stringify(editProduct) ? false : true
+  }
+
   return (
     <>
       <Modal
@@ -76,35 +80,44 @@ export const EditProductCard: React.FC<Props> = ({ product, saveProduct, exit })
             </label>
           </div>
           <div className={s.product_title}>
-            <label>Title</label>
-            <input
-              type="text"
-              value={editProduct.title}
-              onChange={(e) => {
-                handleChange('title', e.target.value)
-              }}
-            />
+            <label>
+              <span>Title</span>
+              <input
+                type="text"
+                value={editProduct.title}
+                onChange={(e) => {
+                  handleChange('title', e.target.value)
+                }}
+              />
+            </label>
           </div>
           <div className={s.product_price}>
-            <label>{`Price:`}</label>
-            <input
-              type="text"
-              value={editProduct.price}
-              onChange={(e) => {
-                handleChange('price', e.target.value)
-              }}
-            />
+            <label>
+              <span>Price:</span>
+              <input
+                type="text"
+                value={editProduct.price}
+                onChange={(e) => {
+                  handleChange('price', e.target.value)
+                }}
+              />
+            </label>
           </div>
           <div className={s.product_description}>
-            <textarea
-              value={editProduct.description}
-              onChange={(e) => {
-                handleChange('description', e.target.value)
-              }}
-            ></textarea>
+            <label htmlFor="description">
+              <span>Description:</span>
+              <textarea
+                id="description"
+                rows={4}
+                value={editProduct.description}
+                onChange={(e) => {
+                  handleChange('description', e.target.value)
+                }}
+              />
+            </label>
           </div>
           <div className={s.edit_product_buttons}>
-            <button type="submit" disabled={loading}>
+            <button type="submit" disabled={loading || !isProductEdited()}>
               Save
             </button>
             <button onClick={exit}>Cancel</button>

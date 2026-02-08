@@ -9,10 +9,17 @@
   cursor: pointer;
   transition:
     background-color 0.3s,
+    box-shadow 0.3s,
     color 0.3s;
 
   &:hover {
-    background-color: $primary;
+    box-shadow: 0 0 10px $primary;
+  }
+
+  &:disabled {
+    background-color: $textSecondary;
+    cursor: auto;
+    box-shadow: none;
   }
 }
 

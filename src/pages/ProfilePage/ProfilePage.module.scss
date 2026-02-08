@@ -1,0 +1,120 @@
+@use '@styles/index' as *;
+.personal_info__wrapper,
+.personal_info,
+.profile_photo,
+.security {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+  margin-inline: auto;
+}
+
+.personal_info__wrapper {
+  gap: 20px;
+}
+
+.personal_info,
+.profile_photo,
+.security {
+  // border: 1px solid $border;
+  border-radius: 10px;
+  padding: 10px;
+  box-sizing: border-box;
+  width: 100%;
+}
+
+.user_name,
+.user_email,
+.user_role {
+  width: 100%;
+  display: block;
+  box-sizing: border-box;
+
+  label {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 100%;
+    gap: 5px;
+    line-height: 36px;
+    height: auto;
+    border-bottom: 1px solid $border;
+    box-sizing: border-box;
+
+    @include on-tablet {
+      flex-direction: row;
+    }
+
+    input {
+      width: 50%;
+      text-align: right;
+    }
+  }
+}
+.profile_photo {
+}
+.photo {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  img {
+    width: 150px;
+    border-radius: 10px;
+  }
+}
+
+.photo_buttons {
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+  height: 100%;
+  gap: 10px;
+  button {
+    @extend .button_secondary;
+  }
+}
+
+.change_password {
+  display: flex;
+  width: 100%;
+  margin-inline: auto;
+  gap: 10px;
+  flex-direction: column;
+
+  label {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+
+    @include on-tablet {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+
+      input {
+        width: 50%;
+      }
+    }
+  }
+}
+
+.profile_page_actions {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin-inline: auto;
+  box-sizing: border-box;
+  padding-block: 15px;
+  button {
+    @extend .button;
+    width: 20%;
+    min-width: fit-content;
+  }
+}
+
+h2 {
+  align-self: center;
+  padding: 20px;
+}
