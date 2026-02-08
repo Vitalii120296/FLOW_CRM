@@ -9,6 +9,7 @@
 .product_buttons {
   display: flex;
   justify-content: flex-end;
+  width: 100%;
 
   button {
     @extend .button_secondary;
