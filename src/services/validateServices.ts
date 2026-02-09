@@ -5,7 +5,7 @@ const EMAIL_PATTERN = /^[\w.+-]+@([\w-]+\.){1,3}[\w-]{2,}$/
 const PHONE_PATTERN = /^\+?\d{10,15}$/
 const NAME_PATTERN = /^[A-Za-z\s'-]+$/
 const PASSWORD_PATTERN =
-  /^(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*(),.?":{}|<>_\-\\[\]\\/+=~`]).{6,50}$/
+  /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9!@#$%^&*(),.?":{}|<>_\-\\[\]\\/+=~`]).{8,50}$/
 
 function normalizePhone(value: string): string {
   return value.replace(/[^\d+]/g, '')
@@ -66,13 +66,16 @@ export function validatePassword(value: string): ValidationError | undefined {
     return { type: ValidationErrorType.REQUIRED }
   }
 
+  if (value.length < 8) {
+    return { type: ValidationErrorType.MIN_LENGTH, min: 8 }
+  }
+
   if (!PASSWORD_PATTERN.test(value)) {
     return { type: ValidationErrorType.INVALID }
   }
 
   return undefined
 }
-
 //#endregion
 
 //#region PHONE
