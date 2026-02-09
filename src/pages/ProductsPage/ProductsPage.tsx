@@ -26,7 +26,7 @@ export const ProductsPage = () => {
     navigate('create')
   }
   return (
-    <div className="page-container">
+    <section className="page-container">
       <h2 className="h2">Products</h2>
       <div className={s.product_buttons}>
         <button className={s.product_button__create} onClick={handleCreate}>
@@ -47,6 +47,6 @@ export const ProductsPage = () => {
           </li>
         ))}
       </ul>
-    </div>
+    </section>
   )
 }

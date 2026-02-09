@@ -12,7 +12,7 @@ type Props = {
 export const ConfirmationDialog: React.FC<Props> = ({ isOpen, onClose, product, handleDelete }) => {
   return (
     <>
-      <Modal isOpen={isOpen} onClose={onClose} title="Delete product" titleId="delete_product">
+      <Modal isOpen={isOpen} onClose={onClose} title="" titleId="delete_product">
         <p>
           Are you sure you want to delete
           <strong> {product.title}</strong>?

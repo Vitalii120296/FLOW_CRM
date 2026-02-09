@@ -30,6 +30,7 @@
   border-radius: 0.5rem;
   border-left: 1px solid $textSecondary;
   box-sizing: border-box;
+  transition: box-shadow 1.3s ease;
 
   &.isDraggin {
     box-shadow:

@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import s from './CreateProduct.module.scss'
+import s from './CreateProductPage.module.scss'
 import type { Product } from '../../types/product'
 import { ProductCard } from '../../app/Components/ProductCard/ProductCard'
 
