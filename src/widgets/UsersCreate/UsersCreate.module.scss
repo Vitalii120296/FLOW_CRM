@@ -20,6 +20,27 @@
   }
 }
 
+.passwordWrapper {
+  position: relative;
+}
+
+.togglePassword {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+  color: $primary;
+  transition: transform 0.2s ease;
+
+  &:hover {
+    transform: translateY(-50%) scale(1.1);
+  }
+}
+
 .content {
   display: flex;
   flex-direction: column;

@@ -4,6 +4,9 @@ import { BiSolidError } from 'react-icons/bi'
 import styles from './UsersCreate.module.scss'
 import cn from 'classnames'
 
+import { FaEye } from 'react-icons/fa'
+import { FaEyeSlash } from 'react-icons/fa'
+
 import { validateService } from '../../services/validateServices'
 import { getValidationErrorMessage } from '../../types/validationMessages'
 import type { ValidationError } from '../../types/ValidationErrorType'
@@ -27,6 +30,7 @@ export const UsersCreate: React.FC<UsersCreateProps> = ({ onAddUser }) => {
   const [errors, setErrors] = useState<FormErrors>({})
   const [isSuccess, setIsSuccess] = useState(false)
   const [countdown, setCountdown] = useState(0)
+  const [isPasswordVisible, setIsPasswordVisible] = useState(false)
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
@@ -46,8 +50,8 @@ export const UsersCreate: React.FC<UsersCreateProps> = ({ onAddUser }) => {
     }
 
     const newUser: LocalUser = {
-      id: crypto.randomUUID(), // уникальный id
-      name: email.split('@')[0], // временное имя
+      id: crypto.randomUUID(),
+      name: email.split('@')[0],
       email,
       password,
       role: 'user',
@@ -106,13 +110,24 @@ export const UsersCreate: React.FC<UsersCreateProps> = ({ onAddUser }) => {
           </div>
         )}
 
-        <input
-          type="password"
-          placeholder="Password"
-          value={password}
-          onChange={handleChange('password', setPassword)}
-          className={errors.password ? 'errorInput' : ''}
-        />
+        <div className={styles.passwordWrapper}>
+          <input
+            type={isPasswordVisible ? 'text' : 'password'}
+            placeholder="Password"
+            value={password}
+            onChange={handleChange('password', setPassword)}
+            className={errors.password ? 'errorInput' : ''}
+          />
+
+          <button
+            type="button"
+            className={styles.togglePassword}
+            onClick={() => setIsPasswordVisible((prev) => !prev)}
+          >
+            {isPasswordVisible ? <FaEyeSlash /> : <FaEye />}
+          </button>
+        </div>
+
         {errors.password && (
           <div className="errorContainer">
             <BiSolidError className="errorIcon" />
