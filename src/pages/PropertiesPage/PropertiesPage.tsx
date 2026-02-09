@@ -1,4 +1,4 @@
-import { Properties } from '../../widgets/PropertiesHead/Properties'
+import { Properties } from '../../widgets/Properties/Properties'
 import styles from './PropertiesPage.module.scss'
 import { BsBuilding } from 'react-icons/bs'
 
