@@ -30,6 +30,12 @@
   }
 }
 
+.errorHead {
+  display: flex;
+  align-items: center;
+  justify-content: start;
+}
+
 .editHint {
   font-size: 14px;
   color: $info;

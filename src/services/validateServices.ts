@@ -2,7 +2,10 @@ import { ValidationErrorType, type ValidationError } from '../types/ValidationEr
 
 //#region PATTERN
 const EMAIL_PATTERN = /^[\w.+-]+@([\w-]+\.){1,3}[\w-]{2,}$/
-const PHONE_PATTERN = /^\+?\d{10,15}$/ // +380XXXXXXXXX или 380XXXXXXXXX или 0XXXXXXXXX
+const PHONE_PATTERN = /^\+?\d{10,15}$/
+const NAME_PATTERN = /^[A-Za-z\s'-]+$/
+const PASSWORD_PATTERN =
+  /^(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*(),.?":{}|<>_\-\\[\]\\/+=~`]).{6,50}$/
 
 function normalizePhone(value: string): string {
   return value.replace(/[^\d+]/g, '')
@@ -23,6 +26,21 @@ function validateLength(
   }
 
   return undefined
+}
+//#endregion
+
+//#region NAME
+
+export function validateName(value: string): ValidationError | undefined {
+  if (!value.trim()) {
+    return { type: ValidationErrorType.REQUIRED }
+  }
+
+  if (!NAME_PATTERN.test(value)) {
+    return { type: ValidationErrorType.INVALID }
+  }
+
+  return validateLength(value, { min: 2, max: 50 })
 }
 //#endregion
 
@@ -48,7 +66,11 @@ export function validatePassword(value: string): ValidationError | undefined {
     return { type: ValidationErrorType.REQUIRED }
   }
 
-  return validateLength(value, { min: 6, max: 50 })
+  if (!PASSWORD_PATTERN.test(value)) {
+    return { type: ValidationErrorType.INVALID }
+  }
+
+  return undefined
 }
 
 //#endregion
@@ -95,24 +117,13 @@ export function validateComment(value: string): ValidationError | undefined {
 }
 //#endregion
 
-//#region NAME
-
-export function validateName(value: string): ValidationError | undefined {
-  if (!value.trim()) {
-    return { type: ValidationErrorType.REQUIRED }
-  }
-
-  return validateLength(value, { min: 2, max: 50 })
-}
-//#endregion
-
 //#region PUBLIC API
 
 export const validateService = {
+  validateName,
   validateEmail,
   validatePhone,
   validateComment,
-  validateName,
   validatePassword,
 }
 //#endregion

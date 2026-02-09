@@ -3,10 +3,23 @@ import stylesHead from './PropertiesHead.module.scss'
 import stylesBody from './PropertiesBody.module.scss'
 import cn from 'classnames'
 import type { PropertiesInfo } from '../../types/properties'
+import type { ValidationError } from '../../types/ValidationErrorType'
+import { getValidationErrorMessage } from '../../types/validationMessages'
+import { validateService } from '../../services/validateServices'
+import { BiSolidError } from 'react-icons/bi'
+
+type FormErrors = {
+  name?: ValidationError
+  type?: ValidationError
+  email?: ValidationError
+  phone?: ValidationError
+  comment?: ValidationError
+}
 
 export const Properties = () => {
   const fileInputRef = useRef<HTMLInputElement | null>(null)
   const titleInputRef = useRef<HTMLInputElement | null>(null)
+  const [errors, setErrors] = useState<FormErrors>({})
 
   // единый стейт для всей информации о бизнесе
   const [businessInfo, setBusinessInfo] = useState<PropertiesInfo>({
@@ -46,17 +59,42 @@ export const Properties = () => {
 
   const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setBusinessInfo((prev) => ({ ...prev, name: e.target.value }))
+    setErrors((prev) => ({ ...prev, name: undefined }))
   }
 
   // ===== Другие поля формы =====
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target
     setBusinessInfo((prev) => ({ ...prev, [name]: value }))
+    setErrors((prev) => ({ ...prev, [name]: undefined }))
   }
 
   // ===== Сохранение =====
   const handleSave = async () => {
+    const newErrors: FormErrors = {}
+
+    const nameError = validateService.validateName(businessInfo.name)
+    if (nameError) newErrors.name = nameError
+
+    const typeError = validateService.validateName(businessInfo.type)
+    if (typeError) newErrors.type = typeError
+
+    const emailError = validateService.validateEmail(businessInfo.email)
+    if (emailError) newErrors.email = emailError
+
+    const phoneError = validateService.validatePhone(businessInfo.phone)
+    if (phoneError) newErrors.phone = phoneError
+
+    const commentError = validateService.validateComment(businessInfo.description)
+    if (commentError) newErrors.comment = commentError
+
+    if (Object.keys(newErrors).length > 0) {
+      setErrors(newErrors)
+      return
+    }
+
     setIsSubmitting(true)
+
     try {
       const response = await fetch('/api/properties', {
         method: 'POST',
@@ -64,15 +102,10 @@ export const Properties = () => {
         body: JSON.stringify(businessInfo),
       })
 
-      console.log(businessInfo)
-
       if (!response.ok) throw new Error('Error saving data')
 
-      const result = await response.json()
-      console.log('Saved successfully:', result)
       alert('Data saved successfully!')
-    } catch (err) {
-      console.error(err)
+    } catch {
       alert('An error occurred while saving data')
     } finally {
       setIsSubmitting(false)
@@ -99,6 +132,13 @@ export const Properties = () => {
               {businessInfo.name || 'Add business name'}
               <span className={stylesHead.editHint}>Edit</span>
             </h1>
+          )}
+
+          {errors.name && (
+            <div className={cn('errorContainer', stylesHead.errorHead)}>
+              <BiSolidError className="errorIcon" />
+              <p className="errorText">{getValidationErrorMessage(errors.name)}</p>
+            </div>
           )}
         </div>
 
@@ -154,6 +194,13 @@ export const Properties = () => {
             />
           </div>
 
+          {errors.comment && (
+            <div className="errorContainer">
+              <BiSolidError className="errorIcon" />
+              <p className="errorText">{getValidationErrorMessage(errors.comment)}</p>
+            </div>
+          )}
+
           <div className={stylesBody.field}>
             <label className={cn('h3', stylesBody.labelText)} htmlFor="type">
               Business Type
@@ -168,6 +215,13 @@ export const Properties = () => {
               className={stylesBody.titleInput}
             />
           </div>
+
+          {errors.type && (
+            <div className="errorContainer">
+              <BiSolidError className="errorIcon" />
+              <p className="errorText">{getValidationErrorMessage(errors.type)}</p>
+            </div>
+          )}
 
           <div className={stylesBody.field}>
             <label className={cn('h3', stylesBody.labelText)} htmlFor="email">
@@ -184,6 +238,13 @@ export const Properties = () => {
             />
           </div>
 
+          {errors.email && (
+            <div className="errorContainer">
+              <BiSolidError className="errorIcon" />
+              <p className="errorText">{getValidationErrorMessage(errors.email)}</p>
+            </div>
+          )}
+
           <div className={stylesBody.field}>
             <label className={cn('h3', stylesBody.labelText)} htmlFor="phone">
               Phone Number
@@ -198,6 +259,13 @@ export const Properties = () => {
               className={stylesBody.titleInput}
             />
           </div>
+
+          {errors.phone && (
+            <div className="errorContainer">
+              <BiSolidError className="errorIcon" />
+              <p className="errorText">{getValidationErrorMessage(errors.phone)}</p>
+            </div>
+          )}
 
           <button
             type="button"
