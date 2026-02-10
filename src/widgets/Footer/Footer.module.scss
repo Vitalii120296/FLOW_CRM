@@ -1,0 +1,163 @@
+@use '@styles/index' as *;
+
+.wrapper {
+  padding-block: 50px;
+}
+
+.columns {
+  display: flex;
+  flex-direction: column; // по замовчуванню для мобільних
+  align-items: flex-start; // вирівнюємо по лівому краю
+  gap: 40px; // відстань між блоками у колонці
+
+  @include on-tablet {
+    flex-direction: row; // на десктоп/планшет робимо рядок
+    justify-content: space-between; // відстань між колонками
+    align-items: center; // вертикальне центрування
+  }
+}
+
+.infoBlock {
+  max-width: 400px;
+}
+
+.logo {
+  padding: 15px;
+  text-decoration: none;
+  color: inherit;
+}
+
+.logoName {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+
+  font-size: 20px;
+  color: $info;
+}
+
+.flow {
+  font-weight: 700;
+}
+
+.crm {
+  display: flex;
+  gap: 2px;
+}
+
+/* CRM COLORS */
+.c {
+  color: #a9dfd8;
+}
+
+.r {
+  color: #f2c8ed;
+}
+
+.m {
+  color: #f2994a;
+}
+
+.textInfo {
+  text-align: left;
+  font-size: 12px;
+  padding: 0 0 32px 0;
+}
+
+.createdBy {
+  text-align: left;
+  font-size: 14px;
+  font-weight: 700;
+  color: $text;
+  padding-bottom: 10px;
+}
+
+.gitLinks {
+  display: flex;
+  flex-direction: row;
+  gap: 12px;
+}
+
+.gitIcons {
+  display: inline-block;
+  color: $textSecondary;
+  text-align: left;
+  transform-origin: left center;
+
+  transition:
+    transform 0.2s ease,
+    color 0.2s ease;
+
+  &:hover {
+    transform: scale(1.1);
+    color: $text;
+  }
+}
+
+.navBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  // padding: 0 20px 0 0;
+
+  .navTitle {
+    font-size: 16px;
+    color: $text; // заголовок секції навігації
+    margin-bottom: 8px;
+    font-weight: 600;
+  }
+
+  .navLinks {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+
+    a {
+      color: $textSecondary;
+      font-size: 14px;
+      text-decoration: none;
+      transition: color 0.2s ease;
+      text-align: left;
+
+      &:hover {
+        color: $text;
+      }
+    }
+  }
+}
+
+.hr {
+  border: none;
+  border-top: 1px solid $textSecondary;
+  height: 1px;
+  margin: 16px 0;
+}
+
+.bottomBar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 40px;
+  height: 1px;
+}
+
+.copyright {
+  font-size: 10px;
+  color: $textSecondary;
+}
+
+.privacyLink {
+  display: flex;
+  gap: 15px;
+
+  a {
+    text-decoration: none;
+    color: $textSecondary;
+    font-size: 12px;
+    transition: color 0.2s ease;
+
+    &:hover {
+      color: $text;
+    }
+  }
+}

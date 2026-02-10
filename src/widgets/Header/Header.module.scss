@@ -71,6 +71,9 @@
     display: flex;
     align-items: center;
     gap: 12px;
+
+    text-decoration: none;
+    color: inherit;
   }
 
   /* показываем дропдаун */
@@ -101,34 +104,41 @@
   /* ===== TRIGGER ===== */
   &__profileTrigger {
     position: relative;
-    display: flex;
+    display: none;
     align-items: center;
     gap: 6px;
     cursor: pointer;
+
+    @include on-tablet {
+      display: flex;
+    }
   }
 
   &__profileUserName {
     font-size: 16px;
     font-weight: 500;
     white-space: nowrap;
+
+    color: $info;
   }
 
   /* ===== DROPDOWN ===== */
   &__profileDropdown {
     position: absolute;
-    top: calc(100% + 6px);
-    left: 0;
+    top: calc(100% + 14px);
+    left: -50%;
+    // transform: translate(-50%, -6px);
 
     min-width: 220px;
-    padding: 12px 14px;
+    padding: 8px 10px;
 
     background-color: $bgBlock;
+    border: 1px solid $border;
     border-radius: 8px;
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
 
     opacity: 0;
     visibility: hidden;
-    transform: translateY(-6px);
     transition: all 0.2s ease;
 
     z-index: 20;
