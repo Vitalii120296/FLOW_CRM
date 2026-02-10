@@ -18,10 +18,10 @@ export const Header = () => {
           </Link>
 
           <div className={styles.header__profile}>
-            <div className={styles.header__profileWrapper}>
-              <Link to="/profile" className={styles.header__profileAvatar}>
+            <Link to="/profile" className={styles.header__profileWrapper}>
+              <div className={styles.header__profileAvatar}>
                 <img src={Avatar} alt="Avatar" />
-              </Link>
+              </div>
 
               {/* ТРИГГЕР */}
               <div className={styles.header__profileTrigger}>
@@ -33,7 +33,7 @@ export const Header = () => {
                   <p className={styles.header__profileEmail}>name.surname@mail.com</p>
                 </div>
               </div>
-            </div>
+            </Link>
           </div>
         </div>
       </header>
