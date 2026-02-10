@@ -27,15 +27,32 @@ export const Footer = () => {
 
             <p className={styles.createdBy}>Created by:</p>
             <nav className={styles.gitLinks}>
-              <Link to="/profile" className={styles.gitIcons}>
+              <a
+                href="https://github.com/Moddderi"
+                target="_blank"
+                rel="noopener noreferrer"
+                className={styles.gitIcons}
+              >
                 <FaGithub />
-              </Link>
-              <Link to="/profile" className={styles.gitIcons}>
+              </a>
+
+              <a
+                href="https://github.com/Vitalii120296"
+                target="_blank"
+                rel="noopener noreferrer"
+                className={styles.gitIcons}
+              >
                 <FaGithub />
-              </Link>
-              <Link to="/profile" className={styles.gitIcons}>
+              </a>
+
+              <a
+                href="https://github.com/01https"
+                target="_blank"
+                rel="noopener noreferrer"
+                className={styles.gitIcons}
+              >
                 <FaGithub />
-              </Link>
+              </a>
             </nav>
           </div>
 
