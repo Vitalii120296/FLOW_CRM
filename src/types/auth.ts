@@ -10,3 +10,10 @@ export type SystemUser = {
   role: UserRole
   status: UserStatus
 }
+
+export type FormData = {
+  name: string
+  email: string
+  password: string
+  confirmPassword: string
+}

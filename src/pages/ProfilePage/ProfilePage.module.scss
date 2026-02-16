@@ -1,4 +1,15 @@
 @use '@styles/index' as *;
+
+section {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
+  max-width: 800px;
+  margin-inline: auto;
+  box-sizing: border-box;
+}
+
 .personal_info__wrapper,
 .personal_info,
 .profile_photo,
@@ -102,11 +113,12 @@
 
 .profile_page_actions {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   width: 100%;
   margin-inline: auto;
   box-sizing: border-box;
   padding-block: 15px;
+
   button {
     @extend .button;
     width: 20%;

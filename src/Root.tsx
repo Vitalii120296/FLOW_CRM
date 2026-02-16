@@ -7,11 +7,15 @@ import { ProductsPage } from './pages/ProductsPage/ProductsPage.tsx'
 import { CreateProductPage } from './pages/CreateProductPage/CreateProductPage.tsx'
 import { PropertiesPage } from './pages/PropertiesPage/PropertiesPage.tsx'
 import { ProfilePage } from './pages/ProfilePage/ProfilePage.tsx'
+import { RegisterPage } from './pages/RegisterPage/RegisterPage.tsx'
+import { LoginPage } from './pages/LoginPage/LoginPage.tsx'
 
 export const Root = () => {
   return (
     <Router>
       <Routes>
+        <Route path="register" element={<RegisterPage />} />
+        <Route path="login" element={<LoginPage />} />
         <Route path="/" element={<App />}>
           <Route index element={<Kanban />} />
           <Route path="clients" element={<ClientsPage />} />
