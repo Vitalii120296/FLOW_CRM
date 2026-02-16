@@ -46,7 +46,7 @@ export function validateName(value: string): ValidationError | undefined {
 
 //#region EMAIL
 
-export function validateEmail(value: string): ValidationError | undefined {
+export function validateEmail(value: string): ValidationError | null {
   if (!value) {
     return { type: ValidationErrorType.REQUIRED }
   }
@@ -55,13 +55,13 @@ export function validateEmail(value: string): ValidationError | undefined {
     return { type: ValidationErrorType.INVALID }
   }
 
-  return undefined
+  return null
 }
 //#endregion
 
 //#region PASSWORD
 
-export function validatePassword(value: string): ValidationError | undefined {
+export function validatePassword(value: string): ValidationError | null {
   if (!value) {
     return { type: ValidationErrorType.REQUIRED }
   }
@@ -74,13 +74,13 @@ export function validatePassword(value: string): ValidationError | undefined {
     return { type: ValidationErrorType.INVALID }
   }
 
-  return undefined
+  return null
 }
 //#endregion
 
 //#region PHONE
 
-export function validatePhone(value: string): ValidationError | undefined {
+export function validatePhone(value: string): ValidationError | null {
   if (!value) {
     return { type: ValidationErrorType.REQUIRED }
   }
@@ -91,15 +91,15 @@ export function validatePhone(value: string): ValidationError | undefined {
     return { type: ValidationErrorType.INVALID }
   }
 
-  return undefined
+  return null
 }
 //#endregion
 
 //#region COMMENT
 
-export function validateComment(value: string): ValidationError | undefined {
+export function validateComment(value: string): ValidationError | null {
   if (!value) {
-    return undefined // comment не обязателен
+    return null // comment не обязателен
   }
 
   if (value.length < 6) {
@@ -116,7 +116,7 @@ export function validateComment(value: string): ValidationError | undefined {
     }
   }
 
-  return undefined
+  return null
 }
 //#endregion
 

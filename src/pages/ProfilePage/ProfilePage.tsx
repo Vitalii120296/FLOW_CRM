@@ -29,6 +29,26 @@ export const ProfilePage = () => {
     <section className="page-container">
       <h1 className="h2">Profile page</h1>
       <div className={s.personal_info__wrapper}>
+        <div className={s.profile_photo}>
+          <h2 className="h3">Profile photo</h2>
+
+          <div className={s.photo}>
+            <div className={s.user_photo}>
+              <img
+                src={
+                  userProfile.photo
+                    ? userProfile.photo
+                    : './public/productImages/defaultProductImage.WebP'
+                }
+                alt="user photo"
+              />
+            </div>
+            <div className={s.photo_buttons}>
+              <button className={s.add_photo}>Choose photo</button>
+              <button className={s.remove_photo}>Remove photo</button>
+            </div>
+          </div>
+        </div>
         <div className={s.personal_info}>
           <h2 className="h3">Personal info</h2>
 
@@ -73,26 +93,6 @@ export const ProfilePage = () => {
             </label>
           </div>
         </div>
-        <div className={s.profile_photo}>
-          <h2 className="h3">Profile photo</h2>
-
-          <div className={s.photo}>
-            <div className={s.user_photo}>
-              <img
-                src={
-                  userProfile.photo
-                    ? userProfile.photo
-                    : './public/productImages/defaultProductImage.WebP'
-                }
-                alt="user photo"
-              />
-            </div>
-            <div className={s.photo_buttons}>
-              <button className={s.add_photo}>Choose photo</button>
-              <button className={s.remove_photo}>Remove photo</button>
-            </div>
-          </div>
-        </div>
         <div className={s.security}>
           <h2 className="h3">Change password</h2>
           <div className={s.change_password}>
@@ -128,7 +128,6 @@ export const ProfilePage = () => {
       </div>
       <div className={s.profile_page_actions}>
         <button className={s.save}>Save changes</button>
-        <button className={s.cancel}>Cancel</button>
       </div>
     </section>
   )
