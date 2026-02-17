@@ -112,7 +112,12 @@ export const CreateProductPage: React.FC = () => {
 
         <div className={s.preview}>
           <h3 className="h3">Preview</h3>
-          <ProductCard product={product} />
+          <ProductCard
+            setTrash={() => {}}
+            setProducts={() => {}}
+            indexForMotion={1}
+            product={product}
+          />
         </div>
       </div>
     </div>
