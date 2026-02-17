@@ -1,0 +1,351 @@
+@use '@styles/index' as *;
+
+.contentContainer {
+  box-sizing: border-box;
+
+  @include on-desktop {
+    margin-inline: auto;
+    max-width: $desktop-min-width;
+  }
+}
+
+.bg {
+  background-color: #05080a;
+  height: 100vh;
+  z-index: 2;
+
+  background-image:
+    linear-gradient(to right, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+
+  background-size: 40px 40px;
+}
+
+//#region HEADER
+
+.headerContainer {
+  background-color: #05080a;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.headerContent {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 10px 20px 10px 20px;
+
+  border-inline: 1px solid rgba(255, 255, 255, 0.1);
+
+  height: auto;
+  z-index: 10;
+  position: relative;
+
+  @include on-desktop {
+    // margin-inline: 100px;
+  }
+}
+
+.logoBlock {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+  position: relative; // для псевдоелементів
+
+  &::before,
+  &::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(to right, #a9dfd8, #f2c8ed, #f2994a);
+    transform: scaleX(0);
+    transition: transform 0.4s ease;
+  }
+
+  &::before {
+    top: -6px;
+    transform-origin: left;
+  }
+
+  &::after {
+    bottom: -6px;
+    transform-origin: right;
+  }
+
+  &:hover::before,
+  &:hover::after {
+    transform: scaleX(1);
+  }
+}
+
+.flow {
+  color: $info;
+  font-weight: 800;
+  font-size: 24px;
+}
+
+.crm {
+  font-weight: 400;
+  font-size: 16px;
+  gap: 2px;
+}
+
+.loginBlock {
+  @extend .button;
+  background-color: $textSecondary; // фон кнопки
+
+  border-radius: 0;
+  border: 1px solid $border;
+
+  // текст внутри кнопки
+  .loginButton {
+    color: rgba(255, 255, 255, 0.6); // бледный белый текст
+    font-weight: 600;
+    text-decoration: none;
+  }
+}
+//#endregion
+
+.aboutWrapper {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  width: 100%;
+  border-inline: 1px dashed rgba(255, 255, 255, 0.1);
+  // border-bottom: 1px dashed rgba(255, 255, 255, 0.1);
+
+  background-color: #05080a;
+}
+
+//#region StartInfo
+
+.startInfo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  // border-right: 1px dashed rgba(255, 255, 255, 0.1);
+}
+
+.startInfoContent {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: auto;
+
+  gap: 20px;
+
+  @include on-desktop {
+    padding: 64px;
+  }
+}
+
+.newVersion {
+  border: 1px solid $primary;
+  border-radius: 18px;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-weight: bold;
+  font-size: 12px;
+  color: #a8f0e6;
+  background-color: rgba(168, 240, 230, 0.1);
+  padding: 4px 10px;
+}
+
+.dot {
+  line-height: 1;
+  font-size: 1rem;
+}
+
+.startInfoText {
+  font-size: 32px;
+  text-align: start;
+  padding-bottom: 20px;
+  font-weight: 800;
+}
+
+.gradientText {
+  background: linear-gradient(90deg, #a9dfd8, #f2c8ed, #f2994a);
+
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.startButton {
+  @extend .button;
+
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+  border-radius: 0;
+}
+
+.biLock {
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+}
+
+.getStarted {
+  color: inherit;
+  align-items: center; // выравнивание текста с иконкой
+}
+
+.additionalInfo {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+}
+
+.additionalInfo > div {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.additionalInfo p {
+  margin: 0;
+  font-size: 10px;
+  line-height: 1;
+}
+
+.adIc {
+  width: 12px;
+  height: 12px;
+  color: $textSecondary;
+  display: inline-block;
+  vertical-align: middle;
+}
+//#endregion
+//#region Preview
+.preview {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  perspective: 1000px;
+  border-left: 1px dashed rgba(255, 255, 255, 0.1);
+}
+
+.previewContent {
+  padding: 32px;
+
+  @include on-desktop {
+    padding: 64px;
+  }
+}
+
+.previewImageWrapper {
+  display: inline-block;
+  padding: 4px;
+  border-radius: 24px;
+  background: linear-gradient(45deg, #a9dfd8, #f2c8ed, #f2994a, #a9dfd8);
+  box-shadow:
+    0 20px 40px rgba(242, 200, 237, 0.5),
+    0 0 30px rgba(242, 200, 237, 0.3);
+}
+
+.previewImageWrapper img {
+  display: block;
+  width: 500px;
+  border-radius: 20px;
+}
+
+//#endregion
+
+//#region Features
+
+.featuresWrapper {
+  background-color: #05080a;
+  border-top: 1px dashed rgba(255, 255, 255, 0.1);
+  border-bottom: 1px dashed rgba(255, 255, 255, 0.1);
+
+  .contentContainer {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: $desktop-min-width;
+    margin-inline: auto;
+
+    @include on-desktop {
+      flex-direction: row;
+    }
+  }
+}
+
+.feature {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 32px;
+  border-inline: 1px dashed rgba(255, 255, 255, 0.1);
+
+  flex: 1 1 0; // растягиваем карточку, чтобы занимала всё доступное место
+  min-width: 200px; // минимальная ширина карточки, чтобы не сжималась слишком сильно
+}
+
+.feature:hover {
+  background-color: #080b0f;
+}
+
+.featureIcon {
+  width: 20px;
+  height: 20px;
+  color: $primary;
+}
+
+//#endregion
+
+//#region Text
+
+.textWrapper {
+  background-color: #05080a;
+  border-bottom: 1px dashed rgba(255, 255, 255, 0.1);
+  padding-block: 48px;
+
+  @include on-desktop {
+    padding-block: 96px;
+  }
+}
+
+.textBlock {
+  display: flex;
+  justify-content: flex-start; // прижимает к левому краю родителя
+  width: 100%;
+  padding: 0; // убираем лишние паддинги
+}
+
+.textBlockContent {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  justify-content: flex-start;
+  gap: 12px;
+  width: 100%; // блок занимает всю ширину родителя
+  padding-left: 64px; // убрали внутренний отступ
+  border-left: 1px dashed rgba(255, 255, 255, 0.1);
+}
+
+.textTitle {
+  font-size: 12px;
+  color: $primary;
+}
+
+.textP {
+  font-size: 14px;
+}
+
+.fcb {
+  padding-left: 10px;
+  font-size: 14px;
+  border-left: 2px solid $primary;
+  font-weight: 400;
+}
+
+//#endregion

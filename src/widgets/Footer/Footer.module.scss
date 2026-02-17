@@ -1,19 +1,19 @@
 @use '@styles/index' as *;
 
 .wrapper {
-  padding-block: 50px;
+  padding-block: 25px;
 }
 
 .columns {
   display: flex;
-  flex-direction: column; // по замовчуванню для мобільних
-  align-items: flex-start; // вирівнюємо по лівому краю
-  gap: 40px; // відстань між блоками у колонці
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 40px;
 
   @include on-tablet {
-    flex-direction: row; // на десктоп/планшет робимо рядок
-    justify-content: space-between; // відстань між колонками
-    align-items: center; // вертикальне центрування
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
   }
 }
 

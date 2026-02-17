@@ -7,6 +7,7 @@
   min-width: 320px;
 }
 
+//NOTE: стара версія кольорів
 html[data-theme='dark'] {
   --primary: #a9dfd8;
   --secondary: #f2c8ed;
@@ -21,6 +22,22 @@ html[data-theme='dark'] {
   --info: #2d9cdb;
   --success: #27ae60;
 }
+
+//NOTE: тестова версія
+// html[data-theme='dark'] {
+//   --primary: #a9dfd8;
+//   --secondary: #f2c8ed;
+//   --bgc: #05080a;
+//   --bgBlock: #05080a;
+//   --text: #ffffff;
+//   --textSecondary: #87888c;
+//   --border: #2c2e3a;
+//   --icons: #87888c;
+//   --error: #ed2b19;
+//   --warning: #f2994a;
+//   --info: #2d9cdb;
+//   --success: #27ae60;
+// }
 
 html[data-theme='light'] {
   --primary: #a9dfd8;
@@ -70,6 +87,13 @@ body {
     box-sizing: border-box;
 
     // overflow-x: hidden;
+
+    // //NOTE: Сітка
+    // background-image:
+    //   linear-gradient(to right, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+    //   linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+
+    // background-size: 40px 40px;
   }
 
   footer {
