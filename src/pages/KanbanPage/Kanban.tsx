@@ -5,7 +5,6 @@ import s from './Kanban.module.scss'
 import { ClientDetails } from '../../widgets/ClientDetails/ClientDetails'
 import { getClientsTestApi } from '../../shared/api/clients.test-api'
 import { DragDropContext, type DropResult } from '@hello-pangea/dnd'
-import cn from 'classnames'
 
 type ColumnData = {
   id: ClientStatus
@@ -123,7 +122,7 @@ export const Kanban = () => {
   }
 
   return (
-    <section className={cn('container', s.kanbanWrapper)}>
+    <section className={`${s.wrapper} page-container`}>
       <h1 className="h2">Kanban Board</h1>
       <div className={s.kanban}>
         {selectedClient && (
