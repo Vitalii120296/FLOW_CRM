@@ -10,10 +10,15 @@
   transition:
     background-color 0.3s,
     box-shadow 0.3s,
-    color 0.3s;
+    color 0.3s,
+    transform 0.3s ease;
 
   &:hover {
     box-shadow: 0 0 10px $primary;
+  }
+
+  &:active {
+    transform: scale(0.9);
   }
 
   &:disabled {
@@ -34,6 +39,10 @@
   &:hover {
     color: $primary;
     transform: scale(1.1);
+  }
+
+  &:active {
+    transform: scale(0.9);
   }
 }
 

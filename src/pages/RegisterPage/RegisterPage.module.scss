@@ -1,6 +1,6 @@
 @use '@styles/index' as *;
 
-section {
+.section_aperance {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -11,6 +11,7 @@ section {
   max-width: 400px;
   margin: auto;
 }
+
 .form {
   max-width: 400px;
   width: 100%;
