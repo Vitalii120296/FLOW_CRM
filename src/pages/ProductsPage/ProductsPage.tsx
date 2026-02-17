@@ -20,12 +20,21 @@ export const ProductsPage = () => {
     getProductsTestApi()
       .then((res) => {
         setProducts(res)
-        setTrash(res)
       })
       .finally(() => {
         setLoading(false)
       })
-  }, [])
+
+    if (showTrash) {
+      getProductsTestApi()
+        .then((res) => {
+          setTrash(res)
+        })
+        .finally(() => {
+          setLoading(false)
+        })
+    }
+  }, [showTrash])
 
   const handleCreate = () => {
     navigate('create')
@@ -63,10 +72,12 @@ export const ProductsPage = () => {
       </div>
       {loading && <Loader />}
       <ul className={s.products_list}>
+        {/* <AnimatePresence mode="wait"> */}
         {!showTrash
-          ? products.map((item) => (
+          ? products.map((item, index) => (
               <li key={item.id} className={s.products_item}>
                 <ProductCard
+                  indexForMotion={index}
                   product={item}
                   setProducts={setProducts}
                   setTrash={setTrash}
@@ -74,9 +85,10 @@ export const ProductsPage = () => {
                 />
               </li>
             ))
-          : trash.map((item) => (
+          : trash.map((item, index) => (
               <li key={item.id} className={s.products_item}>
                 <ProductCard
+                  indexForMotion={index}
                   isRemoved={true}
                   product={item}
                   showEditIcons={showEditIcons}
@@ -85,6 +97,7 @@ export const ProductsPage = () => {
                 />
               </li>
             ))}
+        {/* </AnimatePresence> */}
       </ul>
     </section>
   )

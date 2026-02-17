@@ -4,6 +4,7 @@ import s from './ProfilePage.module.scss'
 import { Loader } from '../../app/Components/Loader/Loader'
 import { getUsersTestApi } from '../../shared/api/users.test-api'
 import cn from 'classnames'
+import { motion } from 'motion/react'
 
 export const ProfilePage = () => {
   const [userProfile, setUserProfile] = useState<SystemUser | null>(null)
@@ -29,7 +30,15 @@ export const ProfilePage = () => {
   return (
     <section className={cn('page-container', s.section_profile)}>
       <h1 className="h2">Profile page</h1>
-      <div className={s.personal_info__wrapper}>
+      <motion.div
+        initial={{ opacity: 0, translateY: 25 }}
+        animate={{ opacity: 1, translateY: 0 }}
+        transition={{
+          duration: 1,
+          ease: 'linear',
+        }}
+        className={s.personal_info__wrapper}
+      >
         <div className={s.profile_photo}>
           <h2 className="h3">Profile photo</h2>
 
@@ -94,8 +103,17 @@ export const ProfilePage = () => {
             </label>
           </div>
         </div>
-      </div>
-      <div className={s.personal_info__wrapper}>
+      </motion.div>
+      <motion.div
+        initial={{ opacity: 0, translateY: 25 }}
+        animate={{ opacity: 1, translateY: 0 }}
+        transition={{
+          duration: 1,
+          delay: 0.5,
+          ease: 'linear',
+        }}
+        className={s.personal_info__wrapper}
+      >
         <div className={s.security}>
           <h2 className="h3">Change password</h2>
           <div className={s.change_password}>
@@ -128,7 +146,7 @@ export const ProfilePage = () => {
             </label>
           </div>
         </div>
-      </div>
+      </motion.div>
       <div className={s.profile_page_actions}>
         <button className={s.save}>Save changes</button>
       </div>
