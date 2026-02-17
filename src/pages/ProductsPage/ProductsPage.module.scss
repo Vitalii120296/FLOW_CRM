@@ -10,9 +10,17 @@
   display: flex;
   justify-content: flex-end;
   width: 100%;
+  gap: 8px;
 
   button {
+    display: flex;
+    gap: 6px;
     @extend .button_secondary;
+
+    &.active {
+      color: $primary;
+      transform: scale(1.1);
+    }
   }
 }
 

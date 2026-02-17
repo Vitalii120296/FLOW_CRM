@@ -7,26 +7,48 @@ import { EditProductCard } from '../EditProductCard/EditProductCard'
 import { ConfirmationDialog } from '../../../shared/ui/ConfirmationDialog/ConfirmationDialog'
 
 type Props = {
-  product: Product
+  isRemoved?: boolean
   showEditIcons?: boolean
-  setProducts?: React.Dispatch<React.SetStateAction<Product[]>>
+  product: Product
+  setTrash: React.Dispatch<React.SetStateAction<Product[]>>
+  setProducts: React.Dispatch<React.SetStateAction<Product[]>>
 }
 
-export const ProductCard: React.FC<Props> = ({ product, showEditIcons, setProducts }) => {
+export const ProductCard: React.FC<Props> = ({
+  isRemoved,
+  product,
+  showEditIcons,
+  setProducts,
+  setTrash,
+}) => {
   const [isDeleteConfirmOpen, setIsDeleteConfirmOpen] = useState(false)
   const [isEditingModalOpen, setIsEditingModalOpen] = useState(false)
+
   const handleDelete = () => {
-    if (!setProducts) return
     setProducts((prev) => prev.filter((item) => item.id !== product.id))
+    setTrash((prev) => [product, ...prev])
   }
 
+  const handleDeleteFromTrash = () => {
+    setTrash((prev) => prev.filter((item) => item.id !== product.id))
+  }
   const editModalOpen = () => {
     setIsEditingModalOpen(true)
   }
 
+  const handleRestore = () => {
+    setTrash((prev) => prev.filter((item) => item.id !== product.id))
+    setProducts((prev) => [product, ...prev])
+  }
+
   return (
     <>
-      <div className={s.product_card} onClick={editModalOpen}>
+      <div
+        className={cn(s.product_card, {
+          [s.product_card__removed]: isRemoved,
+        })}
+        onClick={editModalOpen}
+      >
         <button
           onClick={editModalOpen}
           className={cn(s.edit, {
@@ -59,6 +81,11 @@ export const ProductCard: React.FC<Props> = ({ product, showEditIcons, setProduc
         <div className={s.product_description}>
           <span>{product.description}</span>
         </div>
+        {isRemoved && (
+          <button className={s.restore_button} onClick={handleRestore}>
+            Restore
+          </button>
+        )}
       </div>
       {isEditingModalOpen && (
         <EditProductCard
@@ -75,7 +102,7 @@ export const ProductCard: React.FC<Props> = ({ product, showEditIcons, setProduc
           isOpen={isDeleteConfirmOpen}
           onClose={() => setIsDeleteConfirmOpen(false)}
           product={product}
-          handleDelete={handleDelete}
+          handleDelete={!isRemoved ? handleDelete : handleDeleteFromTrash}
         />
       )}
     </>

@@ -21,6 +21,10 @@
   &:hover {
     transform: scale(1.02);
   }
+
+  &__removed {
+    opacity: 0.9;
+  }
 }
 
 .delete,
@@ -112,4 +116,7 @@
     overflow-y: auto;
     @include scroll-bar;
   }
+}
+.restore_button {
+  @extend .button;
 }

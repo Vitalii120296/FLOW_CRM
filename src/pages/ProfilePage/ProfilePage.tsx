@@ -3,6 +3,7 @@ import type { SystemUser } from '../../types'
 import s from './ProfilePage.module.scss'
 import { Loader } from '../../app/Components/Loader/Loader'
 import { getUsersTestApi } from '../../shared/api/users.test-api'
+import cn from 'classnames'
 
 export const ProfilePage = () => {
   const [userProfile, setUserProfile] = useState<SystemUser | null>(null)
@@ -26,7 +27,7 @@ export const ProfilePage = () => {
   if (!userProfile) return <Loader />
 
   return (
-    <section className="page-container">
+    <section className={cn('page-container', s.section_profile)}>
       <h1 className="h2">Profile page</h1>
       <div className={s.personal_info__wrapper}>
         <div className={s.profile_photo}>
@@ -54,7 +55,7 @@ export const ProfilePage = () => {
 
           <div className={s.user_name}>
             <label htmlFor="user_name" onClick={() => setIsEditingData('name')}>
-              <span>User name: </span>
+              <span className={s.title}>User name: </span>
               {isEditingData !== 'name' ? (
                 <span>{userProfile.name}</span>
               ) : (
@@ -71,7 +72,7 @@ export const ProfilePage = () => {
           </div>
           <div className={s.user_email}>
             <label htmlFor="user_email" onClick={() => setIsEditingData('email')}>
-              <span>User email: </span>
+              <span className={s.title}>User email: </span>
               {isEditingData !== 'email' ? (
                 <span>{userProfile.email}</span>
               ) : (
@@ -88,11 +89,13 @@ export const ProfilePage = () => {
           </div>
           <div className={s.user_role}>
             <label>
-              <span>User role:</span>
+              <span className={s.title}>User role:</span>
               <span>{userProfile.role}</span>
             </label>
           </div>
         </div>
+      </div>
+      <div className={s.personal_info__wrapper}>
         <div className={s.security}>
           <h2 className="h3">Change password</h2>
           <div className={s.change_password}>

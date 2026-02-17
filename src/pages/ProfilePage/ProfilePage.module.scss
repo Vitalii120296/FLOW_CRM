@@ -1,37 +1,41 @@
 @use '@styles/index' as *;
 
-section {
+.section_profile {
   display: flex;
   flex-direction: column;
   gap: 20px;
   width: 100%;
-  max-width: 800px;
   margin-inline: auto;
   box-sizing: border-box;
+
+  h2 {
+    color: $textSecondary;
+  }
+
+  span {
+    color: $text;
+
+    &.title {
+      color: $textSecondary;
+    }
+  }
 }
 
-.personal_info__wrapper,
+.personal_info__wrapper {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+
+  @include on-tablet {
+    flex-direction: row;
+  }
+}
 .personal_info,
 .profile_photo,
 .security {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  width: 100%;
-  margin-inline: auto;
-}
-
-.personal_info__wrapper {
-  gap: 20px;
-}
-
-.personal_info,
-.profile_photo,
-.security {
-  // border: 1px solid $border;
-  border-radius: 10px;
-  padding: 10px;
-  box-sizing: border-box;
   width: 100%;
 }
 
@@ -53,7 +57,7 @@ section {
     border-bottom: 1px solid $border;
     box-sizing: border-box;
 
-    @include on-tablet {
+    @include on-desktop {
       flex-direction: row;
     }
 
@@ -63,12 +67,11 @@ section {
     }
   }
 }
-.profile_photo {
-}
+
 .photo {
   display: flex;
-  flex-direction: column;
-  gap: 20px;
+  // flex-direction: column;
+  gap: 10px;
   img {
     width: 150px;
     border-radius: 10px;
@@ -78,7 +81,7 @@ section {
 .photo_buttons {
   display: flex;
   flex-direction: column;
-  justify-content: end;
+  // justify-content: end;
   height: 100%;
   gap: 10px;
   button {

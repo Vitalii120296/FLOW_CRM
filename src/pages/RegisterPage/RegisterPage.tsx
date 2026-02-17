@@ -53,7 +53,7 @@ export const RegisterPage = () => {
   }
 
   return (
-    <section className="container">
+    <section className={cn('container', s.section_aperance)}>
       <h1 className="h1">Register</h1>
 
       <form className={s.form} onSubmit={handleSubmit}>
