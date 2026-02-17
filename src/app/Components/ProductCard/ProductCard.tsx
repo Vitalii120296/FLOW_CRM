@@ -5,8 +5,10 @@ import cn from 'classnames'
 import { useState } from 'react'
 import { EditProductCard } from '../EditProductCard/EditProductCard'
 import { ConfirmationDialog } from '../../../shared/ui/ConfirmationDialog/ConfirmationDialog'
+import { motion } from 'motion/react'
 
 type Props = {
+  indexForMotion: number
   isRemoved?: boolean
   showEditIcons?: boolean
   product: Product
@@ -15,6 +17,7 @@ type Props = {
 }
 
 export const ProductCard: React.FC<Props> = ({
+  indexForMotion,
   isRemoved,
   product,
   showEditIcons,
@@ -43,7 +46,14 @@ export const ProductCard: React.FC<Props> = ({
 
   return (
     <>
-      <div
+      <motion.div
+        initial={{ opacity: 0, translateY: 15 }}
+        animate={{ opacity: 1, translateY: 0 }}
+        transition={{
+          duration: 0.5,
+          delay: 0.1 * indexForMotion,
+          ease: 'linear',
+        }}
         className={cn(s.product_card, {
           [s.product_card__removed]: isRemoved,
         })}
@@ -86,7 +96,7 @@ export const ProductCard: React.FC<Props> = ({
             Restore
           </button>
         )}
-      </div>
+      </motion.div>
       {isEditingModalOpen && (
         <EditProductCard
           isOpen={isEditingModalOpen}
