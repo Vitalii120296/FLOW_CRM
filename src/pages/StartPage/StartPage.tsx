@@ -1,6 +1,13 @@
 import s from './StartPage.module.scss'
 import cn from 'classnames'
 
+import { BiLockOpenAlt } from 'react-icons/bi'
+import { MdOutlineAccessTime } from 'react-icons/md'
+import { BiSignal3 } from 'react-icons/bi'
+import { AiOutlineTool } from 'react-icons/ai'
+import { GoLock } from 'react-icons/go'
+import { IoIosCheckmarkCircleOutline } from 'react-icons/io'
+
 import { motion } from 'framer-motion'
 
 export const StartPage = () => {
@@ -27,28 +34,39 @@ export const StartPage = () => {
           </div>
         </div>
       </header>
-
-      <div className={cn(s.contentContainer, s.sectionsWrapper)}>
-        <section className={s.startInfo}>
+      {/* MAIN CONTENT */}
+      <section className={cn(s.contentContainer, s.aboutWrapper)}>
+        <div className={s.startInfo}>
           <div className={s.startInfoContent}>
             <div className={s.newVersion}>
               <span className={s.dot}>•</span>
               <span>NEW VERSION</span>
             </div>
+
             <h1 className={s.startInfoText}>
               CRM with a <span className={s.gradientText}>simple interface</span> for B2C businesses
             </h1>
 
             <p>Take advantage of a free trial subscription</p>
-            <button className={s.startButton}>
-              <a className={s.getStarted} href="#/crm">
-                GET STARTED
-              </a>
+            <button className={s.startButton} onClick={() => (window.location.href = '#/crm')}>
+              <BiLockOpenAlt className={s.biLock} />
+              <span className={s.getStarted}>Get started</span>
             </button>
-          </div>
-        </section>
+            <div className={s.additionalInfo}>
+              <div>
+                <IoIosCheckmarkCircleOutline className={s.adIc} />
 
-        <section className={s.preview}>
+                <p>VERSION-1.0</p>
+              </div>
+              <div>
+                <GoLock className={s.adIc} />
+                <p>ALL DATA PROTECTED</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div className={s.preview}>
           <div className={s.previewContent}>
             <div className={s.previewImageWrapper}>
               <motion.img
@@ -60,8 +78,28 @@ export const StartPage = () => {
               />
             </div>
           </div>
-        </section>
-      </div>
+        </div>
+      </section>
+      {/* ===== FEATURES / KEY BENEFITS ===== */}
+      <section className={s.featuresWrapper}>
+        <div className={s.contentContainer}>
+          <div className={s.feature}>
+            <MdOutlineAccessTime className={s.featureIcon} />
+            <h3>Fast platform</h3>
+            <p>Описание преимущества...</p>
+          </div>
+          <div className={s.feature}>
+            <AiOutlineTool className={s.featureIcon} />
+            <h3>Best feature</h3>
+            <p>Описание преимущества...</p>
+          </div>
+          <div className={s.feature}>
+            <BiSignal3 className={s.featureIcon} />
+            <h3>Frequent updates</h3>
+            <p>Описание преимущества...</p>
+          </div>
+        </div>
+      </section>
     </div>
   )
 }

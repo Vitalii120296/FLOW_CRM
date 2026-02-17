@@ -109,13 +109,13 @@
 }
 //#endregion
 
-.sectionsWrapper {
+.aboutWrapper {
   display: flex;
   flex-direction: row;
   gap: 20px;
   width: 100%;
   border-inline: 1px dashed rgba(255, 255, 255, 0.1);
-  border-bottom: 1px dashed rgba(255, 255, 255, 0.1);
+  // border-bottom: 1px dashed rgba(255, 255, 255, 0.1);
 
   background-color: #05080a;
 }
@@ -127,7 +127,7 @@
   justify-content: center;
   align-items: center;
   width: 100%;
-  border-right: 1px dashed rgba(255, 255, 255, 0.1);
+  // border-right: 1px dashed rgba(255, 255, 255, 0.1);
 }
 
 .startInfoContent {
@@ -135,7 +135,6 @@
   flex-direction: column;
   align-items: flex-start;
   width: auto;
-  padding: 32px;
 
   gap: 20px;
 
@@ -180,13 +179,48 @@
 .startButton {
   @extend .button;
 
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
   border-radius: 0;
 }
 
+.biLock {
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+}
+
 .getStarted {
-  text-decoration: none;
   color: inherit;
-  font-weight: 600;
+  align-items: center; // выравнивание текста с иконкой
+}
+
+.additionalInfo {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+}
+
+.additionalInfo > div {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.additionalInfo p {
+  margin: 0;
+  font-size: 10px;
+  line-height: 1;
+}
+
+.adIc {
+  width: 12px;
+  height: 12px;
+  color: $textSecondary;
+  display: inline-block;
+  vertical-align: middle;
 }
 //#endregion
 //#region Preview
@@ -195,6 +229,7 @@
   justify-content: center;
   align-items: center;
   perspective: 1000px;
+  border-left: 1px dashed rgba(255, 255, 255, 0.1);
 }
 
 .previewContent {
@@ -222,3 +257,39 @@
 }
 
 //#endregion
+
+.featuresWrapper {
+  background-color: #05080a;
+  border-top: 1px dashed rgba(255, 255, 255, 0.1);
+  border-bottom: 1px dashed rgba(255, 255, 255, 0.1);
+
+  .contentContainer {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: $desktop-min-width;
+    margin-inline: auto;
+
+    @include on-desktop {
+      flex-direction: row;
+    }
+  }
+}
+
+.feature {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 32px;
+  border-inline: 1px dashed rgba(255, 255, 255, 0.1);
+
+  flex: 1 1 0; // растягиваем карточку, чтобы занимала всё доступное место
+  min-width: 200px; // минимальная ширина карточки, чтобы не сжималась слишком сильно
+}
+
+.featureIcon {
+  width: 20px;
+  height: 20px;
+  color: $primary;
+}
