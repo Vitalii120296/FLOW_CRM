@@ -197,34 +197,93 @@ export const StartPage = () => {
         </div>
       </motion.section>
 
-      <section className={s.textWrapper}>
+      <motion.section
+        className={s.textWrapper}
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true, amount: 0.3 }}
+        variants={{
+          hidden: {},
+          show: {
+            transition: {
+              staggerChildren: 0.18,
+            },
+          },
+        }}
+      >
         <div className={s.contentContainer}>
           <div className={s.textBlock}>
-            <div className={s.textBlockContent}>
-              <p className={s.textTitle}>THE HIDDEN FRICTION</p>
-              <h1 style={{ fontSize: 28 }}>
+            <motion.div
+              className={s.textBlockContent}
+              variants={{
+                hidden: {},
+                show: {
+                  transition: {
+                    staggerChildren: 0.15,
+                  },
+                },
+              }}
+            >
+              <motion.p
+                className={s.textTitle}
+                variants={{
+                  hidden: { opacity: 0, y: 20 },
+                  show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: 'easeOut' } },
+                }}
+              >
+                THE HIDDEN FRICTION
+              </motion.p>
+
+              <motion.h1
+                style={{ fontSize: 28 }}
+                variants={{
+                  hidden: { opacity: 0, y: 30 },
+                  show: { opacity: 1, y: 0, transition: { duration: 0.8, ease: 'easeOut' } },
+                }}
+              >
                 Workflow slowdowns are rarely obvious. <br />
                 Friction builds quietly over time.
-              </h1>
-              <p className={s.textP}>
+              </motion.h1>
+
+              <motion.p
+                className={s.textP}
+                variants={{
+                  hidden: { opacity: 0, y: 25 },
+                  show: { opacity: 1, y: 0, transition: { duration: 0.7, ease: 'easeOut' } },
+                }}
+              >
                 Most managers believe delays happen instantly because <br />
                 of one confusing interface or a single missing task. The reality is uncomfortable:
                 <br />
                 small inefficiencies are scattered and accumulate subtly.
-              </p>
-              <p className={s.textP}>
+              </motion.p>
+
+              <motion.p
+                className={s.textP}
+                variants={{
+                  hidden: { opacity: 0, y: 25 },
+                  show: { opacity: 1, y: 0, transition: { duration: 0.7, ease: 'easeOut' } },
+                }}
+              >
                 Our CRM is designed to make every action simple and visible. <br />
                 By the time you notice tasks piling up, our interface <br />
                 has already kept your workflow smooth.
-              </p>
-              <h5 className={s.fcb}>
+              </motion.p>
+
+              <motion.h5
+                className={s.fcb}
+                variants={{
+                  hidden: { opacity: 0, y: 20 },
+                  show: { opacity: 1, y: 0, transition: { duration: 0.7, ease: 'easeOut' } },
+                }}
+              >
                 FlowCRM bridges this gap. We give you clarity and control over your processes, so
                 small issues never become big problems.
-              </h5>
-            </div>
+              </motion.h5>
+            </motion.div>
           </div>
         </div>
-      </section>
+      </motion.section>
     </div>
   )
 }
