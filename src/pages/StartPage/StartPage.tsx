@@ -1,9 +1,7 @@
 import s from './StartPage.module.scss'
 import cn from 'classnames'
 
-import { GoDotFill } from 'react-icons/go'
-
-// import { motion } from 'framer-motion'
+import { motion } from 'framer-motion'
 
 export const StartPage = () => {
   return (
@@ -21,7 +19,11 @@ export const StartPage = () => {
               </div>
             </div>
 
-            <a href="#/crm">Enter CRM</a>
+            <button className={s.loginBlock}>
+              <a className={s.loginButton} href="#/crm">
+                Sing Up
+              </a>
+            </button>
           </div>
         </div>
       </header>
@@ -38,13 +40,25 @@ export const StartPage = () => {
             </h1>
 
             <p>Take advantage of a free trial subscription</p>
-            <button className={s.startButton}> Get started</button>
+            <button className={s.startButton}>
+              <a className={s.getStarted} href="#/crm">
+                GET STARTED
+              </a>
+            </button>
           </div>
         </section>
 
         <section className={s.preview}>
           <div className={s.previewContent}>
-            <h1>preview kanban</h1>
+            <div className={s.previewImageWrapper}>
+              <motion.img
+                src="kanban.webp"
+                alt="CRM Preview"
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 1, ease: 'easeOut' }}
+              />
+            </div>
           </div>
         </section>
       </div>

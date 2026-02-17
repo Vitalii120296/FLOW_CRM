@@ -21,6 +21,8 @@
   background-size: 40px 40px;
 }
 
+//#region HEADER
+
 .headerContainer {
   background-color: #05080a;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
@@ -82,22 +84,39 @@
 .flow {
   color: $info;
   font-weight: 800;
-  font-size: 28px;
+  font-size: 24px;
 }
 
 .crm {
   font-weight: 400;
-  font-size: 18px;
+  font-size: 16px;
   gap: 2px;
 }
 
+.loginBlock {
+  @extend .button;
+  background-color: $textSecondary; // фон кнопки
+
+  border-radius: 0;
+  border: 1px solid $border;
+
+  // текст внутри кнопки
+  .loginButton {
+    color: rgba(255, 255, 255, 0.6); // бледный белый текст
+    font-weight: 600;
+    text-decoration: none;
+  }
+}
+//#endregion
+
 .sectionsWrapper {
   display: flex;
-  flex-direction: row; // горизонтальный ряд
-  gap: 20px; // расстояние между секциями
-  // padding: 20px;
+  flex-direction: row;
+  gap: 20px;
   width: 100%;
   border-inline: 1px dashed rgba(255, 255, 255, 0.1);
+  border-bottom: 1px dashed rgba(255, 255, 255, 0.1);
+
   background-color: #05080a;
 }
 
@@ -163,12 +182,19 @@
 
   border-radius: 0;
 }
+
+.getStarted {
+  text-decoration: none;
+  color: inherit;
+  font-weight: 600;
+}
 //#endregion
 //#region Preview
 .preview {
-  width: 100%;
+  display: flex;
   justify-content: center;
   align-items: center;
+  perspective: 1000px;
 }
 
 .previewContent {
@@ -177,6 +203,22 @@
   @include on-desktop {
     padding: 64px;
   }
+}
+
+.previewImageWrapper {
+  display: inline-block;
+  padding: 4px;
+  border-radius: 24px;
+  background: linear-gradient(45deg, #a9dfd8, #f2c8ed, #f2994a, #a9dfd8);
+  box-shadow:
+    0 20px 40px rgba(242, 200, 237, 0.5),
+    0 0 30px rgba(242, 200, 237, 0.3);
+}
+
+.previewImageWrapper img {
+  display: block;
+  width: 500px;
+  border-radius: 20px;
 }
 
 //#endregion
