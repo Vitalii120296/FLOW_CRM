@@ -258,6 +258,8 @@
 
 //#endregion
 
+//#region Features
+
 .featuresWrapper {
   background-color: #05080a;
   border-top: 1px dashed rgba(255, 255, 255, 0.1);
@@ -288,8 +290,62 @@
   min-width: 200px; // минимальная ширина карточки, чтобы не сжималась слишком сильно
 }
 
+.feature:hover {
+  background-color: #080b0f;
+}
+
 .featureIcon {
   width: 20px;
   height: 20px;
   color: $primary;
 }
+
+//#endregion
+
+//#region Text
+
+.textWrapper {
+  background-color: #05080a;
+  border-bottom: 1px dashed rgba(255, 255, 255, 0.1);
+  padding-block: 48px;
+
+  @include on-desktop {
+    padding-block: 96px;
+  }
+}
+
+.textBlock {
+  display: flex;
+  justify-content: flex-start; // прижимает к левому краю родителя
+  width: 100%;
+  padding: 0; // убираем лишние паддинги
+}
+
+.textBlockContent {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  justify-content: flex-start;
+  gap: 12px;
+  width: 100%; // блок занимает всю ширину родителя
+  padding-left: 64px; // убрали внутренний отступ
+  border-left: 1px dashed rgba(255, 255, 255, 0.1);
+}
+
+.textTitle {
+  font-size: 12px;
+  color: $primary;
+}
+
+.textP {
+  font-size: 14px;
+}
+
+.fcb {
+  padding-left: 10px;
+  font-size: 14px;
+  border-left: 2px solid $primary;
+  font-weight: 400;
+}
+
+//#endregion

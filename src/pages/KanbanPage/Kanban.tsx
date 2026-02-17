@@ -122,7 +122,7 @@ export const Kanban = () => {
   }
 
   return (
-    <section className="page-container">
+    <section className={s.kanbanWrapper}>
       <h1 className="h2">Kanban Board</h1>
       <div className={s.kanban}>
         {selectedClient && (

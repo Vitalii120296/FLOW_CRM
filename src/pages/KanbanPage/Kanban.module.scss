@@ -1,6 +1,6 @@
 @use '../../app/styles/utils/mixins' as *;
 
-section {
+.kanbanWrapper {
   display: flex;
   flex-direction: column;
   align-items: flex-start;

@@ -35,37 +35,97 @@ export const StartPage = () => {
         </div>
       </header>
       {/* MAIN CONTENT */}
-      <section className={cn(s.contentContainer, s.aboutWrapper)}>
-        <div className={s.startInfo}>
-          <div className={s.startInfoContent}>
-            <div className={s.newVersion}>
+
+      <motion.section
+        className={cn(s.contentContainer, s.aboutWrapper)}
+        initial="hidden"
+        animate="show"
+        variants={{
+          hidden: {},
+          show: {
+            transition: {
+              staggerChildren: 0.2, // задержка между детьми
+            },
+          },
+        }}
+      >
+        {/* Левый блок с информацией */}
+        <motion.div
+          className={s.startInfo}
+          variants={{
+            hidden: { opacity: 0, y: 30 },
+            show: { opacity: 1, y: 0, transition: { duration: 1, ease: 'easeOut' } },
+          }}
+        >
+          <motion.div
+            className={s.startInfoContent}
+            variants={{
+              hidden: { opacity: 0, y: 20 },
+              show: { opacity: 1, y: 0, transition: { duration: 0.8, ease: 'easeOut' } },
+            }}
+          >
+            <motion.div
+              className={s.newVersion}
+              variants={{
+                hidden: { opacity: 0, x: -10 },
+                show: { opacity: 1, x: 0, transition: { duration: 0.5 } },
+              }}
+            >
               <span className={s.dot}>•</span>
               <span>NEW VERSION</span>
-            </div>
+            </motion.div>
 
-            <h1 className={s.startInfoText}>
+            <motion.h1
+              className={s.startInfoText}
+              variants={{
+                hidden: { opacity: 0, y: 20 },
+                show: { opacity: 1, y: 0, transition: { duration: 0.8 } },
+              }}
+            >
               CRM with a <span className={s.gradientText}>simple interface</span> for B2C businesses
-            </h1>
+            </motion.h1>
 
-            <p>Take advantage of a free trial subscription</p>
-            <button className={s.startButton} onClick={() => (window.location.href = '#/crm')}>
+            <motion.p
+              variants={{
+                hidden: { opacity: 0, y: 15 },
+                show: { opacity: 1, y: 0, transition: { duration: 0.8 } },
+              }}
+            >
+              Take advantage of a free trial subscription
+            </motion.p>
+
+            <motion.button
+              className={s.startButton}
+              onClick={() => (window.location.href = '#/crm')}
+              variants={{
+                hidden: { opacity: 0, y: 15 },
+                show: { opacity: 1, y: 0, transition: { duration: 0.8 } },
+              }}
+            >
               <BiLockOpenAlt className={s.biLock} />
               <span className={s.getStarted}>Get started</span>
-            </button>
-            <div className={s.additionalInfo}>
+            </motion.button>
+
+            <motion.div
+              className={s.additionalInfo}
+              variants={{
+                hidden: { opacity: 0, y: 10 },
+                show: { opacity: 1, y: 0, transition: { duration: 0.8 } },
+              }}
+            >
               <div>
                 <IoIosCheckmarkCircleOutline className={s.adIc} />
-
                 <p>VERSION-1.0</p>
               </div>
               <div>
                 <GoLock className={s.adIc} />
                 <p>ALL DATA PROTECTED</p>
               </div>
-            </div>
-          </div>
-        </div>
+            </motion.div>
+          </motion.div>
+        </motion.div>
 
+        {/* Правый блок с превью */}
         <div className={s.preview}>
           <div className={s.previewContent}>
             <div className={s.previewImageWrapper}>
@@ -79,24 +139,89 @@ export const StartPage = () => {
             </div>
           </div>
         </div>
-      </section>
+      </motion.section>
+
       {/* ===== FEATURES / KEY BENEFITS ===== */}
-      <section className={s.featuresWrapper}>
+      <motion.section
+        className={s.featuresWrapper}
+        initial="hidden"
+        animate="show"
+        variants={{
+          hidden: {},
+          show: {
+            transition: {
+              staggerChildren: 0.2, // задержка между блоками
+            },
+          },
+        }}
+      >
         <div className={s.contentContainer}>
-          <div className={s.feature}>
+          {/* Feature 1 */}
+          <motion.div
+            className={s.feature}
+            variants={{
+              hidden: { opacity: 0, y: 20 },
+              show: { opacity: 1, y: 0, transition: { duration: 0.8, ease: 'easeOut' } },
+            }}
+          >
             <MdOutlineAccessTime className={s.featureIcon} />
             <h3>Fast platform</h3>
             <p>Описание преимущества...</p>
-          </div>
-          <div className={s.feature}>
+          </motion.div>
+
+          {/* Feature 2 */}
+          <motion.div
+            className={s.feature}
+            variants={{
+              hidden: { opacity: 0, y: 20 },
+              show: { opacity: 1, y: 0, transition: { duration: 0.8, ease: 'easeOut' } },
+            }}
+          >
             <AiOutlineTool className={s.featureIcon} />
             <h3>Best feature</h3>
             <p>Описание преимущества...</p>
-          </div>
-          <div className={s.feature}>
+          </motion.div>
+
+          {/* Feature 3 */}
+          <motion.div
+            className={s.feature}
+            variants={{
+              hidden: { opacity: 0, y: 20 },
+              show: { opacity: 1, y: 0, transition: { duration: 0.8, ease: 'easeOut' } },
+            }}
+          >
             <BiSignal3 className={s.featureIcon} />
             <h3>Frequent updates</h3>
             <p>Описание преимущества...</p>
+          </motion.div>
+        </div>
+      </motion.section>
+
+      <section className={s.textWrapper}>
+        <div className={s.contentContainer}>
+          <div className={s.textBlock}>
+            <div className={s.textBlockContent}>
+              <p className={s.textTitle}>THE HIDDEN FRICTION</p>
+              <h1 style={{ fontSize: 28 }}>
+                Workflow slowdowns are rarely obvious. <br />
+                Friction builds quietly over time.
+              </h1>
+              <p className={s.textP}>
+                Most managers believe delays happen instantly because <br />
+                of one confusing interface or a single missing task. The reality is uncomfortable:
+                <br />
+                small inefficiencies are scattered and accumulate subtly.
+              </p>
+              <p className={s.textP}>
+                Our CRM is designed to make every action simple and visible. <br />
+                By the time you notice tasks piling up, our interface <br />
+                has already kept your workflow smooth.
+              </p>
+              <h5 className={s.fcb}>
+                FlowCRM bridges this gap. We give you clarity and control over your processes, so
+                small issues never become big problems.
+              </h5>
+            </div>
           </div>
         </div>
       </section>
