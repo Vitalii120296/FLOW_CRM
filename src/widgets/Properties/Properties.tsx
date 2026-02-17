@@ -93,6 +93,8 @@ export const Properties = () => {
       return
     }
 
+    console.log('Business Info to save:', businessInfo)
+
     setIsSubmitting(true)
 
     try {

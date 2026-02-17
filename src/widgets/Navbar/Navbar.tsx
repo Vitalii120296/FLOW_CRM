@@ -38,37 +38,42 @@ export const Navbar = () => {
           <BsIndent className={`${s.icon} ${s.burger_icon}`} />
         </button>
         <li className={s.nav_item}>
-          <NavLink to="/" className={isActive}>
+          <NavLink to="/crm" end className={isActive}>
             <BsFillHouseFill className={s.icon} />
             <span>Kanban</span>
           </NavLink>
         </li>
+
         <li className={s.nav_item}>
-          <NavLink to="/clients" className={isActive}>
+          <NavLink to="/crm/clients" className={isActive}>
             <BsPeopleFill className={s.icon} />
             <span>Clients</span>
           </NavLink>
         </li>
+
         <li className={s.nav_item}>
-          <NavLink to="/profile" className={isActive}>
+          <NavLink to="/crm/profile" className={isActive}>
             <CgProfile className={s.icon} />
             <span>Profile</span>
           </NavLink>
         </li>
+
         <li className={s.nav_item}>
-          <NavLink to="/products" className={isActive}>
+          <NavLink to="/crm/products" className={isActive}>
             <BsBoxSeam className={s.icon} />
             <span>Products</span>
           </NavLink>
         </li>
+
         <li className={s.nav_item}>
-          <NavLink to="/user-management" className={isActive}>
+          <NavLink to="/crm/user-management" className={isActive}>
             <BsGearFill className={s.icon} />
             <span>User Management</span>
           </NavLink>
         </li>
+
         <li className={s.nav_item}>
-          <NavLink to="/properties" className={isActive}>
+          <NavLink to="/crm/properties" className={isActive}>
             <BsBuilding className={s.icon} />
             <span>Properties</span>
           </NavLink>
