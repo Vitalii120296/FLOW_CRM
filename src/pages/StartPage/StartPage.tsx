@@ -8,6 +8,14 @@ import { AiOutlineTool } from 'react-icons/ai'
 import { GoLock } from 'react-icons/go'
 import { IoIosCheckmarkCircleOutline } from 'react-icons/io'
 
+import { FiDatabase } from 'react-icons/fi'
+import { LuSquareKanban } from 'react-icons/lu'
+import { FaRegComment } from 'react-icons/fa'
+import { LuShoppingCart } from 'react-icons/lu'
+import { GrUserManager } from 'react-icons/gr'
+import { BsBriefcase } from 'react-icons/bs'
+import { IoPieChart } from 'react-icons/io5'
+
 import { motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
 
@@ -131,7 +139,7 @@ export const StartPage = () => {
           <div className={s.previewContent}>
             <div className={s.previewImageWrapper}>
               <motion.img
-                src="kanban.webp"
+                src="kanban.png"
                 alt="CRM Preview"
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
@@ -285,6 +293,139 @@ export const StartPage = () => {
           </div>
         </div>
       </motion.section>
+
+      <section className={s.advantagesWrapper}>
+        <div className={s.contentContainer}>
+          <h1 className={s.advantagesTitle}>ADVANTAGES</h1>
+
+          <motion.div
+            className={s.advantagesBlock}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, amount: 0.3 }}
+            variants={{
+              hidden: {},
+              show: { transition: { staggerChildren: 0.15 } },
+            }}
+          >
+            <motion.div
+              className={`${s.advantages} ${s.red}`}
+              variants={{
+                hidden: { opacity: 0, y: 20 },
+                show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: 'easeOut' } },
+              }}
+            >
+              <div className={s.advantagesIconWrapper}>
+                <FiDatabase className={s.advantagesIcon} />
+              </div>
+              <h1>Database of all clients</h1>
+              <p>Easily store and access detailed client information in one secure place.</p>
+            </motion.div>
+
+            <motion.div
+              className={`${s.advantages} ${s.blue}`}
+              variants={{
+                hidden: { opacity: 0, y: 20 },
+                show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: 'easeOut' } },
+              }}
+            >
+              <div className={s.advantagesIconWrapper}>
+                <LuSquareKanban className={s.advantagesIcon} />
+              </div>
+              <h1>Kanban Management</h1>
+              <p>Organize tasks visually and track workflow efficiently for all team members.</p>
+            </motion.div>
+
+            <motion.div
+              className={`${s.advantages} ${s.green}`}
+              variants={{
+                hidden: { opacity: 0, y: 20 },
+                show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: 'easeOut' } },
+              }}
+            >
+              <div className={s.advantagesIconWrapper}>
+                <IoIosCheckmarkCircleOutline className={s.advantagesIcon} />
+              </div>
+              <h1>Client statuses</h1>
+              <p>Quickly see each client’s stage and progress through your sales pipeline.</p>
+            </motion.div>
+
+            <motion.div
+              className={`${s.advantages} ${s.orange}`}
+              variants={{
+                hidden: { opacity: 0, y: 20 },
+                show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: 'easeOut' } },
+              }}
+            >
+              <div className={s.advantagesIconWrapper}>
+                <FaRegComment className={s.advantagesIcon} />
+              </div>
+              <h1>Custom comments and notes</h1>
+              <p>Add detailed notes or comments for each client individually.</p>
+            </motion.div>
+
+            <motion.div
+              className={`${s.advantages} ${s.purple}`}
+              variants={{
+                hidden: { opacity: 0, y: 20 },
+                show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: 'easeOut' } },
+              }}
+            >
+              <div className={s.advantagesIconWrapper}>
+                <LuShoppingCart className={s.advantagesIcon} />
+              </div>
+              <h1>Adding products and linking them to clients</h1>
+              <p>
+                Manage product lists and associate items directly with individual clients easily.
+              </p>
+            </motion.div>
+
+            <motion.div
+              className={`${s.advantages} ${s.teal}`}
+              variants={{
+                hidden: { opacity: 0, y: 20 },
+                show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: 'easeOut' } },
+              }}
+            >
+              <div className={s.advantagesIconWrapper}>
+                <GrUserManager className={s.advantagesIcon} />
+              </div>
+              <h1>Manager management</h1>
+              <p>
+                Assign roles, monitor activity, and manage your team effectively from one place.
+              </p>
+            </motion.div>
+
+            <motion.div
+              className={`${s.advantages} ${s.pink}`}
+              variants={{
+                hidden: { opacity: 0, y: 20 },
+                show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: 'easeOut' } },
+              }}
+            >
+              <div className={s.advantagesIconWrapper}>
+                <BsBriefcase className={s.advantagesIcon} />
+              </div>
+              <h1>Company data configuration</h1>
+              <p>Set up company details, policies, and settings to suit your business needs.</p>
+            </motion.div>
+
+            <motion.div
+              className={`${s.advantages} ${s.yellow} ${s.noHover}`}
+              variants={{
+                hidden: { opacity: 0, y: 20 },
+                show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: 'easeOut' } },
+              }}
+            >
+              <div className={s.advantagesIconWrapper}>
+                <IoPieChart className={s.advantagesIcon} />
+              </div>
+              <h1>Data monitoring</h1>
+              <p>Coming Soon...</p>
+            </motion.div>
+          </motion.div>
+        </div>
+      </section>
     </div>
   )
 }
