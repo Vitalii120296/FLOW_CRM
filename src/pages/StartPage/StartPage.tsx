@@ -131,7 +131,7 @@ export const StartPage = () => {
           <div className={s.previewContent}>
             <div className={s.previewImageWrapper}>
               <motion.img
-                src="kanban.webp"
+                src="kanban.png"
                 alt="CRM Preview"
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}

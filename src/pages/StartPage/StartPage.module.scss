@@ -99,12 +99,15 @@
 
   border-radius: 0;
   border: 1px solid $border;
+  padding: 0;
+  display: flex;
 
   // текст внутри кнопки
   .loginButton {
     color: rgba(255, 255, 255, 0.6); // бледный белый текст
     font-weight: 600;
     text-decoration: none;
+    padding: 5px;
   }
 }
 //#endregion
