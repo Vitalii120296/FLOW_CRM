@@ -9,6 +9,12 @@ import { GoLock } from 'react-icons/go'
 import { IoIosCheckmarkCircleOutline } from 'react-icons/io'
 
 import { FiDatabase } from 'react-icons/fi'
+import { LuSquareKanban } from 'react-icons/lu'
+import { FaRegComment } from 'react-icons/fa'
+import { LuShoppingCart } from 'react-icons/lu'
+import { GrUserManager } from 'react-icons/gr'
+import { BsBriefcase } from 'react-icons/bs'
+import { IoPieChart } from 'react-icons/io5'
 
 import { motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
@@ -293,46 +299,68 @@ export const StartPage = () => {
           <h1 className={s.advantagesTitle}>ADVANTAGES</h1>
 
           <div className={s.advantagesBlock}>
-            <div className={s.advantages}>
+            <div className={`${s.advantages} ${s.red}`}>
               <div className={s.advantagesIconWrapper}>
                 <FiDatabase className={s.advantagesIcon} />
               </div>
-
               <h1>Database of all clients</h1>
-              <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Deserunt, quis!</p>
+              <p>Lorem ipsum dolor sit amet...</p>
             </div>
 
-            <div className={s.advantages}>
-              <h1>1</h1>
-              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem, qui?</p>
+            <div className={`${s.advantages} ${s.blue}`}>
+              <div className={s.advantagesIconWrapper}>
+                <LuSquareKanban className={s.advantagesIcon} />
+              </div>
+              <h1>Kanban Management</h1>
+              <p>Lorem ipsum dolor sit amet...</p>
             </div>
 
-            <div className={s.advantages}>
-              <h1>1</h1>
-              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem, qui?</p>
+            <div className={`${s.advantages} ${s.green}`}>
+              <div className={s.advantagesIconWrapper}>
+                <IoIosCheckmarkCircleOutline className={s.advantagesIcon} />
+              </div>
+              <h1>Client statuses </h1>
+              <p>Lorem ipsum dolor sit amet...</p>
             </div>
 
-            <div className={s.advantages}>
-              <h1>1</h1>
-              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem, qui?</p>
+            <div className={`${s.advantages} ${s.orange}`}>
+              <div className={s.advantagesIconWrapper}>
+                <FaRegComment className={s.advantagesIcon} />
+              </div>
+              <h1>Custom comments and notes</h1>
+              <p>Lorem ipsum dolor sit amet...</p>
             </div>
 
-            <div className={s.advantages}>
-              <h1>1</h1>
-              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem, qui?</p>
+            <div className={`${s.advantages} ${s.purple}`}>
+              <div className={s.advantagesIconWrapper}>
+                <LuShoppingCart className={s.advantagesIcon} />
+              </div>
+              <h1>Adding products and linking them to clients</h1>
+              <p>Lorem ipsum dolor sit amet...</p>
             </div>
 
-            <div className={s.advantages}>
-              <h1>1</h1>
-              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem, qui?</p>
+            <div className={`${s.advantages} ${s.teal}`}>
+              <div className={s.advantagesIconWrapper}>
+                <GrUserManager className={s.advantagesIcon} />
+              </div>
+              <h1>Manager management</h1>
+              <p>Lorem ipsum dolor sit amet...</p>
             </div>
-            <div className={s.advantages}>
-              <h1>1</h1>
-              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem, qui?</p>
+
+            <div className={`${s.advantages} ${s.pink}`}>
+              <div className={s.advantagesIconWrapper}>
+                <BsBriefcase className={s.advantagesIcon} />
+              </div>
+              <h1>Company data configuration</h1>
+              <p>Lorem ipsum dolor sit amet...</p>
             </div>
-            <div className={s.advantages}>
-              <h1>1</h1>
-              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem, qui?</p>
+
+            <div className={`${s.advantages} ${s.yellow}  ${s.noHover}`}>
+              <div className={s.advantagesIconWrapper}>
+                <IoPieChart className={s.advantagesIcon} />
+              </div>
+              <h1>Data monitoring</h1>
+              <p>Coming Soon...</p>
             </div>
           </div>
         </div>
