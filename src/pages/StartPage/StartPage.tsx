@@ -298,71 +298,132 @@ export const StartPage = () => {
         <div className={s.contentContainer}>
           <h1 className={s.advantagesTitle}>ADVANTAGES</h1>
 
-          <div className={s.advantagesBlock}>
-            <div className={`${s.advantages} ${s.red}`}>
+          <motion.div
+            className={s.advantagesBlock}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, amount: 0.3 }}
+            variants={{
+              hidden: {},
+              show: { transition: { staggerChildren: 0.15 } },
+            }}
+          >
+            <motion.div
+              className={`${s.advantages} ${s.red}`}
+              variants={{
+                hidden: { opacity: 0, y: 20 },
+                show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: 'easeOut' } },
+              }}
+            >
               <div className={s.advantagesIconWrapper}>
                 <FiDatabase className={s.advantagesIcon} />
               </div>
               <h1>Database of all clients</h1>
-              <p>Lorem ipsum dolor sit amet...</p>
-            </div>
+              <p>Easily store and access detailed client information in one secure place.</p>
+            </motion.div>
 
-            <div className={`${s.advantages} ${s.blue}`}>
+            <motion.div
+              className={`${s.advantages} ${s.blue}`}
+              variants={{
+                hidden: { opacity: 0, y: 20 },
+                show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: 'easeOut' } },
+              }}
+            >
               <div className={s.advantagesIconWrapper}>
                 <LuSquareKanban className={s.advantagesIcon} />
               </div>
               <h1>Kanban Management</h1>
-              <p>Lorem ipsum dolor sit amet...</p>
-            </div>
+              <p>Organize tasks visually and track workflow efficiently for all team members.</p>
+            </motion.div>
 
-            <div className={`${s.advantages} ${s.green}`}>
+            <motion.div
+              className={`${s.advantages} ${s.green}`}
+              variants={{
+                hidden: { opacity: 0, y: 20 },
+                show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: 'easeOut' } },
+              }}
+            >
               <div className={s.advantagesIconWrapper}>
                 <IoIosCheckmarkCircleOutline className={s.advantagesIcon} />
               </div>
-              <h1>Client statuses </h1>
-              <p>Lorem ipsum dolor sit amet...</p>
-            </div>
+              <h1>Client statuses</h1>
+              <p>Quickly see each client’s stage and progress through your sales pipeline.</p>
+            </motion.div>
 
-            <div className={`${s.advantages} ${s.orange}`}>
+            <motion.div
+              className={`${s.advantages} ${s.orange}`}
+              variants={{
+                hidden: { opacity: 0, y: 20 },
+                show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: 'easeOut' } },
+              }}
+            >
               <div className={s.advantagesIconWrapper}>
                 <FaRegComment className={s.advantagesIcon} />
               </div>
               <h1>Custom comments and notes</h1>
-              <p>Lorem ipsum dolor sit amet...</p>
-            </div>
+              <p>Add detailed notes or comments for each client individually.</p>
+            </motion.div>
 
-            <div className={`${s.advantages} ${s.purple}`}>
+            <motion.div
+              className={`${s.advantages} ${s.purple}`}
+              variants={{
+                hidden: { opacity: 0, y: 20 },
+                show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: 'easeOut' } },
+              }}
+            >
               <div className={s.advantagesIconWrapper}>
                 <LuShoppingCart className={s.advantagesIcon} />
               </div>
               <h1>Adding products and linking them to clients</h1>
-              <p>Lorem ipsum dolor sit amet...</p>
-            </div>
+              <p>
+                Manage product lists and associate items directly with individual clients easily.
+              </p>
+            </motion.div>
 
-            <div className={`${s.advantages} ${s.teal}`}>
+            <motion.div
+              className={`${s.advantages} ${s.teal}`}
+              variants={{
+                hidden: { opacity: 0, y: 20 },
+                show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: 'easeOut' } },
+              }}
+            >
               <div className={s.advantagesIconWrapper}>
                 <GrUserManager className={s.advantagesIcon} />
               </div>
               <h1>Manager management</h1>
-              <p>Lorem ipsum dolor sit amet...</p>
-            </div>
+              <p>
+                Assign roles, monitor activity, and manage your team effectively from one place.
+              </p>
+            </motion.div>
 
-            <div className={`${s.advantages} ${s.pink}`}>
+            <motion.div
+              className={`${s.advantages} ${s.pink}`}
+              variants={{
+                hidden: { opacity: 0, y: 20 },
+                show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: 'easeOut' } },
+              }}
+            >
               <div className={s.advantagesIconWrapper}>
                 <BsBriefcase className={s.advantagesIcon} />
               </div>
               <h1>Company data configuration</h1>
-              <p>Lorem ipsum dolor sit amet...</p>
-            </div>
+              <p>Set up company details, policies, and settings to suit your business needs.</p>
+            </motion.div>
 
-            <div className={`${s.advantages} ${s.yellow}  ${s.noHover}`}>
+            <motion.div
+              className={`${s.advantages} ${s.yellow} ${s.noHover}`}
+              variants={{
+                hidden: { opacity: 0, y: 20 },
+                show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: 'easeOut' } },
+              }}
+            >
               <div className={s.advantagesIconWrapper}>
                 <IoPieChart className={s.advantagesIcon} />
               </div>
               <h1>Data monitoring</h1>
               <p>Coming Soon...</p>
-            </div>
-          </div>
+            </motion.div>
+          </motion.div>
         </div>
       </section>
     </div>
