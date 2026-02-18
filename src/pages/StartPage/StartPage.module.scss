@@ -11,7 +11,7 @@
 
 .bg {
   background-color: #05080a;
-  height: 100vh;
+  height: auto;
   z-index: 2;
 
   background-image:
@@ -351,4 +351,189 @@
   font-weight: 400;
 }
 
+//#endregion
+
+//#region Advantages
+
+.advantagesWrapper {
+  width: 100%;
+  // padding: 40px 16px;
+  border-bottom: 1px dashed rgba(255, 255, 255, 0.1);
+  padding-block: 28px;
+}
+
+.advantagesBlock {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 40px;
+  justify-items: center;
+  // width: 100%;
+  padding: 32px;
+  border-inline: 1px dashed rgba(255, 255, 255, 0.1);
+}
+
+.advantages {
+  aspect-ratio: 1 / 1;
+  border-left: 2px solid;
+  border-radius: 16px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start; // прижато к верху
+  align-items: flex-start;
+  padding: 24px;
+  gap: 16px;
+  text-align: left;
+  transition: all 0.3s ease;
+  background-color: #05080a;
+
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 0 25px rgba(255, 255, 255, 0.3);
+  }
+}
+
+// Отключаем ховер для элементов с классом noHover
+.advantages.noHover:hover {
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+.advantagesIconWrapper {
+  padding: 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 2px solid;
+  border-radius: 8px;
+  margin-bottom: 12px;
+}
+
+.advantagesIcon {
+  font-size: 24px;
+}
+
+/* === МОДИФИКАТОРЫ ЦВЕТОВ ДЛЯ ВСЕХ 8 БЛОКОВ === */
+.red {
+  border-color: #ff4d4f;
+  box-shadow: 0 0 15px rgba(255, 77, 79, 0.5);
+
+  .advantagesIconWrapper {
+    border-color: #ff4d4f;
+    background-color: rgba(255, 77, 79, 0.2);
+  }
+
+  .advantagesIcon {
+    color: #ff4d4f;
+  }
+}
+
+.blue {
+  border-color: #40a9ff;
+  box-shadow: 0 0 15px rgba(64, 169, 255, 0.5);
+
+  .advantagesIconWrapper {
+    border-color: #40a9ff;
+    background-color: rgba(64, 169, 255, 0.2);
+  }
+
+  .advantagesIcon {
+    color: #40a9ff;
+  }
+}
+
+.green {
+  border-color: #73d13d;
+  box-shadow: 0 0 15px rgba(115, 209, 61, 0.5);
+
+  .advantagesIconWrapper {
+    border-color: #73d13d;
+    background-color: rgba(115, 209, 61, 0.2);
+  }
+
+  .advantagesIcon {
+    color: #73d13d;
+  }
+}
+
+.orange {
+  border-color: #faad14;
+  box-shadow: 0 0 15px rgba(250, 173, 20, 0.5);
+
+  .advantagesIconWrapper {
+    border-color: #faad14;
+    background-color: rgba(250, 173, 20, 0.2);
+  }
+
+  .advantagesIcon {
+    color: #faad14;
+  }
+}
+
+.purple {
+  border-color: #9254de;
+  box-shadow: 0 0 15px rgba(146, 84, 222, 0.5);
+
+  .advantagesIconWrapper {
+    border-color: #9254de;
+    background-color: rgba(146, 84, 222, 0.2);
+  }
+
+  .advantagesIcon {
+    color: #9254de;
+  }
+}
+
+.teal {
+  border-color: #13c2c2;
+  box-shadow: 0 0 15px rgba(19, 194, 194, 0.5);
+
+  .advantagesIconWrapper {
+    border-color: #13c2c2;
+    background-color: rgba(19, 194, 194, 0.2);
+  }
+
+  .advantagesIcon {
+    color: #13c2c2;
+  }
+}
+
+.pink {
+  border-color: #ff85c0;
+  box-shadow: 0 0 15px rgba(255, 133, 192, 0.5);
+
+  .advantagesIconWrapper {
+    border-color: #ff85c0;
+    background-color: rgba(255, 133, 192, 0.2);
+  }
+
+  .advantagesIcon {
+    color: #ff85c0;
+  }
+}
+
+.yellow {
+  border-color: gray;
+  // box-shadow: 0 0 15px rgba(255, 169, 64, 0.5);
+
+  .advantagesIconWrapper {
+    border-color: gray;
+    background-color: rgba(37, 36, 35, 0.2);
+  }
+
+  .advantagesIcon {
+    color: gray;
+  }
+}
+
+.advantagesTitle {
+  display: flex;
+  align-items: center;
+  font-weight: 400;
+  font-size: 22px;
+  color: white;
+
+  padding-inline: 32px;
+  margin-bottom: 10px;
+}
 //#endregion
