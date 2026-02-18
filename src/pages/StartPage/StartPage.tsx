@@ -8,6 +8,8 @@ import { AiOutlineTool } from 'react-icons/ai'
 import { GoLock } from 'react-icons/go'
 import { IoIosCheckmarkCircleOutline } from 'react-icons/io'
 
+import { FiDatabase } from 'react-icons/fi'
+
 import { motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
 
@@ -285,6 +287,56 @@ export const StartPage = () => {
           </div>
         </div>
       </motion.section>
+
+      <section className={s.advantagesWrapper}>
+        <div className={s.contentContainer}>
+          <h1 className={s.advantagesTitle}>ADVANTAGES</h1>
+
+          <div className={s.advantagesBlock}>
+            <div className={s.advantages}>
+              <div className={s.advantagesIconWrapper}>
+                <FiDatabase className={s.advantagesIcon} />
+              </div>
+
+              <h1>Database of all clients</h1>
+              <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Deserunt, quis!</p>
+            </div>
+
+            <div className={s.advantages}>
+              <h1>1</h1>
+              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem, qui?</p>
+            </div>
+
+            <div className={s.advantages}>
+              <h1>1</h1>
+              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem, qui?</p>
+            </div>
+
+            <div className={s.advantages}>
+              <h1>1</h1>
+              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem, qui?</p>
+            </div>
+
+            <div className={s.advantages}>
+              <h1>1</h1>
+              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem, qui?</p>
+            </div>
+
+            <div className={s.advantages}>
+              <h1>1</h1>
+              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem, qui?</p>
+            </div>
+            <div className={s.advantages}>
+              <h1>1</h1>
+              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem, qui?</p>
+            </div>
+            <div className={s.advantages}>
+              <h1>1</h1>
+              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem, qui?</p>
+            </div>
+          </div>
+        </div>
+      </section>
     </div>
   )
 }

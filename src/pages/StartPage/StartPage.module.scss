@@ -11,7 +11,7 @@
 
 .bg {
   background-color: #05080a;
-  height: 100vh;
+  height: auto;
   z-index: 2;
 
   background-image:
@@ -349,6 +349,117 @@
   font-size: 14px;
   border-left: 2px solid $primary;
   font-weight: 400;
+}
+
+//#endregion
+
+//#region Advantages
+
+.advantagesWrapper {
+  width: 100%;
+  // padding: 40px 16px;
+  border-bottom: 1px dashed rgba(255, 255, 255, 0.1);
+  padding-block: 28px;
+}
+
+.advantagesBlock {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 40px;
+  justify-items: center;
+  // width: 100%;
+  padding: 32px;
+  border-inline: 1px dashed rgba(255, 255, 255, 0.1);
+}
+
+.advantages {
+  aspect-ratio: 1 / 1;
+  border-left: 2px solid;
+  border-radius: 16px;
+
+  display: flex;
+  flex-direction: column;
+
+  justify-content: flex-start;
+  align-items: flex-start;
+
+  padding: 24px;
+  gap: 20px;
+  text-align: left;
+  transition: all 0.3s ease;
+  background-color: #05080a;
+}
+
+/* Разные цвета бордера и тени */
+.advantages:nth-child(1) {
+  border-color: #ff4d4f;
+  box-shadow: 0 0 15px rgba(255, 77, 79, 0.5);
+}
+.advantages:nth-child(2) {
+  border-color: #40a9ff;
+  box-shadow: 0 0 15px rgba(64, 169, 255, 0.5);
+}
+.advantages:nth-child(3) {
+  border-color: #73d13d;
+  box-shadow: 0 0 15px rgba(115, 209, 61, 0.5);
+}
+.advantages:nth-child(4) {
+  border-color: #faad14;
+  box-shadow: 0 0 15px rgba(250, 173, 20, 0.5);
+}
+.advantages:nth-child(5) {
+  border-color: #9254de;
+  box-shadow: 0 0 15px rgba(146, 84, 222, 0.5);
+}
+.advantages:nth-child(6) {
+  border-color: #13c2c2;
+  box-shadow: 0 0 15px rgba(19, 194, 194, 0.5);
+}
+.advantages:nth-child(7) {
+  border-color: #ff85c0;
+  box-shadow: 0 0 15px rgba(255, 133, 192, 0.5);
+}
+.advantages:nth-child(8) {
+  border-color: #ffa940;
+  box-shadow: 0 0 15px rgba(255, 169, 64, 0.5);
+}
+
+/* Hover — тень чуть ярче */
+.advantages:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 0 25px rgba(255, 255, 255, 0.3);
+}
+
+.advantagesTitle {
+  display: flex;
+  align-items: center;
+  font-weight: 400;
+  font-size: 22px;
+  color: $primary;
+
+  padding-inline: 32px;
+  margin-bottom: 10px;
+
+  // border-left: 3px solid $primary;
+  // text-shadow:
+  //   0 0 5px $primary,
+  //   0 0 10px $primary,
+  //   0 0 15px $primary;
+}
+
+.advantagesIconWrapper {
+  padding: 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 2px solid #ff4d4f; // красная граница
+  background-color: rgba(255, 0, 0, 0.2); // бледно-неоновый красный
+  border-radius: 8px; // слегка скругленные углы, если нужно
+}
+
+.advantagesIcon {
+  color: #ff4d4f; // сама иконка ярко-красная
+  font-size: 18px; // размер иконки
 }
 
 //#endregion
