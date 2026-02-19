@@ -255,6 +255,7 @@
 
   @include on-tablet {
     border-left: 1px dashed rgba(255, 255, 255, 0.1);
+    border-top: none;
   }
 }
 
@@ -296,7 +297,7 @@
 
 .featuresWrapper {
   background-color: #05080a;
-  border-top: 1px dashed rgba(255, 255, 255, 0.1);
+  // border-top: 1px dashed rgba(255, 255, 255, 0.1);
   border-bottom: 1px dashed rgba(255, 255, 255, 0.1);
 
   .contentContainer {
@@ -318,14 +319,18 @@
   align-items: flex-start;
   gap: 12px;
   padding: 32px;
-  border-block: 1px dashed rgba(255, 255, 255, 0.1);
+  border-top: 1px dashed rgba(255, 255, 255, 0.1);
 
   flex: 1;
   min-width: 200px;
 
   @include on-tablet {
     border-inline: 1px dashed rgba(255, 255, 255, 0.1);
-    align-items: flex-start;
+
+    &:nth-child(2) {
+      border-top: 1px dashed rgba(255, 255, 255, 0.1);
+      border-inline: none;
+    }
   }
 }
 
