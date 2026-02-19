@@ -95,16 +95,15 @@
 
 .loginBlock {
   @extend .button;
-  background-color: $textSecondary; // фон кнопки
+  // background-color: $textSecondary; // фон кнопки
 
   border-radius: 0;
-  border: 1px solid $border;
   padding: 0;
   display: flex;
 
   // текст внутри кнопки
   .loginButton {
-    color: rgba(255, 255, 255, 0.6); // бледный белый текст
+    color: #05080a;
     font-weight: 600;
     text-decoration: none;
     padding: 5px;
@@ -114,13 +113,17 @@
 
 .aboutWrapper {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   gap: 20px;
   width: 100%;
   border-inline: 1px dashed rgba(255, 255, 255, 0.1);
   // border-bottom: 1px dashed rgba(255, 255, 255, 0.1);
 
   background-color: #05080a;
+
+  @include on-tablet {
+    flex-direction: row;
+  }
 }
 
 //#region StartInfo
@@ -130,7 +133,7 @@
   justify-content: center;
   align-items: center;
   width: 100%;
-  // border-right: 1px dashed rgba(255, 255, 255, 0.1);
+  flex: 1;
 }
 
 .startInfoContent {
@@ -139,7 +142,13 @@
   align-items: flex-start;
   width: auto;
 
-  gap: 20px;
+  gap: 14px;
+
+  padding: 18px;
+
+  @include on-tablet {
+    gap: 20px;
+  }
 
   @include on-desktop {
     padding: 64px;
@@ -165,10 +174,19 @@
 }
 
 .startInfoText {
-  font-size: 32px;
+  font-size: 26px;
   text-align: start;
-  padding-bottom: 20px;
   font-weight: 800;
+  padding-bottom: 10px;
+
+  @include on-tablet {
+    padding-bottom: 20px;
+    font-size: 32px;
+  }
+}
+
+.startInfoAbout {
+  text-align: start;
 }
 
 .gradientText {
@@ -232,7 +250,12 @@
   justify-content: center;
   align-items: center;
   perspective: 1000px;
-  border-left: 1px dashed rgba(255, 255, 255, 0.1);
+  border-top: 1px dashed rgba(255, 255, 255, 0.1);
+  flex: 1;
+
+  @include on-tablet {
+    border-left: 1px dashed rgba(255, 255, 255, 0.1);
+  }
 }
 
 .previewContent {
@@ -253,9 +276,17 @@
     0 0 30px rgba(242, 200, 237, 0.3);
 }
 
+// .previewImageWrapper img {
+//   display: block;
+//   width: 500px;
+//   border-radius: 20px;
+// }
+
 .previewImageWrapper img {
   display: block;
-  width: 500px;
+  width: 100%;
+  max-width: 500px;
+  height: auto;
   border-radius: 20px;
 }
 
@@ -275,7 +306,7 @@
     max-width: $desktop-min-width;
     margin-inline: auto;
 
-    @include on-desktop {
+    @include on-tablet {
       flex-direction: row;
     }
   }
@@ -287,10 +318,15 @@
   align-items: flex-start;
   gap: 12px;
   padding: 32px;
-  border-inline: 1px dashed rgba(255, 255, 255, 0.1);
+  border-block: 1px dashed rgba(255, 255, 255, 0.1);
 
-  flex: 1 1 0; // растягиваем карточку, чтобы занимала всё доступное место
-  min-width: 200px; // минимальная ширина карточки, чтобы не сжималась слишком сильно
+  flex: 1;
+  min-width: 200px;
+
+  @include on-tablet {
+    border-inline: 1px dashed rgba(255, 255, 255, 0.1);
+    align-items: flex-start;
+  }
 }
 
 .feature:hover {
@@ -301,6 +337,10 @@
   width: 20px;
   height: 20px;
   color: $primary;
+}
+
+.featureAbout {
+  text-align: start;
 }
 
 //#endregion
@@ -330,9 +370,13 @@
   text-align: left;
   justify-content: flex-start;
   gap: 12px;
-  width: 100%; // блок занимает всю ширину родителя
-  padding-left: 64px; // убрали внутренний отступ
+  width: 100%;
+  padding-inline: 32px;
   border-left: 1px dashed rgba(255, 255, 255, 0.1);
+
+  @include on-tablet {
+    padding-left: 64px;
+  }
 }
 
 .textTitle {
@@ -357,29 +401,34 @@
 
 .advantagesWrapper {
   width: 100%;
-  // padding: 40px 16px;
-  border-bottom: 1px dashed rgba(255, 255, 255, 0.1);
   padding-block: 28px;
 }
 
 .advantagesBlock {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(1, 1fr);
   gap: 40px;
-  justify-items: center;
-  // width: 100%;
+  // justify-items: center;
   padding: 32px;
   border-inline: 1px dashed rgba(255, 255, 255, 0.1);
+
+  @include on-tablet {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @include on-desktop {
+    grid-template-columns: repeat(4, 1fr);
+  }
 }
 
 .advantages {
-  aspect-ratio: 1 / 1;
+  aspect-ratio: 5 / 2;
   border-left: 2px solid;
   border-radius: 16px;
 
   display: flex;
   flex-direction: column;
-  justify-content: flex-start; // прижато к верху
+  justify-content: flex-start;
   align-items: flex-start;
   padding: 24px;
   gap: 16px;
@@ -387,13 +436,20 @@
   transition: all 0.3s ease;
   background-color: #05080a;
 
+  @include on-tablet {
+    aspect-ratio: 4 / 3;
+  }
+
+  @include on-desktop {
+    aspect-ratio: 1 / 1;
+  }
+
   &:hover {
     transform: translateY(-5px);
     box-shadow: 0 0 25px rgba(255, 255, 255, 0.3);
   }
 }
 
-// Отключаем ховер для элементов с классом noHover
 .advantages.noHover:hover {
   transform: none !important;
   box-shadow: none !important;
@@ -413,7 +469,6 @@
   font-size: 24px;
 }
 
-/* === МОДИФИКАТОРЫ ЦВЕТОВ ДЛЯ ВСЕХ 8 БЛОКОВ === */
 .red {
   border-color: #ff4d4f;
   box-shadow: 0 0 15px rgba(255, 77, 79, 0.5);
@@ -536,4 +591,64 @@
   padding-inline: 32px;
   margin-bottom: 10px;
 }
+//#endregion
+
+//#region Footer
+
+.footer {
+  background-color: #05080a;
+  border-block: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.footerContent {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 10px 20px 10px 20px;
+  margin-top: 12px;
+
+  // border-inline: 1px dashed rgba(255, 255, 255, 0.1);
+
+  height: auto;
+  z-index: 10;
+  position: relative;
+
+  @include on-desktop {
+    // margin-inline: 100px;
+  }
+}
+
+.createdBy {
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+}
+
+.gitIcons {
+  display: inline-block;
+  color: $textSecondary;
+  text-align: left;
+  transform-origin: left center;
+
+  transition:
+    transform 0.2s ease,
+    color 0.2s ease;
+
+  &:hover {
+    transform: scale(1.1);
+    color: $text;
+  }
+}
+
+.footerPrivacy {
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  justify-content: start;
+
+  padding: 10px 20px;
+
+  font-size: 10px;
+}
+
 //#endregion
