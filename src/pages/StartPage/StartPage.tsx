@@ -305,7 +305,7 @@ export const StartPage = () => {
             className={s.advantagesBlock}
             initial="hidden"
             whileInView="show"
-            viewport={{ once: true, amount: 0.3 }}
+            viewport={{ once: true, amount: 0.1 }}
             variants={{
               hidden: {},
               show: { transition: { staggerChildren: 0.15 } },
