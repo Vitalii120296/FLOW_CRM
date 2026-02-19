@@ -116,13 +116,12 @@
   flex-direction: column;
   gap: 20px;
   width: 100%;
-  border-inline: 1px dashed rgba(255, 255, 255, 0.1);
-  // border-bottom: 1px dashed rgba(255, 255, 255, 0.1);
 
   background-color: #05080a;
 
   @include on-tablet {
     flex-direction: row;
+    border-inline: 1px dashed rgba(255, 255, 255, 0.1);
   }
 }
 
@@ -297,7 +296,7 @@
 
 .featuresWrapper {
   background-color: #05080a;
-  // border-top: 1px dashed rgba(255, 255, 255, 0.1);
+  border-top: 1px dashed rgba(255, 255, 255, 0.1);
   border-bottom: 1px dashed rgba(255, 255, 255, 0.1);
 
   .contentContainer {
@@ -319,7 +318,7 @@
   align-items: flex-start;
   gap: 12px;
   padding: 32px;
-  border-top: 1px dashed rgba(255, 255, 255, 0.1);
+  // border-top: 1px dashed rgba(255, 255, 255, 0.1);
 
   flex: 1;
   min-width: 200px;
@@ -328,7 +327,6 @@
     border-inline: 1px dashed rgba(255, 255, 255, 0.1);
 
     &:nth-child(2) {
-      border-top: 1px dashed rgba(255, 255, 255, 0.1);
       border-inline: none;
     }
   }
