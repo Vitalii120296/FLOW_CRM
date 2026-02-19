@@ -16,6 +16,8 @@ import { GrUserManager } from 'react-icons/gr'
 import { BsBriefcase } from 'react-icons/bs'
 import { IoPieChart } from 'react-icons/io5'
 
+import { FaGithub } from 'react-icons/fa'
+
 import { motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
 
@@ -95,6 +97,7 @@ export const StartPage = () => {
             </motion.h1>
 
             <motion.p
+              className={s.startInfoAbout}
               variants={{
                 hidden: { opacity: 0, y: 15 },
                 show: { opacity: 1, y: 0, transition: { duration: 0.8 } },
@@ -175,7 +178,7 @@ export const StartPage = () => {
           >
             <MdOutlineAccessTime className={s.featureIcon} />
             <h3>Fast platform</h3>
-            <p>Описание преимущества...</p>
+            <p className={s.featureAbout}>High-speed performance for seamless user experience</p>
           </motion.div>
 
           {/* Feature 2 */}
@@ -188,7 +191,7 @@ export const StartPage = () => {
           >
             <AiOutlineTool className={s.featureIcon} />
             <h3>Best feature</h3>
-            <p>Описание преимущества...</p>
+            <p className={s.featureAbout}>Powerful tools designed for maximum productivity</p>
           </motion.div>
 
           {/* Feature 3 */}
@@ -201,7 +204,7 @@ export const StartPage = () => {
           >
             <BiSignal3 className={s.featureIcon} />
             <h3>Frequent updates</h3>
-            <p>Описание преимущества...</p>
+            <p className={s.featureAbout}>Regular updates with new features and improvements</p>
           </motion.div>
         </div>
       </motion.section>
@@ -426,6 +429,54 @@ export const StartPage = () => {
           </motion.div>
         </div>
       </section>
+
+      <footer className={s.footer}>
+        <div className={s.contentContainer}>
+          <div className={s.footerContent}>
+            <div className={s.logoBlock}>
+              <div className={s.flow}>FLOW</div>
+              <div className={s.crm}>
+                <span style={{ color: '#a9dfd8' }}>C</span>
+                <span style={{ color: '#f2c8ed' }}>R</span>
+                <span style={{ color: '#f2994a' }}>M</span>
+              </div>
+            </div>
+
+            <div className={s.createdBy}>
+              <a
+                href="https://github.com/Moddderi"
+                target="_blank"
+                rel="noopener noreferrer"
+                className={s.gitIcons}
+              >
+                <FaGithub size={22} />
+              </a>
+
+              <a
+                href="https://github.com/Vitalii120296"
+                target="_blank"
+                rel="noopener noreferrer"
+                className={s.gitIcons}
+              >
+                <FaGithub size={22} />
+              </a>
+
+              <a
+                href="https://github.com/01https"
+                target="_blank"
+                rel="noopener noreferrer"
+                className={s.gitIcons}
+              >
+                <FaGithub size={22} />
+              </a>
+            </div>
+          </div>
+
+          <p className={s.footerPrivacy}>
+            © {new Date().getFullYear()} FLOW CRM. ALL RIGHTS RESERVED.
+          </p>
+        </div>
+      </footer>
     </div>
   )
 }
