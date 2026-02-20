@@ -12,7 +12,11 @@ import s from './Navbar.module.scss'
 import { useEffect, useState } from 'react'
 import cn from 'classnames'
 
-export const Navbar = () => {
+type Props = {
+  showBurger: boolean
+}
+
+export const Navbar: React.FC<Props> = ({ showBurger }) => {
   const [burgerIsOpen, setBurgerIsOpen] = useState(false)
   const location = useLocation()
 
@@ -32,7 +36,7 @@ export const Navbar = () => {
   const isActive = ({ isActive }: { isActive: boolean }) => (isActive ? s.active : '')
 
   return (
-    <nav className={cn(s.navbar, { [s.navbar_open]: burgerIsOpen })}>
+    <nav className={cn(s.navbar, { [s.navbar_open]: burgerIsOpen, [s.show]: showBurger })}>
       <ul className={s.nav_items}>
         <button className={s.burger_btn} onClick={() => setBurgerIsOpen(!burgerIsOpen)}>
           <BsIndent className={`${s.icon} ${s.burger_icon}`} />

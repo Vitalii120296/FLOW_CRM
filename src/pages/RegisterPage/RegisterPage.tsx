@@ -1,10 +1,19 @@
 import { useState } from 'react'
+import { Link } from 'react-router'
+
 import s from './RegisterPage.module.scss'
 import cn from 'classnames'
-import { Link } from 'react-router'
-import type { FormData } from '../../types'
+import { FaEye, FaEyeSlash } from 'react-icons/fa'
+
 import { useAuthValidate } from '../../shared/hooks/useAuthValidate'
+import type { FormData } from '../../types'
+
 export const RegisterPage = () => {
+  const [touched, setTouched] = useState<Partial<Record<keyof FormData, boolean>>>({})
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [isPasswordVisible, setIsPasswordVisible] = useState(false)
+  const [isConfirmPasswordVisible, setIsConfirmPasswordVisible] = useState(false)
+
   const [formData, setFormData] = useState<FormData>({
     name: '',
     email: '',
@@ -13,9 +22,6 @@ export const RegisterPage = () => {
   })
 
   const { errors, validate } = useAuthValidate(formData)
-
-  const [touched, setTouched] = useState<Partial<Record<keyof FormData, boolean>>>({})
-  const [isSubmitting, setIsSubmitting] = useState(false)
 
   const handleBlock = (e: React.ClipboardEvent<HTMLInputElement>) => {
     e.preventDefault()
@@ -114,7 +120,7 @@ export const RegisterPage = () => {
             <label htmlFor="password">Password</label>
             <input
               id="password"
-              type="password"
+              type={isPasswordVisible ? 'text' : 'password'}
               value={formData.password}
               onChange={(e) => handleChange('password', e.target.value)}
               onFocus={() => handleTouch('password')}
@@ -126,6 +132,13 @@ export const RegisterPage = () => {
                 [s.successInput]: touched.password && !errors.password,
               })}
             />
+            <button
+              type="button"
+              className={s.togglePassword}
+              onClick={() => setIsPasswordVisible((prev) => !prev)}
+            >
+              {isPasswordVisible ? <FaEyeSlash /> : <FaEye />}
+            </button>
           </div>
           {touched.password && errors.password && (
             <span className={s.errorText}>{errors.password}</span>
@@ -142,7 +155,7 @@ export const RegisterPage = () => {
             <label htmlFor="confirmPassword">Confirm password</label>
             <input
               id="confirmPassword"
-              type="password"
+              type={isConfirmPasswordVisible ? 'text' : 'password'}
               value={formData.confirmPassword}
               onChange={(e) => handleChange('confirmPassword', e.target.value)}
               onFocus={() => handleTouch('confirmPassword')}
@@ -154,6 +167,13 @@ export const RegisterPage = () => {
                 [s.successInput]: touched.confirmPassword && !errors.confirmPassword,
               })}
             />
+            <button
+              type="button"
+              className={s.togglePassword}
+              onClick={() => setIsConfirmPasswordVisible((prev) => !prev)}
+            >
+              {isConfirmPasswordVisible ? <FaEyeSlash /> : <FaEye />}
+            </button>
           </div>
 
           {touched.confirmPassword && errors.confirmPassword && (

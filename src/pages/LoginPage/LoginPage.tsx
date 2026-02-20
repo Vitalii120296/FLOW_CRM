@@ -1,6 +1,9 @@
 import { useState } from 'react'
+
 import s from './LoginPage.module.scss'
 import cn from 'classnames'
+import { FaEye, FaEyeSlash } from 'react-icons/fa'
+
 import { Link } from 'react-router'
 import { useAuthValidate } from '../../shared/hooks/useAuthValidate'
 
@@ -18,6 +21,7 @@ export const LoginPage = () => {
   const [touched, setTouched] = useState<Partial<Record<keyof LoginForm, boolean>>>({})
   const [isSubmitting, setIsSubmitting] = useState(false)
   const { errors, validate } = useAuthValidate<LoginForm>(formData)
+  const [isPasswordVisible, setIsPasswordVisible] = useState(false)
 
   const handleChange = (field: keyof LoginForm, value: string) => {
     setFormData((prev) => ({ ...prev, [field]: value }))
@@ -87,7 +91,7 @@ export const LoginPage = () => {
             <label htmlFor="password">Password</label>
             <input
               id="password"
-              type="password"
+              type={isPasswordVisible ? 'text' : 'password'}
               value={formData.password}
               onChange={(e) => handleChange('password', e.target.value)}
               onFocus={() => handleTouch('password')}
@@ -96,6 +100,13 @@ export const LoginPage = () => {
                 [s.successInput]: touched.password && !errors.password,
               })}
             />
+            <button
+              type="button"
+              className={s.togglePassword}
+              onClick={() => setIsPasswordVisible((prev) => !prev)}
+            >
+              {isPasswordVisible ? <FaEyeSlash /> : <FaEye />}
+            </button>
           </div>
 
           {touched.password && errors.password && (
