@@ -8,7 +8,7 @@ export const PropertiesPage = () => {
   return (
     <div className="page-container">
       <div className={styles.titleContainer}>
-        <h1 className={cn('h2', styles.title)}>Properties</h1>
+        <h1 className={cn('h3', styles.title)}>Properties</h1>
         <BsBuilding className={styles.icon} />
       </div>
 

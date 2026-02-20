@@ -60,10 +60,30 @@ export const Footer = () => {
           <div className={styles.navBlock}>
             <p className={styles.navTitle}>Navigation</p>
             <nav className={styles.navLinks}>
-              <Link to="/">Kanban</Link>
-              <Link to="/clients">Clients</Link>
-              <Link to="/profile">Profile</Link>
-              <Link to="/products">Products</Link>
+              <Link
+                to="/crm"
+                onClick={() => {
+                  window.scrollTo({ top: 0, behavior: 'smooth' })
+                }}
+              >
+                Kanban
+              </Link>
+              <Link
+                to="/crm/clients"
+                onClick={() => {
+                  window.scrollTo({ top: 0, behavior: 'smooth' })
+                }}
+              >
+                Clients
+              </Link>
+              <Link
+                to="/crm/products"
+                onClick={() => {
+                  window.scrollTo({ top: 0, behavior: 'smooth' })
+                }}
+              >
+                Products
+              </Link>
             </nav>
           </div>
         </div>
@@ -75,7 +95,7 @@ export const Footer = () => {
 
           <div className={styles.privacyLink}>
             <Link
-              to="/"
+              to="/crm"
               onClick={() => {
                 window.scrollTo({ top: 0, behavior: 'smooth' })
               }}
@@ -83,7 +103,7 @@ export const Footer = () => {
               Privacy
             </Link>
             <Link
-              to="/"
+              to="/crm"
               onClick={() => {
                 window.scrollTo({ top: 0, behavior: 'smooth' })
               }}
