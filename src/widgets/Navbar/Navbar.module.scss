@@ -10,15 +10,25 @@
   box-sizing: border-box;
   position: absolute;
   top: 0;
-  left: 0;
-  transition: width 0.3s ease;
+  left: -60px;
+  transition:
+    width 0.3s ease,
+    transform 0.3s ease;
   overflow: hidden;
   z-index: 9;
+
+  &.show {
+    transform: translateX(60px);
+  }
 
   box-shadow:
     4px 0 10px $bgc,
     4px 0 15px $bgc,
     8px 0 25px $bgc;
+
+  @include on-tablet {
+    left: 0;
+  }
 
   @include on-desktop {
     width: 225px;

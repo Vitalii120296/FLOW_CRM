@@ -4,8 +4,7 @@ import { BiSolidError } from 'react-icons/bi'
 import styles from './UsersCreate.module.scss'
 import cn from 'classnames'
 
-import { FaEye } from 'react-icons/fa'
-import { FaEyeSlash } from 'react-icons/fa'
+import { FaEye, FaEyeSlash } from 'react-icons/fa'
 
 import { validateService } from '../../services/validateServices'
 import { getValidationErrorMessage } from '../../types/validationMessages'
