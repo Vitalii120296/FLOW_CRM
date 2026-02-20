@@ -127,6 +127,8 @@
   border-radius: 0.5rem;
   min-height: 35px;
   padding-top: 20px;
+  overflow-x: hidden;
+  text-wrap: wrap;
 }
 
 label {
