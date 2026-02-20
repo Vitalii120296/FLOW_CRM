@@ -64,6 +64,21 @@
   &__profile {
     display: flex;
     align-items: center;
+    gap: 20px;
+
+    &_burger {
+      display: grid;
+      align-items: center;
+      padding: 3px;
+      font-size: 25px;
+      background-color: transparent;
+      color: $primary;
+      border: none;
+
+      @include on-tablet {
+        display: none;
+      }
+    }
   }
 
   &__profileWrapper {

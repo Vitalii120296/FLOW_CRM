@@ -1,9 +1,13 @@
 import { Link } from 'react-router-dom'
-import { BsCaretDownFill } from 'react-icons/bs'
+import { BsCaretDownFill, BsJustify } from 'react-icons/bs'
 import Avatar from '/public/icons/avatar.png'
 import styles from './Header.module.scss'
 
-export const Header = () => {
+type Props = {
+  setShowBurger: React.Dispatch<React.SetStateAction<boolean>>
+}
+
+export const Header: React.FC<Props> = ({ setShowBurger }) => {
   return (
     <>
       <header className={styles.header}>
@@ -34,6 +38,12 @@ export const Header = () => {
                 </div>
               </div>
             </Link>
+            <button
+              className={styles.header__profile_burger}
+              onClick={() => setShowBurger((prev) => !prev)}
+            >
+              <BsJustify />
+            </button>
           </div>
         </div>
       </header>

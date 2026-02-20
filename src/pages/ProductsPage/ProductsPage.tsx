@@ -72,7 +72,6 @@ export const ProductsPage = () => {
       </div>
       {loading && <Loader />}
       <ul className={s.products_list}>
-        {/* <AnimatePresence mode="wait"> */}
         {!showTrash
           ? products.map((item, index) => (
               <li key={item.id} className={s.products_item}>
@@ -97,7 +96,6 @@ export const ProductsPage = () => {
                 />
               </li>
             ))}
-        {/* </AnimatePresence> */}
       </ul>
     </section>
   )
