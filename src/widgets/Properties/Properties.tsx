@@ -130,7 +130,7 @@ export const Properties = () => {
               className={stylesHead.titleInput}
             />
           ) : (
-            <h1 className={cn('h2', stylesHead.title)} onClick={startEditTitle}>
+            <h1 className={cn('h3', stylesHead.title)} onClick={startEditTitle}>
               {businessInfo.name || 'Add business name'}
               <span className={stylesHead.editHint}>Edit</span>
             </h1>
@@ -145,7 +145,7 @@ export const Properties = () => {
         </div>
 
         <div className={stylesHead.logoBlock}>
-          {!businessInfo.logo.url && <p className={cn('h4', stylesHead.label)}>Company logo</p>}
+          {!businessInfo.logo.url && <p className={cn('h6', stylesHead.label)}>Company logo</p>}
 
           {businessInfo.logo.url ? (
             <div className={stylesHead.logoPreview}>
@@ -182,7 +182,7 @@ export const Properties = () => {
       <div className={stylesBody.wrapper}>
         <div className={stylesBody.form}>
           <div className={stylesBody.field}>
-            <label className={cn('h3', stylesBody.labelText)} htmlFor="description">
+            <label className={cn('h4', stylesBody.labelText)} htmlFor="description">
               Description
             </label>
             <input
@@ -204,7 +204,7 @@ export const Properties = () => {
           )}
 
           <div className={stylesBody.field}>
-            <label className={cn('h3', stylesBody.labelText)} htmlFor="type">
+            <label className={cn('h4', stylesBody.labelText)} htmlFor="type">
               Business Type
             </label>
             <input
@@ -226,7 +226,7 @@ export const Properties = () => {
           )}
 
           <div className={stylesBody.field}>
-            <label className={cn('h3', stylesBody.labelText)} htmlFor="email">
+            <label className={cn('h4', stylesBody.labelText)} htmlFor="email">
               Email
             </label>
             <input
@@ -248,7 +248,7 @@ export const Properties = () => {
           )}
 
           <div className={stylesBody.field}>
-            <label className={cn('h3', stylesBody.labelText)} htmlFor="phone">
+            <label className={cn('h4', stylesBody.labelText)} htmlFor="phone">
               Phone Number
             </label>
             <input
