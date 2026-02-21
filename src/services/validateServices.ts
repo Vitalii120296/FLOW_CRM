@@ -2,7 +2,7 @@ import { ValidationErrorType, type ValidationError } from '../types/ValidationEr
 
 //#region PATTERN
 const EMAIL_PATTERN = /^[\w.+-]+@([\w-]+\.){1,3}[\w-]{2,}$/
-const PHONE_PATTERN = /^\+?\d{10,15}$/
+const PHONE_PATTERN = /^\+[1-9]\d{9,14}$/
 const NAME_PATTERN = /^[A-Za-z\s'-]+$/
 const PASSWORD_PATTERN =
   /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9!@#$%^&*(),.?":{}|<>_\-\\[\]\\/+=~`]).{8,50}$/
