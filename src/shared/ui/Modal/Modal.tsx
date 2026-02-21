@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import s from './Modal.module.scss'
 import { CloseButton } from '../CloseButton/CloseButton'
 import cn from 'classnames'
-import { motion, AnimatePresence } from 'framer-motion'
+import { motion } from 'framer-motion'
 
 type Props = {
   isOpen: boolean
