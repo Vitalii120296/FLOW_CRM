@@ -394,9 +394,7 @@ export const StartPage = () => {
                 <GrUserManager className={s.advantagesIcon} />
               </div>
               <h1>Manager management</h1>
-              <p>
-                Assign roles, monitor activity, and manage your team effectively from one place.
-              </p>
+              <p>Assign roles and organize your team efficiently from one place.</p>
             </motion.div>
 
             <motion.div
