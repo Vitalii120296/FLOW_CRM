@@ -25,6 +25,9 @@
   gap: 8px;
   color: $info;
 
+  text-align: start;
+  // font-size: 16px;
+
   &:hover .editHint {
     opacity: 1;
   }

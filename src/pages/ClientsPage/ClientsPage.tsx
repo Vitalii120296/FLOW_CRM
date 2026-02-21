@@ -7,6 +7,8 @@ import { ClientsTable } from '../../widgets/ClientsTable/ClientsTable'
 import { getClientsTestApi } from '../../shared/api/clients.test-api'
 import { Loader } from '../../app/Components/Loader/Loader'
 
+import s from './ClientsPage.module.scss'
+
 export const ClientsPage = () => {
   const [clients, setClients] = useState<Client[]>([])
   const [searchParams, setSearchParams] = useSearchParams()
@@ -39,8 +41,10 @@ export const ClientsPage = () => {
   // NOTE використовуємо page-container клас для сторінки (у міксинах є стилі для нього)
   return (
     <div className="page-container">
-      <ClientsFilter filters={filters} onChange={setSearchParams} />
-      {loading ? <Loader /> : <ClientsTable setClients={setClients} clients={filteredClients} />}
+      <div className={s.wrapper}>
+        <ClientsFilter filters={filters} onChange={setSearchParams} />
+        {loading ? <Loader /> : <ClientsTable setClients={setClients} clients={filteredClients} />}
+      </div>
     </div>
   )
 }

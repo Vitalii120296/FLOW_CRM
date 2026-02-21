@@ -1,7 +1,8 @@
 @use '@styles/index' as *;
 
 .wrapper {
-  width: 100%;
+  width: calc(100% - 10px);
+
   max-width: 100%;
   background: $bgBlock;
   border-radius: 12px;

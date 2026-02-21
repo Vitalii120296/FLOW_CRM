@@ -94,7 +94,7 @@ export const UsersCreate: React.FC<UsersCreateProps> = ({ onAddUser }) => {
 
   return (
     <div className={styles.wrapper}>
-      <h1 className={cn('h3', styles.title)}>Create User</h1>
+      <h1 className={cn('h3', styles.title)}>Add User</h1>
       <form onSubmit={handleSubmit} className={styles.content}>
         <input
           placeholder="Email"
@@ -135,12 +135,12 @@ export const UsersCreate: React.FC<UsersCreateProps> = ({ onAddUser }) => {
         )}
 
         <button type="submit" className={styles.create}>
-          Create user
+          Send request
         </button>
 
         {isSuccess && (
           <div className={styles.sucessContainer}>
-            <p className={styles.successText}>User created ✅ {countdown}</p>
+            <p className={styles.successText}>Request sent ✅ {countdown}</p>
           </div>
         )}
       </form>

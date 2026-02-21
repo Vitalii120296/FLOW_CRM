@@ -22,7 +22,7 @@ export const Header: React.FC<Props> = ({ setShowBurger }) => {
           </Link>
 
           <div className={styles.header__profile}>
-            <Link to="/profile" className={styles.header__profileWrapper}>
+            <Link to="/crm/profile" className={styles.header__profileWrapper}>
               <div className={styles.header__profileAvatar}>
                 <img src={Avatar} alt="Avatar" />
               </div>

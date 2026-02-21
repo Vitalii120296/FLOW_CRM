@@ -433,14 +433,20 @@ export const StartPage = () => {
       <footer className={s.footer}>
         <div className={s.contentContainer}>
           <div className={s.footerContent}>
-            <div className={s.logoBlock}>
+            <Link
+              to="/"
+              className={s.logoBlock}
+              onClick={() => {
+                window.scrollTo({ top: 0, behavior: 'smooth' })
+              }}
+            >
               <div className={s.flow}>FLOW</div>
               <div className={s.crm}>
                 <span style={{ color: '#a9dfd8' }}>C</span>
                 <span style={{ color: '#f2c8ed' }}>R</span>
                 <span style={{ color: '#f2994a' }}>M</span>
               </div>
-            </div>
+            </Link>
 
             <div className={s.createdBy}>
               <a

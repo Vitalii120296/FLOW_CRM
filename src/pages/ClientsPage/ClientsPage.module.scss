@@ -1,8 +1,7 @@
-.clients-page {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
+@use '@styles/index' as *;
 
-  overflow-y: auto;
-  -webkit-overflow-scrolling: touch;
+.wrapper {
+  @include on-desktop {
+    padding-inline: 16px;
+  }
 }
