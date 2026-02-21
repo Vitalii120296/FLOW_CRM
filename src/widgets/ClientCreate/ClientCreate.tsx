@@ -19,13 +19,6 @@ type FormData = {
   comment: string
 }
 
-// type FormErrors = {
-//   name?: ValidationError
-//   email?: ValidationError
-//   phone?: ValidationError
-//   comment?: ValidationError
-// }
-
 export const ClientCreate: React.FC<Props> = ({ isOpen, onClose }) => {
   const [formData, setFormData] = useState<FormData>({
     fullName: '',
@@ -153,7 +146,7 @@ export const ClientCreate: React.FC<Props> = ({ isOpen, onClose }) => {
         )}
 
         <div className={styles.actions}>
-          <button className={styles.create_client} type="submit">
+          <button className={styles.create_client} type="submit" disabled={isSubmitting}>
             Create
           </button>
           <button className={styles.cancel} type="button" onClick={onClose}>
