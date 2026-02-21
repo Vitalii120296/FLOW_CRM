@@ -2,8 +2,9 @@
 
 /* ==== WRAPPER ==== */
 .wrapper {
-  width: calc(100vw - 100px);
-  max-width: 100%;
+  // width: calc(100% - 200px);
+  // width: auto;
+  // max-width: 100%;
   box-sizing: border-box;
 
   background: $bgBlock;
@@ -15,7 +16,7 @@
   overflow-y: hidden;
 
   @include on-tablet {
-    width: auto;
+    // width: auto;
   }
 
   @include scroll-bar;
@@ -24,6 +25,9 @@
 /* ==== Tablet==== */
 
 .table {
+  width: 100%;
+  border-collapse: collapse;
+
   th,
   td {
     padding: 12px 16px;

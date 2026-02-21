@@ -53,6 +53,7 @@
   gap: 10px;
   position: relative; // для псевдоелементів
   text-decoration: none;
+  cursor: pointer;
 
   &::before,
   &::after {
