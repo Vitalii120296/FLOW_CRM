@@ -1,4 +1,9 @@
 @use '@styles/index' as *;
+.product_wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
 
 .products_list {
   display: grid;
