@@ -1,4 +1,4 @@
-import { validateEmail, validateName, validatePassword } from '../../services/validateServices'
+import { validateService } from '../../services/validateServices'
 import { ValidationErrorType } from '../../types/ValidationErrorType'
 import { useState } from 'react'
 
@@ -9,8 +9,8 @@ export const useAuthValidate = <T extends Record<string, string>>(formData: T) =
     let errorMessage = ''
 
     if (field === 'name') {
-      const error = validateName(value)
-      if (error) {
+      const error = validateService.validateName(value)
+      if (error && value.length > 0) {
         if (error.type === ValidationErrorType.REQUIRED) {
           errorMessage = '* Name is required'
         } else if (error.type === ValidationErrorType.INVALID) {
@@ -24,8 +24,8 @@ export const useAuthValidate = <T extends Record<string, string>>(formData: T) =
     }
 
     if (field === 'email') {
-      const error = validateEmail(value)
-      if (error) {
+      const error = validateService.validateEmail(value)
+      if (error && value.length > 0) {
         if (error.type === ValidationErrorType.REQUIRED) {
           errorMessage = '* Email is required'
         } else if (error.type === ValidationErrorType.INVALID) {
@@ -35,8 +35,8 @@ export const useAuthValidate = <T extends Record<string, string>>(formData: T) =
     }
 
     if (field === 'password') {
-      const error = validatePassword(value)
-      if (error) {
+      const error = validateService.validatePassword(value)
+      if (error && value.length > 0) {
         if (error.type === ValidationErrorType.REQUIRED) {
           errorMessage = '* Password is required'
         } else if (error.type === ValidationErrorType.MIN_LENGTH) {
@@ -50,12 +50,13 @@ export const useAuthValidate = <T extends Record<string, string>>(formData: T) =
       }
     }
 
-    if (field === 'confirmPassword' && value !== formData.password) {
+    if (field === 'confirmPassword' && value !== formData.password && value.length > 0) {
       errorMessage = '* Passwords do not match'
     }
 
     setErrors((prev) => ({ ...prev, [field]: errorMessage }))
   }
+  const hasErrors = Object.values(errors).some(Boolean)
 
-  return { errors, validate }
+  return { hasErrors, errors, validate }
 }

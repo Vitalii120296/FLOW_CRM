@@ -21,7 +21,7 @@ export const RegisterPage = () => {
     confirmPassword: '',
   })
 
-  const { errors, validate } = useAuthValidate(formData)
+  const { hasErrors, errors, validate } = useAuthValidate(formData)
 
   const handleBlock = (e: React.ClipboardEvent<HTMLInputElement>) => {
     e.preventDefault()
@@ -58,6 +58,9 @@ export const RegisterPage = () => {
     }, 1000)
   }
 
+  const isSuccesInput = (value: keyof FormData) =>
+    touched[value] && !errors[value] && formData[value].length > 0 ? true : false
+
   return (
     <section className={cn('container', s.section_aperance)}>
       <h1 className="h1">Register</h1>
@@ -74,12 +77,13 @@ export const RegisterPage = () => {
             <input
               id="name"
               type="text"
+              required
               value={formData.name}
               onFocus={() => handleTouch('name')}
               onChange={(e) => handleChange('name', e.target.value)}
               className={cn({
                 [s.errorInput]: touched.name && errors.name,
-                [s.successInput]: touched.name && !errors.name,
+                [s.successInput]: isSuccesInput('name'),
               })}
             />
           </div>
@@ -98,12 +102,13 @@ export const RegisterPage = () => {
             <input
               id="email"
               type="email"
+              required
               value={formData.email}
               onChange={(e) => handleChange('email', e.target.value)}
               onFocus={() => handleTouch('email')}
               className={cn({
                 [s.errorInput]: touched.email && errors.email,
-                [s.successInput]: touched.email && !errors.email,
+                [s.successInput]: isSuccesInput('email'),
               })}
             />
           </div>
@@ -119,6 +124,7 @@ export const RegisterPage = () => {
           >
             <label htmlFor="password">Password</label>
             <input
+              required
               id="password"
               type={isPasswordVisible ? 'text' : 'password'}
               value={formData.password}
@@ -129,7 +135,7 @@ export const RegisterPage = () => {
               onPasteCapture={handleBlock}
               className={cn({
                 [s.errorInput]: touched.password && errors.password,
-                [s.successInput]: touched.password && !errors.password,
+                [s.successInput]: isSuccesInput('password'),
               })}
             />
             <button
@@ -155,6 +161,7 @@ export const RegisterPage = () => {
             <label htmlFor="confirmPassword">Confirm password</label>
             <input
               id="confirmPassword"
+              required
               type={isConfirmPasswordVisible ? 'text' : 'password'}
               value={formData.confirmPassword}
               onChange={(e) => handleChange('confirmPassword', e.target.value)}
@@ -164,7 +171,7 @@ export const RegisterPage = () => {
               onPasteCapture={handleBlock}
               className={cn({
                 [s.errorInput]: touched.confirmPassword && errors.confirmPassword,
-                [s.successInput]: touched.confirmPassword && !errors.confirmPassword,
+                [s.successInput]: isSuccesInput('confirmPassword'),
               })}
             />
             <button
@@ -181,7 +188,7 @@ export const RegisterPage = () => {
           )}
         </div>
 
-        <button type="submit" disabled={isSubmitting} className={s.submit}>
+        <button type="submit" disabled={isSubmitting || hasErrors} className={s.submit}>
           {isSubmitting ? 'Registering...' : 'Register'}
         </button>
       </form>

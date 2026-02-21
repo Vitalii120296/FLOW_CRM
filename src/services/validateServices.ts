@@ -6,6 +6,7 @@ const PHONE_PATTERN = /^\+[1-9]\d{9,14}$/
 const NAME_PATTERN = /^[A-Za-z\s'-]+$/
 const PASSWORD_PATTERN =
   /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9!@#$%^&*(),.?":{}|<>_\-\\[\]\\/+=~`]).{8,50}$/
+const PRICE_PATTERN = /^(?!0+(\.0{1,2})?$)\d+(\.\d{1,2})?$/
 
 function normalizePhone(value: string): string {
   return value.replace(/[^\d+]/g, '')
@@ -16,7 +17,7 @@ function normalizePhone(value: string): string {
 function validateLength(
   value: string,
   options: { min?: number; max?: number }
-): ValidationError | undefined {
+): ValidationError | null {
   if (options.min !== undefined && value.length < options.min) {
     return { type: ValidationErrorType.MIN_LENGTH, min: options.min }
   }
@@ -25,13 +26,13 @@ function validateLength(
     return { type: ValidationErrorType.MAX_LENGTH, max: options.max }
   }
 
-  return undefined
+  return null
 }
 //#endregion
 
 //#region NAME
 
-export function validateName(value: string): ValidationError | undefined {
+export function validateName(value: string): ValidationError | null {
   if (!value.trim()) {
     return { type: ValidationErrorType.REQUIRED }
   }
@@ -120,6 +121,58 @@ export function validateComment(value: string): ValidationError | null {
 }
 //#endregion
 
+//#region Title
+
+export function validateProductTitle(value: string): ValidationError | null {
+  if (!value.trim()) {
+    return { type: ValidationErrorType.REQUIRED }
+  }
+
+  if (value.length < 2) {
+    return {
+      type: ValidationErrorType.MIN_LENGTH,
+      min: 2,
+    }
+  }
+
+  if (value.length > 100) {
+    return {
+      type: ValidationErrorType.MAX_LENGTH,
+      max: 100,
+    }
+  }
+
+  return null
+}
+//#endregion
+//#region Price
+
+export function validateProductPrice(value: string): ValidationError | null {
+  if (!value.trim()) {
+    return { type: ValidationErrorType.REQUIRED }
+  }
+
+  if (!PRICE_PATTERN.test(value)) {
+    return { type: ValidationErrorType.INVALID }
+  }
+
+  return null
+}
+//#endregion
+//#region Description
+
+export function validateProductDescription(value: string): ValidationError | null {
+  if (value.length > 100) {
+    return {
+      type: ValidationErrorType.MAX_LENGTH,
+      max: 100,
+    }
+  }
+
+  return null
+}
+//#endregion
+
 //#region PUBLIC API
 
 export const validateService = {
@@ -128,5 +181,8 @@ export const validateService = {
   validatePhone,
   validateComment,
   validatePassword,
+  validateProductTitle,
+  validateProductPrice,
+  validateProductDescription,
 }
 //#endregion

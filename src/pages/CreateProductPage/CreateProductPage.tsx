@@ -1,7 +1,12 @@
 import { useState } from 'react'
+
 import s from './CreateProductPage.module.scss'
+import cn from 'classnames'
+import { BiSolidError } from 'react-icons/bi'
+
 import type { Product } from '../../types/product'
 import { ProductCard } from '../../app/Components/ProductCard/ProductCard'
+import { useProductValidate } from '../../shared/hooks/useProductValidate'
 
 const emptyProduct: Product = {
   id: '',
@@ -15,14 +20,21 @@ const emptyProduct: Product = {
 export const CreateProductPage: React.FC = () => {
   const [product, setProduct] = useState<Product>(emptyProduct)
   const [loading, setLoading] = useState(false)
+  const [touched, setTouched] = useState<Partial<Record<keyof Product, boolean>>>({})
+  const { hasErrors, errors, validate } = useProductValidate()
 
   // обробка зміни текстових полів
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value } = e.target
+  const handleChange = (field: keyof Product, value: string) => {
     setProduct((prev) => ({
       ...prev,
-      [name]: value,
+      [field]: value,
     }))
+    validate(field, value)
+  }
+
+  const handleTouch = (field: keyof Omit<Product, 'file'>) => {
+    setTouched((prev) => ({ ...prev, [field]: true }))
+    validate(field, product[field])
   }
 
   // обробка вибору файлу
@@ -69,6 +81,9 @@ export const CreateProductPage: React.FC = () => {
     }
   }
 
+  const isSuccesInput = (value: keyof Omit<Product, 'file'>) =>
+    touched[value] && !errors[value] && product[value].length > 0 ? true : false
+
   return (
     <div className="page-container">
       <div className={s.create_product__wrapper}>
@@ -83,29 +98,67 @@ export const CreateProductPage: React.FC = () => {
           </div>
 
           <input
+            required
             name="title"
             placeholder="Product title"
             value={product.title}
-            onChange={handleChange}
-            required
+            onFocus={() => handleTouch('title')}
+            onChange={(e) => handleChange('title', e.target.value)}
+            className={cn({
+              ['errorInput']: touched.title && errors.title,
+              ['successInput']: isSuccesInput('title'),
+            })}
           />
+          {errors.title && (
+            <div className="errorContainer">
+              <BiSolidError className="errorIcon" />
+
+              <p className="errorText">{errors.title}</p>
+            </div>
+          )}
 
           <input
+            required
             name="price"
             placeholder="Price"
             value={product.price || ''}
-            onChange={handleChange}
-            required
+            onFocus={() => handleTouch('price')}
+            onChange={(e) => handleChange('price', e.target.value)}
+            className={cn({
+              ['errorInput']: touched.price && errors.price,
+              ['successInput']: isSuccesInput('price'),
+            })}
           />
+
+          {errors.price && (
+            <div className="errorContainer">
+              <BiSolidError className="errorIcon" />
+
+              <p className="errorText">{errors.price}</p>
+            </div>
+          )}
 
           <textarea
             name="description"
             placeholder="Description"
             value={product.description}
-            onChange={handleChange}
+            onFocus={() => handleTouch('description')}
+            onChange={(e) => handleChange('description', e.target.value)}
+            className={cn({
+              ['errorInput']: touched.description && errors.description,
+              ['successInput']: isSuccesInput('description'),
+            })}
           />
 
-          <button type="submit" disabled={loading}>
+          {errors.description && (
+            <div className="errorContainer">
+              <BiSolidError className="errorIcon" />
+
+              <p className="errorText">{errors.description}</p>
+            </div>
+          )}
+
+          <button type="submit" disabled={loading || hasErrors}>
             {loading ? 'Creating...' : 'Create product'}
           </button>
         </form>

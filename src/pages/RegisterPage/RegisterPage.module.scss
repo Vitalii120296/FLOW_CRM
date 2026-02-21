@@ -80,11 +80,12 @@
 
 .login_link {
   display: flex;
+  justify-content: space-between;
   max-width: 400px;
   width: 100%;
-  justify-content: space-around;
   color: $primary;
   font-size: 14px;
+  gap: 10px;
 }
 
 .togglePassword {
