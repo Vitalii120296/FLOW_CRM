@@ -1,7 +1,8 @@
 import { useState } from 'react'
 import { Modal } from '../../../shared/ui/Modal/Modal'
-import type { Product } from '../../../types/product'
 import s from './EditProductCard.module.scss'
+
+import type { Product } from '../../../types/product'
 
 type Props = {
   isOpen: boolean
@@ -10,7 +11,7 @@ type Props = {
   exit: () => void
 }
 
-export const EditProductCard: React.FC<Props> = ({ product, saveProduct, exit }) => {
+export const EditProductCard: React.FC<Props> = ({ isOpen, product, saveProduct, exit }) => {
   const [editProduct, setEditProduct] = useState<Product>({ ...product })
   const [loading, setLoading] = useState(false)
 
@@ -65,12 +66,7 @@ export const EditProductCard: React.FC<Props> = ({ product, saveProduct, exit })
 
   return (
     <>
-      <Modal
-        isOpen={Boolean(product)}
-        onClose={exit}
-        title={'Edit product card'}
-        titleId={'edit_product'}
-      >
+      <Modal isOpen={isOpen} onClose={exit} title="Edit product card" titleId="edit_product">
         <form className={s.product_card} onSubmit={handleSubmit}>
           <div className={s.product_image}>
             <img src={editProduct.image} alt={editProduct.title} />
