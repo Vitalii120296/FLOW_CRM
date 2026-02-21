@@ -1,150 +1,156 @@
 import React, { useState } from 'react'
 import { Modal } from '../../shared/ui/Modal/Modal'
 
-import { getValidationErrorMessage } from '../../types/validationMessages'
-import { validateService } from '../../services/validateServices'
-import type { ValidationError } from '../../types/ValidationErrorType'
+import cn from 'classnames'
 
 import styles from './ClientCreate.module.scss'
 import { BiSolidError } from 'react-icons/bi'
+import { useClientValidate } from '../../shared/hooks/useClientValidate'
 
 type Props = {
   onClose: () => void
   isOpen: boolean
 }
 
-type FormErrors = {
-  name?: ValidationError
-  email?: ValidationError
-  phone?: ValidationError
-  comment?: ValidationError
+type FormData = {
+  fullName: string
+  email: string
+  phone: string
+  comment: string
 }
 
 export const ClientCreate: React.FC<Props> = ({ isOpen, onClose }) => {
-  const [name, setName] = useState('')
-  const [email, setEmail] = useState('')
-  const [phone, setPhone] = useState('')
-  const [comment, setComment] = useState('')
+  const [formData, setFormData] = useState<FormData>({
+    fullName: '',
+    email: '',
+    phone: '',
+    comment: '',
+  })
+  const [touched, setTouched] = useState<Partial<Record<keyof FormData, boolean>>>({})
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const { errors, validate } = useClientValidate()
 
-  const [errors, setErrors] = useState<FormErrors>({})
+  const handleChange = (field: keyof FormData, value: string) => {
+    setFormData((prev) => ({ ...prev, [field]: value }))
+    validate(field, value)
+  }
+
+  const handleTouch = (field: keyof FormData) => {
+    setTouched((prev) => ({ ...prev, [field]: true }))
+    validate(field, formData[field])
+  }
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
 
-    const newErrors: FormErrors = {}
+    // перевірка всіх полів перед сабмітом
+    Object.entries(formData).forEach(([key, value]) => {
+      validate(key as keyof FormData, value)
+    })
 
-    // name
-    const nameError = validateService.validateName(name)
-    if (nameError) {
-      newErrors.name = nameError
-    }
+    const hasErrors = Object.values(errors).some(Boolean)
+    if (hasErrors) return
 
-    // email
-    const emailError = validateService.validateEmail(email)
-    if (emailError) {
-      newErrors.email = emailError
-    }
+    setIsSubmitting(true)
 
-    // phone
-    const phoneError = validateService.validatePhone(phone)
-    if (phoneError) {
-      newErrors.phone = phoneError
-    }
+    // тут буде API запит
+    console.log('Form submitted:', formData)
 
-    // comment
-    const commentError = validateService.validateComment(comment)
-    if (commentError) {
-      newErrors.comment = commentError
-    }
+    setTimeout(() => {
+      setIsSubmitting(false)
+    }, 1000)
 
-    if (Object.keys(newErrors).length > 0) {
-      setErrors(newErrors)
-      return
-    }
-
-    const payload = { name, email, phone, comment }
-    console.log('Create client:', payload)
+    console.log('Create client:', formData)
 
     onClose()
   }
-
-  const handleChange =
-    (field: keyof FormErrors, setter: (value: string) => void) =>
-    (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-      setter(e.target.value)
-      setErrors((prev) => ({ ...prev, [field]: undefined }))
-    }
 
   return (
     <Modal isOpen={isOpen} onClose={onClose} titleId="client-title" title="Create client">
       <form onSubmit={handleSubmit} className={styles.content}>
         <input
-          placeholder="Full Name"
-          value={name}
-          onChange={handleChange('name', setName)}
-          className={errors.name ? 'errorInput' : ''}
+          placeholder="Full name"
+          value={formData.fullName}
+          onFocus={() => handleTouch('fullName')}
+          onChange={(e) => handleChange('fullName', e.target.value)}
+          className={cn({
+            ['errorInput']: touched.fullName && errors.fullName,
+            ['successInput']: touched.fullName && !errors.fullName,
+          })}
         />
 
-        {errors.name && (
+        {errors.fullName && (
           <div className="errorContainer">
             <BiSolidError className="errorIcon" />
 
-            <p className="errorText">{getValidationErrorMessage(errors.name)}</p>
+            <p className="errorText">{errors.fullName}</p>
           </div>
         )}
 
         <input
           placeholder="Email"
-          // type="email"
-          value={email}
-          onChange={handleChange('email', setEmail)}
-          className={errors.email ? 'errorInput' : ''}
+          type="email"
+          value={formData.email}
+          onFocus={() => handleTouch('email')}
+          onChange={(e) => handleChange('email', e.target.value)}
+          className={cn({
+            ['errorInput']: touched.email && errors.email,
+            ['successInput']: touched.email && !errors.email,
+          })}
         />
 
         {errors.email && (
           <div className="errorContainer">
             <BiSolidError className="errorIcon" />
 
-            <p className="errorText">{getValidationErrorMessage(errors.email)}</p>
+            <p className="errorText">{errors.email}</p>
           </div>
         )}
 
         <input
           placeholder="Phone"
-          value={phone}
-          onChange={handleChange('phone', setPhone)}
-          className={errors.phone ? 'errorInput' : ''}
+          value={formData.phone}
+          onFocus={() => handleTouch('phone')}
+          onChange={(e) => handleChange('phone', e.target.value)}
+          className={cn({
+            ['errorInput']: touched.phone && errors.phone,
+            ['successInput']: touched.phone && !errors.phone,
+          })}
         />
 
         {errors.phone && (
           <div className="errorContainer">
             <BiSolidError className="errorIcon" />
 
-            <p className="errorText">{getValidationErrorMessage(errors.phone)}</p>
+            <p className="errorText">{errors.phone}</p>
           </div>
         )}
 
         <textarea
           placeholder="Comment"
-          value={comment}
-          onChange={handleChange('comment', setComment)}
-          className={errors.comment ? 'errorInput' : ''}
+          value={formData.comment}
+          onFocus={() => handleTouch('comment')}
+          onChange={(e) => handleChange('comment', e.target.value)}
+          className={cn({
+            ['errorInput']: touched.comment && errors.comment,
+            ['successInput']: touched.comment && !errors.comment,
+          })}
         />
 
         {errors.comment && (
           <div className="errorContainer">
             <BiSolidError className="errorIcon" />
 
-            <p className="errorText">{getValidationErrorMessage(errors.comment)}</p>
+            <p className="errorText">{errors.comment}</p>
           </div>
         )}
 
         <div className={styles.actions}>
+          <button className={styles.create_client} type="submit" disabled={isSubmitting}>
+            Create
+          </button>
           <button className={styles.cancel} type="button" onClick={onClose}>
             Cancel
-          </button>
-          <button className={styles.create_client} type="submit">
-            Create
           </button>
         </div>
       </form>
