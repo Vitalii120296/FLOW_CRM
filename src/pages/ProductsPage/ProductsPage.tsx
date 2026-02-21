@@ -44,7 +44,7 @@ export const ProductsPage = () => {
     setShowTrash((prev) => !prev)
   }
   return (
-    <section className={'page-container'}>
+    <section className={`page-container ${s.product_wrapper}`}>
       <h1 className="h2">Products</h1>
       <div className={s.product_buttons}>
         <button className={s.product_button__create} onClick={handleCreate}>
