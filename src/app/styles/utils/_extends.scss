@@ -63,5 +63,8 @@
 }
 
 .errorInput {
-  border: 1px solid #ff4d4f;
+  border: 1px solid $error;
+}
+.successInput {
+  border: 1px solid $success;
 }
