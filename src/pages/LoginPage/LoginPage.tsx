@@ -20,7 +20,7 @@ export const LoginPage = () => {
 
   const [touched, setTouched] = useState<Partial<Record<keyof LoginForm, boolean>>>({})
   const [isSubmitting, setIsSubmitting] = useState(false)
-  const { errors, validate } = useAuthValidate<LoginForm>(formData)
+  const { hasErrors, errors, validate } = useAuthValidate<LoginForm>(formData)
   const [isPasswordVisible, setIsPasswordVisible] = useState(false)
 
   const handleChange = (field: keyof LoginForm, value: string) => {
@@ -66,6 +66,7 @@ export const LoginPage = () => {
           >
             <label htmlFor="email">Email</label>
             <input
+              required
               id="email"
               type="email"
               value={formData.email}
@@ -90,6 +91,7 @@ export const LoginPage = () => {
           >
             <label htmlFor="password">Password</label>
             <input
+              required
               id="password"
               type={isPasswordVisible ? 'text' : 'password'}
               value={formData.password}
@@ -114,7 +116,7 @@ export const LoginPage = () => {
           )}
         </div>
 
-        <button type="submit" disabled={isSubmitting} className={s.submit}>
+        <button type="submit" disabled={isSubmitting || hasErrors} className={s.submit}>
           {isSubmitting ? 'Logging in...' : 'Login'}
         </button>
       </form>

@@ -15,7 +15,7 @@ export const useClientValidate = <T extends Record<string, string>>() => {
 
     if (field === 'fullName') {
       const error = validateName(value)
-      if (error) {
+      if (error && value.length > 0) {
         if (error.type === ValidationErrorType.REQUIRED) {
           errorMessage = '* Name is required'
         } else if (error.type === ValidationErrorType.INVALID) {
@@ -30,7 +30,7 @@ export const useClientValidate = <T extends Record<string, string>>() => {
 
     if (field === 'email') {
       const error = validateEmail(value)
-      if (error) {
+      if (error && value.length > 0) {
         if (error.type === ValidationErrorType.REQUIRED) {
           errorMessage = '* Email is required'
         } else if (error.type === ValidationErrorType.INVALID) {
@@ -41,7 +41,7 @@ export const useClientValidate = <T extends Record<string, string>>() => {
 
     if (field === 'phone') {
       const error = validatePhone(value)
-      if (error) {
+      if (error && value.length > 0) {
         if (error.type === ValidationErrorType.REQUIRED) {
           errorMessage = '* Phone is required'
         } else if (error.type === ValidationErrorType.INVALID) {
@@ -53,7 +53,7 @@ export const useClientValidate = <T extends Record<string, string>>() => {
     if (field === 'comment') {
       const error = validateComment(value)
 
-      if (error) {
+      if (error && value.length > 0) {
         if (error.type === ValidationErrorType.MIN_LENGTH) {
           errorMessage = `* Comment must be at least ${error.min} characters`
         }
@@ -66,5 +66,6 @@ export const useClientValidate = <T extends Record<string, string>>() => {
     setErrors((prev) => ({ ...prev, [field]: errorMessage }))
   }
 
-  return { errors, validate }
+  const hasErrors = Object.values(errors).some(Boolean)
+  return { hasErrors, errors, validate }
 }

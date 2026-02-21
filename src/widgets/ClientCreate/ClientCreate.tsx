@@ -28,7 +28,7 @@ export const ClientCreate: React.FC<Props> = ({ isOpen, onClose }) => {
   })
   const [touched, setTouched] = useState<Partial<Record<keyof FormData, boolean>>>({})
   const [isSubmitting, setIsSubmitting] = useState(false)
-  const { errors, validate } = useClientValidate()
+  const { hasErrors, errors, validate } = useClientValidate()
 
   const handleChange = (field: keyof FormData, value: string) => {
     setFormData((prev) => ({ ...prev, [field]: value }))
@@ -48,7 +48,6 @@ export const ClientCreate: React.FC<Props> = ({ isOpen, onClose }) => {
       validate(key as keyof FormData, value)
     })
 
-    const hasErrors = Object.values(errors).some(Boolean)
     if (hasErrors) return
 
     setIsSubmitting(true)
@@ -65,17 +64,21 @@ export const ClientCreate: React.FC<Props> = ({ isOpen, onClose }) => {
     onClose()
   }
 
+  const isSuccesInput = (value: keyof FormData) =>
+    touched[value] && !errors[value] && formData[value].length > 0 ? true : false
+
   return (
     <Modal isOpen={isOpen} onClose={onClose} titleId="client-title" title="Create client">
       <form onSubmit={handleSubmit} className={styles.content}>
         <input
+          required
           placeholder="Full name"
           value={formData.fullName}
           onFocus={() => handleTouch('fullName')}
           onChange={(e) => handleChange('fullName', e.target.value)}
           className={cn({
             ['errorInput']: touched.fullName && errors.fullName,
-            ['successInput']: touched.fullName && !errors.fullName,
+            ['successInput']: isSuccesInput('fullName'),
           })}
         />
 
@@ -88,6 +91,7 @@ export const ClientCreate: React.FC<Props> = ({ isOpen, onClose }) => {
         )}
 
         <input
+          required
           placeholder="Email"
           type="email"
           value={formData.email}
@@ -95,7 +99,7 @@ export const ClientCreate: React.FC<Props> = ({ isOpen, onClose }) => {
           onChange={(e) => handleChange('email', e.target.value)}
           className={cn({
             ['errorInput']: touched.email && errors.email,
-            ['successInput']: touched.email && !errors.email,
+            ['successInput']: isSuccesInput('email'),
           })}
         />
 
@@ -108,13 +112,14 @@ export const ClientCreate: React.FC<Props> = ({ isOpen, onClose }) => {
         )}
 
         <input
+          required
           placeholder="Phone"
           value={formData.phone}
           onFocus={() => handleTouch('phone')}
           onChange={(e) => handleChange('phone', e.target.value)}
           className={cn({
             ['errorInput']: touched.phone && errors.phone,
-            ['successInput']: touched.phone && !errors.phone,
+            ['successInput']: isSuccesInput('phone'),
           })}
         />
 
@@ -131,9 +136,9 @@ export const ClientCreate: React.FC<Props> = ({ isOpen, onClose }) => {
           value={formData.comment}
           onFocus={() => handleTouch('comment')}
           onChange={(e) => handleChange('comment', e.target.value)}
-          className={cn({
+          className={cn(styles.content_comment, {
             ['errorInput']: touched.comment && errors.comment,
-            ['successInput']: touched.comment && !errors.comment,
+            ['successInput']: isSuccesInput('comment'),
           })}
         />
 
@@ -146,7 +151,11 @@ export const ClientCreate: React.FC<Props> = ({ isOpen, onClose }) => {
         )}
 
         <div className={styles.actions}>
-          <button className={styles.create_client} type="submit" disabled={isSubmitting}>
+          <button
+            className={styles.create_client}
+            type="submit"
+            disabled={isSubmitting || hasErrors}
+          >
             Create
           </button>
           <button className={styles.cancel} type="button" onClick={onClose}>

@@ -25,9 +25,16 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  // gap: 20px;
   padding: 0.5rem 0.7rem;
   border-bottom: 1px solid $border;
+  min-height: 16px;
+
+  input {
+    padding: 0;
+  }
+  span {
+    max-width: 50%;
+  }
 
   &:hover {
     background-color: $border;
@@ -36,7 +43,6 @@
     input,
     span,
     label {
-      // font-weight: 600;
       color: $primary;
     }
 
@@ -162,6 +168,8 @@ textarea {
 }
 textarea {
   text-overflow: auto;
+
+  @include scroll-bar;
 }
 
 span {

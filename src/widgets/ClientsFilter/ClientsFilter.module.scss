@@ -33,33 +33,33 @@
     flex-direction: row;
     align-items: center;
   }
-}
 
-input {
-  height: 36px;
-  padding: 0 12px;
-  border-radius: 8px;
-  border: 1px solid $border;
-  font-size: 14px;
+  input {
+    height: 36px;
+    padding: 0 12px;
+    border-radius: 8px;
+    border: 1px solid $border;
+    font-size: 14px;
 
-  @include on-mobile {
-    width: 100%;
-    box-sizing: border-box;
+    @include on-mobile {
+      width: 100%;
+      box-sizing: border-box;
+    }
   }
-}
 
-select {
-  height: 36px;
-  padding: 0 12px;
-  border-radius: 8px;
-  border: 1px solid $border;
-  font-size: 14px;
-  color: $text;
-  background-color: $bgBlock;
+  select {
+    height: 36px;
+    padding: 0 12px;
+    border-radius: 8px;
+    border: 1px solid $border;
+    font-size: 14px;
+    color: $text;
+    background-color: $bgBlock;
 
-  @include on-mobile {
-    width: 100%;
-    box-sizing: border-box;
+    @include on-mobile {
+      width: 100%;
+      box-sizing: border-box;
+    }
   }
 }
 

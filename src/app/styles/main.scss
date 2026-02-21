@@ -117,9 +117,10 @@ textarea {
   background-color: $bgBlock;
   color: $text;
   border: 1px solid $border;
-  padding: 0.5rem 1rem;
+  padding: 8px 12px;
   border-radius: 4px;
   resize: none;
+
   transition:
     background-color 0.3s,
     color 0.3s,
