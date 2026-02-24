@@ -5,6 +5,7 @@ import type { Client } from '../../types'
 import styles from './ClientsTable.module.scss'
 import { ClientDetails } from '../ClientDetails/ClientDetails'
 import { statusFormat } from '../../utils/statusFormat'
+import { span } from 'motion/react-client'
 
 type Props = {
   clients: Client[]

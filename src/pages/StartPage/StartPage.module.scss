@@ -25,7 +25,7 @@
 
 .headerContainer {
   background-color: #05080a;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  border-block: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .headerContent {
@@ -33,9 +33,7 @@
   justify-content: space-between;
   align-items: center;
 
-  padding: 10px 20px 10px 20px;
-
-  border-inline: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 10px 30px 10px 30px;
 
   height: auto;
   z-index: 10;
@@ -43,6 +41,7 @@
 
   @include on-desktop {
     // margin-inline: 100px;
+    border-inline: 1px solid rgba(255, 255, 255, 0.1);
   }
 }
 
@@ -51,7 +50,7 @@
   flex-direction: row;
   align-items: center;
   gap: 10px;
-  position: relative; // для псевдоелементів
+  position: relative;
   text-decoration: none;
   cursor: pointer;
 
@@ -302,14 +301,14 @@
   border-bottom: 1px dashed rgba(255, 255, 255, 0.1);
 
   .contentContainer {
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: 1fr;
     width: 100%;
     max-width: $desktop-min-width;
     margin-inline: auto;
 
     @include on-tablet {
-      flex-direction: row;
+      grid-template-columns: repeat(3, 1fr);
     }
   }
 }
@@ -320,16 +319,29 @@
   align-items: flex-start;
   gap: 12px;
   padding: 32px;
-  // border-top: 1px dashed rgba(255, 255, 255, 0.1);
 
-  flex: 1;
-  min-width: 200px;
+  border-top: 1px dashed rgba(255, 255, 255, 0.1);
+
+  &:last-child {
+    border-right: none;
+  }
 
   @include on-tablet {
-    border-inline: 1px dashed rgba(255, 255, 255, 0.1);
+    border-top: none;
+    border-right: 1px dashed rgba(255, 255, 255, 0.1);
 
-    &:nth-child(2) {
-      border-inline: none;
+    // &:first-child {
+    //   border-left: 1px dashed rgba(255, 255, 255, 0.1);
+    // }
+  }
+
+  @include on-desktop {
+    &:first-child {
+      border-left: 1px dashed rgba(255, 255, 255, 0.1);
+    }
+
+    &:last-child {
+      border-right: 1px dashed rgba(255, 255, 255, 0.1);
     }
   }
 }
