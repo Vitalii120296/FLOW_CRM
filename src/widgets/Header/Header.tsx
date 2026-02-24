@@ -1,7 +1,9 @@
 import { Link } from 'react-router-dom'
 import { BsCaretDownFill, BsJustify } from 'react-icons/bs'
-import Avatar from '/public/icons/avatar.png'
 import styles from './Header.module.scss'
+
+import { FaRegBell } from 'react-icons/fa6'
+import { BsFillPersonFill } from 'react-icons/bs'
 
 type Props = {
   setShowBurger: React.Dispatch<React.SetStateAction<boolean>>
@@ -22,16 +24,22 @@ export const Header: React.FC<Props> = ({ setShowBurger }) => {
           </Link>
 
           <div className={styles.header__profile}>
+            <div className={styles.ballContainer}>
+              <FaRegBell className={styles.ball} />
+            </div>
+
             <Link to="/crm/profile" className={styles.header__profileWrapper}>
               <div className={styles.header__profileAvatar}>
-                <img src={Avatar} alt="Avatar" />
+                <BsFillPersonFill />
               </div>
 
               {/* ТРИГГЕР */}
               <div className={styles.header__profileTrigger}>
-                <p className={styles.header__profileUserName}>Name Surname</p>
                 <BsCaretDownFill className="icon" />
+                {/* <p className={styles.header__profileUserName}>Name Surname</p> */}
+
                 {/* dropdown */}
+
                 <div className={styles.header__profileDropdown}>
                   <p className={styles.header__profileName}>Name Surname</p>
                   <p className={styles.header__profileEmail}>name.surname@mail.com</p>

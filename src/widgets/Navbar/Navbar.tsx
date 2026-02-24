@@ -3,7 +3,7 @@ import {
   BsFillHouseFill,
   BsBoxSeam,
   BsPeopleFill,
-  BsGearFill,
+  // BsGearFill,
   BsBuilding,
   BsIndent,
 } from 'react-icons/bs'
@@ -56,30 +56,30 @@ export const Navbar: React.FC<Props> = ({ showBurger }) => {
         </li>
 
         <li className={s.nav_item}>
-          <NavLink to="/crm/profile" className={isActive}>
-            <CgProfile className={s.icon} />
-            <span>Profile</span>
-          </NavLink>
-        </li>
-
-        <li className={s.nav_item}>
           <NavLink to="/crm/products" className={isActive}>
             <BsBoxSeam className={s.icon} />
             <span>Products</span>
           </NavLink>
         </li>
 
-        <li className={s.nav_item}>
+        {/* <li className={s.nav_item}>
           <NavLink to="/crm/user-management" className={isActive}>
             <BsGearFill className={s.icon} />
             <span>User Management</span>
           </NavLink>
-        </li>
+        </li> */}
 
         <li className={s.nav_item}>
           <NavLink to="/crm/properties" className={isActive}>
             <BsBuilding className={s.icon} />
             <span>Properties</span>
+          </NavLink>
+        </li>
+
+        <li className={s.nav_item}>
+          <NavLink to="/crm/profile" className={isActive}>
+            <CgProfile className={s.icon} />
+            <span>Profile</span>
           </NavLink>
         </li>
       </ul>
