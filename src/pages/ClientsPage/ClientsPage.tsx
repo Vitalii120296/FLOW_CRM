@@ -4,10 +4,10 @@ import type { Client, ClientFilters, ClientStatus } from '../../types'
 
 import { ClientsFilter } from '../../widgets/ClientsFilter/ClientsFilter'
 import { ClientsTable } from '../../widgets/ClientsTable/ClientsTable'
-import { getClientsTestApi } from '../../shared/api/clients.test-api'
 import { Loader } from '../../app/Components/Loader/Loader'
 
 import s from './ClientsPage.module.scss'
+import { clientService } from '../../services/clientServices'
 
 export const ClientsPage = () => {
   const [clients, setClients] = useState<Client[]>([])
@@ -21,16 +21,27 @@ export const ClientsPage = () => {
 
   // 2️⃣ загружаем клиентов (тестовый API)
   useEffect(() => {
-    setTimeout(() => {
-      getClientsTestApi()
-        .then(setClients)
-        .finally(() => setLoading(false))
-    }, 800)
+    const fetchClients = async () => {
+      try {
+        setLoading(true)
+        const res = await clientService.getAll()
+        setClients(res)
+        console.log(res)
+      } catch (error) {
+        console.error('Failed to load clients:', error)
+      } finally {
+        setLoading(false)
+      }
+    }
+
+    fetchClients()
   }, [])
 
   const filteredClients = useMemo(() => {
     return clients.filter((client) => {
-      const matchesSearch = client.name.toLowerCase().includes(filters.search?.toLowerCase() ?? '')
+      const matchesSearch = client.first_name
+        .toLowerCase()
+        .includes(filters.search?.toLowerCase() ?? '')
 
       const matchesStatus = filters.status === 'all' || client.status === filters.status
 
@@ -42,7 +53,7 @@ export const ClientsPage = () => {
   return (
     <div className="page-container">
       <div className={s.wrapper}>
-        <ClientsFilter filters={filters} onChange={setSearchParams} />
+        <ClientsFilter filters={filters} onChange={setSearchParams} setClients={setClients} />
         {loading ? <Loader /> : <ClientsTable setClients={setClients} clients={filteredClients} />}
       </div>
     </div>

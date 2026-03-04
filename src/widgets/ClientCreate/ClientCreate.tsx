@@ -6,29 +6,38 @@ import cn from 'classnames'
 import styles from './ClientCreate.module.scss'
 import { BiSolidError } from 'react-icons/bi'
 import { useClientValidate } from '../../shared/hooks/useClientValidate'
+import { clientService } from '../../services/clientServices'
+import { useAuth } from '../../app/Components/Contexts/AuthContext'
+import type { Client } from '../../types'
 
 type Props = {
   onClose: () => void
   isOpen: boolean
+  setClients?: React.Dispatch<React.SetStateAction<Client[]>>
 }
 
 type FormData = {
-  fullName: string
+  first_name: string
+  last_name: string
   email: string
   phone: string
   comment: string
+  status: string
 }
 
-export const ClientCreate: React.FC<Props> = ({ isOpen, onClose }) => {
+export const ClientCreate: React.FC<Props> = ({ isOpen, onClose, setClients }) => {
   const [formData, setFormData] = useState<FormData>({
-    fullName: '',
+    first_name: '',
+    last_name: '',
     email: '',
     phone: '',
     comment: '',
+    status: 'new',
   })
   const [touched, setTouched] = useState<Partial<Record<keyof FormData, boolean>>>({})
   const [isSubmitting, setIsSubmitting] = useState(false)
   const { hasErrors, errors, validate } = useClientValidate()
+  const { currentUser } = useAuth()
 
   const handleChange = (field: keyof FormData, value: string) => {
     setFormData((prev) => ({ ...prev, [field]: value }))
@@ -40,24 +49,27 @@ export const ClientCreate: React.FC<Props> = ({ isOpen, onClose }) => {
     validate(field, formData[field])
   }
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-
-    // перевірка всіх полів перед сабмітом
-    Object.entries(formData).forEach(([key, value]) => {
-      validate(key as keyof FormData, value)
-    })
 
     if (hasErrors) return
 
     setIsSubmitting(true)
 
-    // тут буде API запит
-    console.log('Form submitted:', formData)
+    try {
+      await clientService.addClient({
+        ...formData,
+        createdBy: currentUser
+          ? { first_name: currentUser.first_name, id: currentUser.id }
+          : { first_name: 'Unknown', id: 0 },
+      })
 
-    setTimeout(() => {
+      if (setClients) setClients((prev) => [formData as Client, ...prev])
+    } catch (error) {
+      console.log(error)
+    } finally {
       setIsSubmitting(false)
-    }, 1000)
+    }
 
     console.log('Create client:', formData)
 
@@ -72,13 +84,13 @@ export const ClientCreate: React.FC<Props> = ({ isOpen, onClose }) => {
       <form onSubmit={handleSubmit} className={styles.content}>
         <input
           required
-          placeholder="Full name"
-          value={formData.fullName}
-          onFocus={() => handleTouch('fullName')}
-          onChange={(e) => handleChange('fullName', e.target.value)}
+          placeholder="First name"
+          value={formData.first_name}
+          onFocus={() => handleTouch('first_name')}
+          onChange={(e) => handleChange('first_name', e.target.value)}
           className={cn({
-            ['errorInput']: touched.fullName && errors.fullName,
-            ['successInput']: isSuccesInput('fullName'),
+            ['errorInput']: touched.first_name && errors.first_name,
+            ['successInput']: isSuccesInput('first_name'),
           })}
         />
 
@@ -86,7 +98,27 @@ export const ClientCreate: React.FC<Props> = ({ isOpen, onClose }) => {
           <div className="errorContainer">
             <BiSolidError className="errorIcon" />
 
-            <p className="errorText">{errors.fullName}</p>
+            <p className="errorText">{errors.first_name}</p>
+          </div>
+        )}
+
+        <input
+          required
+          placeholder="Last name"
+          value={formData.last_name}
+          onFocus={() => handleTouch('last_name')}
+          onChange={(e) => handleChange('last_name', e.target.value)}
+          className={cn({
+            ['errorInput']: touched.last_name && errors.last_name,
+            ['successInput']: isSuccesInput('last_name'),
+          })}
+        />
+
+        {errors.fullName && (
+          <div className="errorContainer">
+            <BiSolidError className="errorIcon" />
+
+            <p className="errorText">{errors.last_name}</p>
           </div>
         )}
 

@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import stylesHead from './PropertiesHead.module.scss'
 import stylesBody from './PropertiesBody.module.scss'
 import cn from 'classnames'
@@ -7,6 +7,8 @@ import type { ValidationError } from '../../types/ValidationErrorType'
 import { getValidationErrorMessage } from '../../types/validationMessages'
 import { validateService } from '../../services/validateServices'
 import { BiSolidError } from 'react-icons/bi'
+import { propertiesService } from '../../services/propertisService'
+import { Loader } from '../../app/Components/Loader/Loader'
 
 type FormErrors = {
   name?: ValidationError
@@ -28,11 +30,29 @@ export const Properties = () => {
     type: '',
     email: '',
     phone: '',
-    logo: { url: null },
+    img: '',
   })
 
   const [isEditingTitle, setIsEditingTitle] = useState(false)
   const [isSubmitting, setIsSubmitting] = useState(false)
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    const fetchProperties = async () => {
+      try {
+        const res = await (await propertiesService.getProperties()).at(0)
+        if (res) {
+          setBusinessInfo(res)
+        }
+      } catch (error) {
+        console.log(error)
+      } finally {
+        setLoading(false)
+      }
+    }
+
+    fetchProperties()
+  }, [])
 
   // ===== Логотип =====
   const handleUploadClick = () => fileInputRef.current?.click()
@@ -41,11 +61,11 @@ export const Properties = () => {
     const file = e.target.files?.[0]
     if (!file) return
     const previewUrl = URL.createObjectURL(file)
-    setBusinessInfo((prev) => ({ ...prev, logo: { url: previewUrl } }))
+    setBusinessInfo((prev) => ({ ...prev, img: previewUrl }))
   }
 
   const handleRemoveLogo = () => {
-    setBusinessInfo((prev) => ({ ...prev, logo: { url: null } }))
+    setBusinessInfo((prev) => ({ ...prev, img: null }))
     if (fileInputRef.current) fileInputRef.current.value = ''
   }
 
@@ -98,13 +118,7 @@ export const Properties = () => {
     setIsSubmitting(true)
 
     try {
-      const response = await fetch('/api/properties', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(businessInfo),
-      })
-
-      if (!response.ok) throw new Error('Error saving data')
+      await propertiesService.updateProperties(businessInfo)
 
       alert('Data saved successfully!')
     } catch {
@@ -113,6 +127,8 @@ export const Properties = () => {
       setIsSubmitting(false)
     }
   }
+
+  if (loading) return <Loader />
 
   return (
     <div className="container">
@@ -145,12 +161,12 @@ export const Properties = () => {
         </div>
 
         <div className={stylesHead.logoBlock}>
-          {!businessInfo.logo.url && <p className={cn('h6', stylesHead.label)}>Company logo</p>}
+          {!businessInfo.img && <p className={cn('h6', stylesHead.label)}>Company logo</p>}
 
-          {businessInfo.logo.url ? (
+          {businessInfo.img ? (
             <div className={stylesHead.logoPreview}>
               <div className={stylesHead.imageWrapper}>
-                <img src={businessInfo.logo.url} alt="Company logo" />
+                <img src={businessInfo.img} alt="Company logo" />
                 <div className={stylesHead.overlay}>
                   <button className={stylesHead.change} type="button" onClick={handleUploadClick}>
                     Change

@@ -7,15 +7,19 @@ import { FaEye, FaEyeSlash } from 'react-icons/fa'
 
 import { useAuthValidate } from '../../shared/hooks/useAuthValidate'
 import type { FormData } from '../../types'
+import { authService } from '../../services/authService'
+import { useNavigate } from 'react-router'
 
 export const RegisterPage = () => {
   const [touched, setTouched] = useState<Partial<Record<keyof FormData, boolean>>>({})
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [isPasswordVisible, setIsPasswordVisible] = useState(false)
   const [isConfirmPasswordVisible, setIsConfirmPasswordVisible] = useState(false)
+  const navigate = useNavigate()
 
   const [formData, setFormData] = useState<FormData>({
-    name: '',
+    firstName: '',
+    lastName: '',
     email: '',
     password: '',
     confirmPassword: '',
@@ -37,25 +41,22 @@ export const RegisterPage = () => {
     validate(field, formData[field])
   }
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
 
-    // перевірка всіх полів перед сабмітом
-    Object.entries(formData).forEach(([key, value]) => {
-      validate(key as keyof FormData, value)
-    })
-
-    const hasErrors = Object.values(errors).some(Boolean)
     if (hasErrors) return
 
-    setIsSubmitting(true)
+    try {
+      setIsSubmitting(true)
 
-    // тут буде API запит
-    console.log('Form submitted:', formData)
+      await authService.register(formData)
 
-    setTimeout(() => {
+      navigate('/login')
+    } catch (error) {
+      console.error(error)
+    } finally {
       setIsSubmitting(false)
-    }, 1000)
+    }
   }
 
   const isSuccesInput = (value: keyof FormData) =>
@@ -66,29 +67,58 @@ export const RegisterPage = () => {
       <h1 className="h1">Register</h1>
 
       <form className={s.form} onSubmit={handleSubmit}>
-        {/* Name */}
+        {/* First name */}
         <div className={s.field}>
           <div
             className={cn(s.inputWrapper, {
-              [s.active]: touched.name,
+              [s.active]: touched.firstName,
             })}
           >
-            <label htmlFor="name">Name</label>
+            <label htmlFor="firstName">First name</label>
             <input
-              id="name"
+              id="firstName"
               type="text"
               required
-              value={formData.name}
-              onFocus={() => handleTouch('name')}
-              onChange={(e) => handleChange('name', e.target.value)}
+              value={formData.firstName}
+              onFocus={() => handleTouch('firstName')}
+              onChange={(e) => handleChange('firstName', e.target.value)}
               className={cn({
-                [s.errorInput]: touched.name && errors.name,
-                [s.successInput]: isSuccesInput('name'),
+                [s.errorInput]: touched.firstName && errors.firstName,
+                [s.successInput]: isSuccesInput('firstName'),
               })}
             />
           </div>
 
-          {touched.name && errors.name && <span className={s.errorText}>{errors.name}</span>}
+          {touched.firstName && errors.firstName && (
+            <span className={s.errorText}>{errors.firstName}</span>
+          )}
+        </div>
+
+        {/* Last name */}
+        <div className={s.field}>
+          <div
+            className={cn(s.inputWrapper, {
+              [s.active]: touched.lastName,
+            })}
+          >
+            <label htmlFor="lastName">Last name</label>
+            <input
+              id="lastName"
+              type="text"
+              required
+              value={formData.lastName}
+              onFocus={() => handleTouch('lastName')}
+              onChange={(e) => handleChange('lastName', e.target.value)}
+              className={cn({
+                [s.errorInput]: touched.lastName && errors.lastName,
+                [s.successInput]: isSuccesInput('lastName'),
+              })}
+            />
+          </div>
+
+          {touched.lastName && errors.lastName && (
+            <span className={s.errorText}>{errors.lastName}</span>
+          )}
         </div>
 
         {/* Email */}

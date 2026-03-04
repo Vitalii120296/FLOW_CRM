@@ -22,7 +22,7 @@ export const ProgressCardList = React.forwardRef<HTMLDivElement, Props>(
       <div className={s.progress_card__column} ref={ref}>
         <ul className={s.progress_card__list}>
           {clients.map((client, i) => (
-            <Draggable draggableId={client.id} index={i} key={client.id}>
+            <Draggable draggableId={client.id.toString()} index={i} key={client.id.toString()}>
               {(provided, snapshot) => (
                 <li
                   ref={provided.innerRef}
@@ -42,7 +42,7 @@ export const ProgressCardList = React.forwardRef<HTMLDivElement, Props>(
                         [s['progress_card__icon--blue']]: columnId === 'done',
                       })}
                     />
-                    {client.name}
+                    {`${client.first_name} ${client.last_name}`}
                   </p>
                   {client.email && <p className={s.progress_card__row}>{client.email}</p>}
                   {client.phone && <p className={s.progress_card__row}>{client.phone}</p>}

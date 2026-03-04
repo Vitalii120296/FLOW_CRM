@@ -1,5 +1,5 @@
 import type React from 'react'
-import type { ClientFilters, ClientStatus } from '../../types'
+import type { Client, ClientFilters, ClientStatus } from '../../types'
 import { ClientCreate } from '../ClientCreate/ClientCreate'
 
 import styles from './ClientsFilter.module.scss'
@@ -8,9 +8,10 @@ import { useState } from 'react'
 type Props = {
   filters: ClientFilters
   onChange: (params: URLSearchParams) => void
+  setClients: React.Dispatch<React.SetStateAction<Client[]>>
 }
 
-export const ClientsFilter: React.FC<Props> = ({ filters, onChange }) => {
+export const ClientsFilter: React.FC<Props> = ({ filters, onChange, setClients }) => {
   const [isModalOpen, setIsModalOpen] = useState(false)
 
   const handleSearchChange = (value: string) => {
@@ -69,7 +70,11 @@ export const ClientsFilter: React.FC<Props> = ({ filters, onChange }) => {
         </div>
       </div>
 
-      <ClientCreate isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
+      <ClientCreate
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        setClients={setClients}
+      />
     </>
   )
 }
