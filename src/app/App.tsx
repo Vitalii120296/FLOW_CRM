@@ -5,9 +5,16 @@ import { Navbar } from '../widgets/Navbar/Navbar'
 import { Footer } from '../widgets/Footer/Footer'
 import { useState } from 'react'
 
+import { useEffect } from 'react'
+import { useAuth } from './Components/Contexts/AuthContext'
+
 export const App = () => {
   const [showBurger, setShowBurger] = useState(false)
+  const { checkAuth } = useAuth()
 
+  useEffect(() => {
+    checkAuth()
+  }, [checkAuth])
   return (
     <>
       <div className="app">

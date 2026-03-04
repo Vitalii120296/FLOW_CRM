@@ -1,20 +1,19 @@
 import axios, { AxiosError } from 'axios'
+import { authService } from '../../services/authService'
 
 export const httpClient = axios.create({
   baseURL: import.meta.env.VITE_API_URL,
   withCredentials: true,
 })
-/*
-httpClient.interceptors.request.use((request) => {
-  const accessToken = localStorage.getItem('accessToken')
+// httpClient.interceptors.request.use((request) => {
+//   const accessToken = localStorage.getItem('accessToken')
 
-  if (accessToken) {
-    request.headers.Authorization = `Bearer ${accessToken}`
-  }
+//   if (accessToken) {
+//     request.headers.Authorization = `Bearer ${accessToken}`
+//   }
 
-  return request
-})
-*/
+//   return request
+// })
 
 httpClient.interceptors.response.use(
   (res) => res.data,
@@ -25,6 +24,7 @@ httpClient.interceptors.response.use(
       case 400:
         throw new Error('Bad Request')
       case 401:
+        authService.refresh()
         throw new Error('Unauthorized')
       case 403:
         throw new Error('Forbidden')

@@ -4,8 +4,9 @@ import s from './LoginPage.module.scss'
 import cn from 'classnames'
 import { FaEye, FaEyeSlash } from 'react-icons/fa'
 
-import { Link } from 'react-router'
+import { Link, useNavigate } from 'react-router'
 import { useAuthValidate } from '../../shared/hooks/useAuthValidate'
+import { useAuth } from '../../app/Components/Contexts/AuthContext'
 
 type LoginForm = {
   email: string
@@ -22,6 +23,8 @@ export const LoginPage = () => {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const { hasErrors, errors, validate } = useAuthValidate<LoginForm>(formData)
   const [isPasswordVisible, setIsPasswordVisible] = useState(false)
+  const navigate = useNavigate()
+  const { login } = useAuth()
 
   const handleChange = (field: keyof LoginForm, value: string) => {
     setFormData((prev) => ({ ...prev, [field]: value }))
@@ -33,23 +36,26 @@ export const LoginPage = () => {
     validate(field, formData[field])
   }
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
 
     Object.entries(formData).forEach(([key, value]) => {
       validate(key as keyof LoginForm, value)
     })
 
-    const hasErrors = Object.values(errors).some(Boolean)
     if (hasErrors) return
 
-    setIsSubmitting(true)
+    try {
+      setIsSubmitting(true)
 
-    console.log('Login data:', formData)
+      await login(formData.email, formData.password)
 
-    setTimeout(() => {
+      navigate('/crm/properties')
+    } catch (error) {
+      console.error(error)
+    } finally {
       setIsSubmitting(false)
-    }, 1000)
+    }
   }
 
   return (

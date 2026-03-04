@@ -3,8 +3,8 @@ import { ProgressCard } from '../../app/Components/ProgressCard/ProgressCard'
 import type { Client, ClientStatus } from '../../types'
 import s from './Kanban.module.scss'
 import { ClientDetails } from '../../widgets/ClientDetails/ClientDetails'
-import { getClientsTestApi } from '../../shared/api/clients.test-api'
 import { DragDropContext, type DropResult } from '@hello-pangea/dnd'
+import { clientService } from '../../services/clientServices'
 
 type ColumnData = {
   id: ClientStatus
@@ -21,28 +21,36 @@ export const Kanban = () => {
   const [selectedClient, setSelectedClient] = useState<Client | null>(null)
 
   useEffect(() => {
-    // 1. Fetch clients
-    getClientsTestApi().then((allClients) => {
-      // 2. Transform data
-      const clientsMap: Record<string, Client> = {}
-      const columnsMap: Record<ClientStatus, ColumnData> = {
-        new: { id: 'new', columnClients: [] },
-        in_progress: { id: 'in_progress', columnClients: [] },
-        done: { id: 'done', columnClients: [] },
+    const fetchAndTransformClients = async () => {
+      try {
+        const res = await clientService.getAll()
+        console.log(res)
+
+        const clientsMap: Record<string, Client> = {}
+        const columnsMap: Record<ClientStatus, ColumnData> = {
+          new: { id: 'new', columnClients: [] },
+          in_progress: { id: 'in_progress', columnClients: [] },
+          done: { id: 'done', columnClients: [] },
+        }
+
+        res.forEach((client) => {
+          const idStr = client.id.toString()
+          clientsMap[idStr] = client
+          columnsMap[client.status].columnClients.push(idStr)
+        })
+
+        setColumnsData({ clients: clientsMap, columns: columnsMap })
+      } catch (error) {
+        console.log(error)
       }
+    }
 
-      allClients.forEach((client) => {
-        clientsMap[client.id] = client
-        columnsMap[client.status].columnClients.push(client.id)
-      })
-
-      setColumnsData({ clients: clientsMap, columns: columnsMap })
-    })
+    fetchAndTransformClients()
   }, [])
 
   if (!columnsData) return <p>Loading...</p>
 
-  const onDragEnd = (result: DropResult) => {
+  const onDragEnd = async (result: DropResult) => {
     const { destination, source, draggableId } = result
 
     if (!destination) return
@@ -50,6 +58,8 @@ export const Kanban = () => {
 
     const startColumn = columnsData.columns[source.droppableId as ClientStatus]
     const finishColumn = columnsData.columns[destination.droppableId as ClientStatus]
+
+    const clientId = draggableId
 
     // Перетягування всередині однієї колонки
     if (startColumn === finishColumn) {
@@ -84,29 +94,31 @@ export const Kanban = () => {
         [finishColumn.id]: { ...finishColumn, columnClients: finishClientIds },
       },
     })
+
+    await clientService.updateClientStatus(clientId, finishColumn.id)
   }
 
   const updateColumnsData = (updatedClient: Client) => {
     setColumnsData((prev) => {
       if (!prev) return prev
 
-      const oldClient = prev.clients[updatedClient.id]
+      const clientIdStr = updatedClient.id.toString() // ⚠️ конвертуємо у рядок
+      const oldClient = prev.clients[clientIdStr]
       const newColumns = { ...prev.columns }
 
-      // Якщо статус змінився, переміщаємо клієнта між колонками
       if (oldClient.status !== updatedClient.status) {
         // видаляємо зі старої колонки
         newColumns[oldClient.status] = {
           ...newColumns[oldClient.status],
           columnClients: newColumns[oldClient.status].columnClients.filter(
-            (id) => id !== updatedClient.id
+            (id) => id !== clientIdStr // ⚠️ порівнюємо рядки
           ),
         }
 
         // додаємо у нову колонку
         newColumns[updatedClient.status] = {
           ...newColumns[updatedClient.status],
-          columnClients: [updatedClient.id, ...newColumns[updatedClient.status].columnClients],
+          columnClients: [clientIdStr, ...newColumns[updatedClient.status].columnClients],
         }
       }
 
@@ -114,7 +126,7 @@ export const Kanban = () => {
         ...prev,
         clients: {
           ...prev.clients,
-          [updatedClient.id]: updatedClient,
+          [clientIdStr]: updatedClient,
         },
         columns: newColumns,
       }

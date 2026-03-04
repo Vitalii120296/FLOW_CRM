@@ -1,28 +1,77 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, type FormEvent } from 'react'
 import type { SystemUser } from '../../types'
 import s from './ProfilePage.module.scss'
 import { Loader } from '../../app/Components/Loader/Loader'
-import { getUsersTestApi } from '../../shared/api/users.test-api'
 import cn from 'classnames'
 import { motion } from 'motion/react'
+import { useAuth } from '../../app/Components/Contexts/AuthContext'
+import { userService } from '../../services/userServices'
 
 export const ProfilePage = () => {
   const [userProfile, setUserProfile] = useState<SystemUser | null>(null)
   const [isEditingData, setIsEditingData] = useState<keyof SystemUser | null>(null)
+  const [loading, setLoading] = useState(false)
+  const { currentUser, setCurrentUser } = useAuth()
 
   useEffect(() => {
-    getUsersTestApi().then((res) => setUserProfile(res[0]))
+    setUserProfile(currentUser)
   }, [])
 
   const handleChange = <K extends keyof SystemUser>(key: K, value: SystemUser[K]) => {
-    setUserProfile((prev) => {
-      if (!prev) return prev
+    setUserProfile((prev) => (prev ? { ...prev, [key]: value } : prev))
+  }
 
-      return {
-        ...prev,
-        [key]: value,
+  const handleProfileSubmit = async (e: FormEvent) => {
+    e.preventDefault()
+    if (!userProfile) return
+    setLoading(true)
+    try {
+      const data = {
+        first_name: userProfile.first_name,
+        last_name: userProfile.last_name,
+        email: userProfile.email,
       }
-    })
+      const updatedUser = await userService.updateUserData(data)
+
+      setCurrentUser(updatedUser)
+      localStorage.setItem('user', JSON.stringify(updatedUser))
+    } catch (err) {
+      console.error(err)
+      // показати тост повідомлення про помилку
+    } finally {
+      setLoading(false)
+      setIsEditingData(null)
+    }
+  }
+
+  const handlePasswordSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    const form = e.currentTarget
+    const oldPassword = (form.elements.namedItem('old_password') as HTMLInputElement).value
+    const newPassword = (form.elements.namedItem('new_password') as HTMLInputElement).value
+    const confirmPassword = (form.elements.namedItem('confirm_password') as HTMLInputElement).value
+
+    if (newPassword !== confirmPassword) {
+      alert('Passwords do not match')
+      return
+    }
+
+    setLoading(true)
+    try {
+      const response = await fetch('/api/change-password', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ oldPassword, newPassword }),
+      })
+      if (!response.ok) throw new Error('Failed to change password')
+      alert('Password changed successfully')
+      form.reset()
+    } catch (err) {
+      console.error(err)
+      alert('Error changing password')
+    } finally {
+      setLoading(false)
+    }
   }
 
   if (!userProfile) return <Loader />
@@ -30,55 +79,71 @@ export const ProfilePage = () => {
   return (
     <section className={cn('page-container', s.section_profile)}>
       <h1 className="h2">Profile page</h1>
-      <motion.div
+
+      {/* Personal info form */}
+      <motion.form
+        onSubmit={handleProfileSubmit}
         initial={{ opacity: 0, translateY: 25 }}
         animate={{ opacity: 1, translateY: 0 }}
-        transition={{
-          duration: 1,
-          ease: 'linear',
-        }}
+        transition={{ duration: 1, ease: 'linear' }}
         className={s.personal_info__wrapper}
       >
         <div className={s.profile_photo}>
           <h2 className="h3">Profile photo</h2>
-
           <div className={s.photo}>
             <div className={s.user_photo}>
-              <img
-                src={
-                  userProfile.photo
-                    ? userProfile.photo
-                    : './public/productImages/defaultProductImage.WebP'
-                }
-                alt="user photo"
-              />
+              <img src={userProfile.avatar || ''} alt="user photo" />
             </div>
             <div className={s.photo_buttons}>
-              <button className={s.add_photo}>Choose photo</button>
-              <button className={s.remove_photo}>Remove photo</button>
+              <button type="button" className={s.add_photo}>
+                Choose photo
+              </button>
+              <button type="button" className={s.remove_photo}>
+                Remove photo
+              </button>
             </div>
           </div>
         </div>
+
         <div className={s.personal_info}>
           <h2 className="h3">Personal info</h2>
 
           <div className={s.user_name}>
-            <label htmlFor="user_name" onClick={() => setIsEditingData('name')}>
-              <span className={s.title}>User name: </span>
-              {isEditingData !== 'name' ? (
-                <span>{userProfile.name}</span>
+            <label htmlFor="first_name" onClick={() => setIsEditingData('first_name')}>
+              <span className={s.title}>First name: </span>
+              {isEditingData !== 'first_name' ? (
+                <span>{userProfile.first_name}</span>
               ) : (
                 <input
                   type="text"
-                  name="user_name"
-                  id="user_name"
-                  value={userProfile.name}
+                  name="first_name"
+                  id="first_name"
+                  value={userProfile.first_name}
                   onBlur={() => setIsEditingData(null)}
-                  onChange={(e) => handleChange('name', e.target.value)}
+                  onChange={(e) => handleChange('first_name', e.target.value)}
                 />
               )}
             </label>
           </div>
+
+          <div className={s.user_name}>
+            <label htmlFor="last_name" onClick={() => setIsEditingData('last_name')}>
+              <span className={s.title}>Last name: </span>
+              {isEditingData !== 'last_name' ? (
+                <span>{userProfile.last_name}</span>
+              ) : (
+                <input
+                  type="text"
+                  name="last_name"
+                  id="last_name"
+                  value={userProfile.last_name}
+                  onBlur={() => setIsEditingData(null)}
+                  onChange={(e) => handleChange('last_name', e.target.value)}
+                />
+              )}
+            </label>
+          </div>
+
           <div className={s.user_email}>
             <label htmlFor="user_email" onClick={() => setIsEditingData('email')}>
               <span className={s.title}>User email: </span>
@@ -96,22 +161,28 @@ export const ProfilePage = () => {
               )}
             </label>
           </div>
+
           <div className={s.user_role}>
             <label>
               <span className={s.title}>User role:</span>
               <span>{userProfile.role}</span>
             </label>
           </div>
+
+          <div className={s.profile_page_actions}>
+            <button type="submit" className={s.save} disabled={loading}>
+              {loading ? 'Saving...' : 'Save changes'}
+            </button>
+          </div>
         </div>
-      </motion.div>
-      <motion.div
+      </motion.form>
+
+      {/* Password form */}
+      <motion.form
+        onSubmit={handlePasswordSubmit}
         initial={{ opacity: 0, translateY: 25 }}
         animate={{ opacity: 1, translateY: 0 }}
-        transition={{
-          duration: 1,
-          delay: 0.5,
-          ease: 'linear',
-        }}
+        transition={{ duration: 1, delay: 0.5, ease: 'linear' }}
         className={s.personal_info__wrapper}
       >
         <div className={s.security}>
@@ -121,7 +192,7 @@ export const ProfilePage = () => {
               <span>Old password</span>
               <input
                 type="password"
-                name="old password"
+                name="old_password"
                 id="old_password"
                 placeholder="***********"
               />
@@ -130,7 +201,7 @@ export const ProfilePage = () => {
               <span>New password</span>
               <input
                 type="password"
-                name="new password"
+                name="new_password"
                 id="new_password"
                 placeholder="***********"
               />
@@ -139,17 +210,19 @@ export const ProfilePage = () => {
               <span>Confirm new password</span>
               <input
                 type="password"
-                name="confirm new password"
+                name="confirm_password"
                 id="confirm_password"
                 placeholder="***********"
               />
             </label>
           </div>
+          <div className={s.profile_page_actions}>
+            <button type="submit" className={s.save} disabled={loading}>
+              {loading ? 'Saving...' : 'Change password'}
+            </button>
+          </div>
         </div>
-      </motion.div>
-      <div className={s.profile_page_actions}>
-        <button className={s.save}>Save changes</button>
-      </div>
+      </motion.form>
     </section>
   )
 }

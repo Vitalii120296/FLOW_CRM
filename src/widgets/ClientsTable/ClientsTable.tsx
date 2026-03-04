@@ -37,14 +37,12 @@ export const ClientsTable: React.FC<Props> = ({ clients, setClients }) => {
 
         <tbody>
           {clients.map((client, index) => {
-            const [name = '—', surname = '—'] = client.name.split(' ')
-
             return (
               <tr key={client.id} onClick={() => setSelectedClient(client)} className={styles.row}>
                 <td className={styles.tdIndex}>{index + 1}</td>
 
-                <td>{name}</td>
-                <td>{surname}</td>
+                <td>{client.first_name}</td>
+                <td>{client.last_name}</td>
 
                 <td>{client.phone ?? '—'}</td>
 
@@ -56,7 +54,7 @@ export const ClientsTable: React.FC<Props> = ({ clients, setClients }) => {
                   </span>
                 </td>
 
-                <td>{client.createdBy.name}</td>
+                <td>{client.createdBy?.first_name}</td>
               </tr>
             )
           })}

@@ -20,8 +20,16 @@ import { FaGithub } from 'react-icons/fa'
 
 import { motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
+import { useAuth } from '../../app/Components/Contexts/AuthContext'
+import { useEffect } from 'react'
 
 export const StartPage = () => {
+  const { currentUser, logout, checkAuth } = useAuth()
+
+  useEffect(() => {
+    checkAuth()
+  }, [checkAuth])
+
   return (
     <div className={s.bg}>
       {/* HEADER */}
@@ -38,9 +46,15 @@ export const StartPage = () => {
             </div>
 
             <button className={s.loginBlock}>
-              <Link className={s.loginButton} to="/register">
-                Sign Up
-              </Link>
+              {currentUser ? (
+                <button className={s.loginButton} onClick={() => logout()}>
+                  Log out
+                </button>
+              ) : (
+                <Link className={s.loginButton} to="/login">
+                  Sign In
+                </Link>
+              )}
             </button>
           </div>
         </div>

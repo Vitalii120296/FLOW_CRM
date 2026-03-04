@@ -10,6 +10,7 @@ import { ProfilePage } from './pages/ProfilePage/ProfilePage.tsx'
 import { RegisterPage } from './pages/RegisterPage/RegisterPage.tsx'
 import { LoginPage } from './pages/LoginPage/LoginPage.tsx'
 import { StartPage } from './pages/StartPage/StartPage.tsx'
+import { RequireAuth } from './app/Components/Contexts/RequireAuth.tsx'
 
 export const Root = () => {
   return (
@@ -23,15 +24,17 @@ export const Root = () => {
         <Route path="login" element={<LoginPage />} />
 
         {/* CRM внутри App */}
-        <Route path="crm" element={<App />}>
-          <Route index element={<Kanban />} />
-          <Route path="clients" element={<ClientsPage />} />
-          <Route path="products" element={<ProductsPage />} />
-          <Route path="products/create" element={<CreateProductPage />} />
-          <Route path="profile" element={<ProfilePage />} />
-          {/* //NOTE: закоментував */}
-          {/* <Route path="user-management" element={<UserManagmentPage />} /> */}
-          <Route path="properties" element={<PropertiesPage />} />
+        <Route path="/" element={<RequireAuth />}>
+          <Route path="crm" element={<App />}>
+            <Route index element={<Kanban />} />
+            <Route path="clients" element={<ClientsPage />} />
+            <Route path="products" element={<ProductsPage />} />
+            <Route path="products/create" element={<CreateProductPage />} />
+            <Route path="profile" element={<ProfilePage />} />
+            {/* //NOTE: закоментував */}
+            {/* <Route path="user-management" element={<UserManagmentPage />} /> */}
+            <Route path="properties" element={<PropertiesPage />} />
+          </Route>
         </Route>
 
         {/* Любой неизвестный путь редиректим на / */}

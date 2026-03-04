@@ -10,6 +10,7 @@ import { CLIENT_STATUSES } from '../../shared/constants/constants'
 import { getValidationErrorMessage } from '../../types/validationMessages'
 import { validateService } from '../../services/validateServices'
 import type { ValidationError } from '../../types/ValidationErrorType'
+import { clientService } from '../../services/clientServices'
 
 type Props = {
   client: Client
@@ -18,7 +19,8 @@ type Props = {
 }
 
 type FormErrors = {
-  name?: ValidationError
+  first_name?: ValidationError
+  last_name?: ValidationError
   email?: ValidationError
   phone?: ValidationError
   comment?: ValidationError
@@ -36,8 +38,8 @@ export const ClientDetails: React.FC<Props> = ({ client, setClient, exit }) => {
   const validateForm = (): boolean => {
     const newErrors: FormErrors = {}
 
-    const nameError = validateService.validateName(form.name ?? '')
-    if (nameError) newErrors.name = nameError
+    const nameError = validateService.validateName(form.first_name ?? '')
+    if (nameError) newErrors.first_name = nameError
 
     const emailError = validateService.validateEmail(form.email ?? '')
     if (emailError) newErrors.email = emailError
@@ -82,9 +84,14 @@ export const ClientDetails: React.FC<Props> = ({ client, setClient, exit }) => {
     autoFocus: true,
   })
 
-  const handleSubmitClient = () => {
+  const handleSubmitClient = async () => {
     if (!validateForm()) return
 
+    try {
+      await clientService.updateClient(`${form.id}`, { ...form })
+    } catch (error) {
+      console.log(error)
+    }
     setClient(form)
     exit()
   }
@@ -109,24 +116,46 @@ export const ClientDetails: React.FC<Props> = ({ client, setClient, exit }) => {
     <>
       <Modal isOpen={Boolean(client)} onClose={exit} titleId="client-title" title="Client details">
         <div className={s.client_info}>
-          <div className={s.client_info__row} {...editingAtr('name')}>
-            <label>Name:</label>
+          <div className={s.client_info__row} {...editingAtr('first_name')}>
+            <label>First name:</label>
 
-            {editingField === 'name' ? (
+            {editingField === 'first_name' ? (
               <input
                 type="text"
-                value={form.name ?? ''}
-                {...changeAtributes('name')}
-                className={errors.name ? 'errorInput' : ''}
+                value={form.first_name ?? ''}
+                {...changeAtributes('first_name')}
+                className={errors.first_name ? 'errorInput' : ''}
               />
             ) : (
-              <span>{form.name}</span>
+              <span>{form.first_name}</span>
             )}
 
-            {errors.name && (
+            {errors.first_name && (
               <div className="errorContainer">
                 <BiSolidError className="errorIcon" />
-                <p className="errorText">{getValidationErrorMessage(errors.name)}</p>
+                <p className="errorText">{getValidationErrorMessage(errors.first_name)}</p>
+              </div>
+            )}
+          </div>
+
+          <div className={s.client_info__row} {...editingAtr('last_name')}>
+            <label>Last name:</label>
+
+            {editingField === 'last_name' ? (
+              <input
+                type="text"
+                value={form.last_name ?? ''}
+                {...changeAtributes('last_name')}
+                className={errors.first_name ? 'errorInput' : ''}
+              />
+            ) : (
+              <span>{form.last_name}</span>
+            )}
+
+            {errors.last_name && (
+              <div className="errorContainer">
+                <BiSolidError className="errorIcon" />
+                <p className="errorText">{getValidationErrorMessage(errors.last_name)}</p>
               </div>
             )}
           </div>
