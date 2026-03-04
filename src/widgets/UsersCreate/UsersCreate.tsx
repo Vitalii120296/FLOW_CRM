@@ -49,8 +49,9 @@ export const UsersCreate: React.FC<UsersCreateProps> = ({ onAddUser }) => {
     }
 
     const newUser: LocalUser = {
-      id: crypto.randomUUID(),
-      name: email.split('@')[0],
+      id: +Math.random().toString().slice(3),
+      first_name: email.split('@')[0],
+      last_name: email.split('@')[0],
       email,
       password,
       role: 'user',
