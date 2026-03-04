@@ -31,7 +31,8 @@ export const UsersTable: React.FC<Props> = ({ users, onToggleStatus }) => {
             return (
               <tr key={user.id} className={isInactive ? styles.inactiveRow : ''}>
                 <td className={styles.tdIndex}>{index + 1}</td>
-                <td>{user.name}</td>
+                <td>{user.first_name}</td>
+                <td>{user.last_name}</td>
                 <td>{user.email}</td>
                 <td>{user.role}</td>
                 <td>{user.status}</td>
@@ -39,7 +40,7 @@ export const UsersTable: React.FC<Props> = ({ users, onToggleStatus }) => {
                 <td className={styles.actions}>
                   <button
                     className={styles.iconButton}
-                    onClick={() => onToggleStatus(user.id)}
+                    onClick={() => onToggleStatus(user.id.toString())}
                     disabled={false}
                     title={isInactive ? 'Activate user' : 'Deactivate user'}
                   >
