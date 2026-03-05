@@ -2,9 +2,14 @@ import type { SystemUser } from './auth'
 
 export type ClientStatus = 'new' | 'in_progress' | 'done'
 
-type ClientNote = {
+export type ClientNote = {
   id: string
-  content: string
+  description: string
+}
+
+export type ClientNoteResponse = {
+  id: number
+  description: string
 }
 
 export type Client = {
