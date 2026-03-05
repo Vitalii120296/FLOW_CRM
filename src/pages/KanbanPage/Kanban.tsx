@@ -98,7 +98,12 @@ export const Kanban = () => {
     await clientService.updateClientStatus(clientId, finishColumn.id)
   }
 
-  const updateColumnsData = (updatedClient: Client) => {
+  const updateColumnsData = (updatedClient: Client | ((prevState: Client) => Client)) => {
+    if (typeof updatedClient === 'function') {
+      // Handle function form (shouldn't happen in this context, but for type compatibility)
+      return
+    }
+
     setColumnsData((prev) => {
       if (!prev) return prev
 
