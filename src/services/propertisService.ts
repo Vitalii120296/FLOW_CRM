@@ -6,7 +6,7 @@ export const propertiesService = {
     return client.get('business/')
   },
 
-  updateProperties: (data: PropertiesInfo): Promise<PropertiesInfo> => {
+  updateProperties: (data: FormData): Promise<PropertiesInfo> => {
     return client.post('business/', data)
   },
 }

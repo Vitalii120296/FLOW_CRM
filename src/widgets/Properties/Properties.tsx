@@ -23,7 +23,6 @@ export const Properties = () => {
   const titleInputRef = useRef<HTMLInputElement | null>(null)
   const [errors, setErrors] = useState<FormErrors>({})
 
-  // единый стейт для всей информации о бизнесе
   const [businessInfo, setBusinessInfo] = useState<PropertiesInfo>({
     name: '',
     description: '',
@@ -33,6 +32,7 @@ export const Properties = () => {
     img: '',
   })
 
+  const [logoFile, setLogoFile] = useState<File | null>(null)
   const [isEditingTitle, setIsEditingTitle] = useState(false)
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [loading, setLoading] = useState(true)
@@ -62,10 +62,12 @@ export const Properties = () => {
     if (!file) return
     const previewUrl = URL.createObjectURL(file)
     setBusinessInfo((prev) => ({ ...prev, img: previewUrl }))
+    setLogoFile(file) // зберігаємо файл для відправки
   }
 
   const handleRemoveLogo = () => {
-    setBusinessInfo((prev) => ({ ...prev, img: null }))
+    setBusinessInfo((prev) => ({ ...prev, img: '' }))
+    setLogoFile(null)
     if (fileInputRef.current) fileInputRef.current.value = ''
   }
 
@@ -113,14 +115,24 @@ export const Properties = () => {
       return
     }
 
-    console.log('Business Info to save:', businessInfo)
-
     setIsSubmitting(true)
 
     try {
-      await propertiesService.updateProperties(businessInfo)
+      const formData = new FormData()
+      formData.append('name', businessInfo.name)
+      formData.append('description', businessInfo.description)
+      formData.append('type', businessInfo.type)
+      formData.append('email', businessInfo.email)
+      formData.append('phone', businessInfo.phone)
+
+      if (logoFile) {
+        formData.append('img', logoFile)
+      }
+
+      await propertiesService.updateProperties(formData)
 
       alert('Data saved successfully!')
+      setLogoFile(null)
     } catch {
       alert('An error occurred while saving data')
     } finally {
