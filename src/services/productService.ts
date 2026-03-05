@@ -22,6 +22,12 @@ export const productService = {
     return client.post('/products/', data)
   },
 
+  createWithFile: (data: FormData): Promise<Product> => {
+    return client.post('/products/', data, {
+      headers: { 'Content-Type': 'multipart/form-data' },
+    })
+  },
+
   // обновить продукт
   update: (id: string, data: Partial<Product>): Promise<Product> => {
     return client.patch(`/products/${id}/`, data)

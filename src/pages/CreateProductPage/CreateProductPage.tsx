@@ -7,6 +7,7 @@ import { BiSolidError } from 'react-icons/bi'
 import type { Product } from '../../types/product'
 import { ProductCard } from '../../app/Components/ProductCard/ProductCard'
 import { useProductValidate } from '../../shared/hooks/useProductValidate'
+import { productService } from '../../services/productService'
 
 const emptyProduct: Product = {
   id: '',
@@ -54,23 +55,15 @@ export const CreateProductPage: React.FC = () => {
     setLoading(true)
 
     const formData = new FormData()
-    formData.append('title', product.title)
+    formData.append('name', product.title)
     formData.append('price', String(product.price))
     formData.append('description', product.description)
     if (product.file) formData.append('image', product.file)
 
     try {
-      const response = await fetch('/api/products', {
-        method: 'POST',
-        body: formData,
-      })
-
-      if (!response.ok) throw new Error('Failed to create product')
-
-      const createdProduct = await response.json()
+      const createdProduct = await productService.createWithFile(formData) // используем service
       console.log('Created product:', createdProduct)
 
-      // очищаємо форму
       setProduct(emptyProduct)
       alert('Product created successfully!')
     } catch (err) {
