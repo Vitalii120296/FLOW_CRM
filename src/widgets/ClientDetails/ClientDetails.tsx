@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import type { Client } from '../../types'
 import s from './ClientDetails.module.scss'
 import { BiSolidError } from 'react-icons/bi'
@@ -15,7 +15,7 @@ import { clientService } from '../../services/clientServices'
 type Props = {
   client: Client
   exit: () => void
-  setClient: (updatedClient: Client) => void
+  setClient: React.Dispatch<React.SetStateAction<Client>>
 }
 
 type FormErrors = {
@@ -31,8 +31,24 @@ export const ClientDetails: React.FC<Props> = ({ client, setClient, exit }) => {
   const [editingField, setEditingField] = useState<keyof Client | null>(null)
   const [form, setForm] = useState<Client>(client)
   const [newNote, setNewNote] = useState<string>('')
-
   const [errors, setErrors] = useState<FormErrors>({})
+
+  useEffect(() => {
+    const fetchNotes = async (id: string) => {
+      try {
+        const notes = await clientService.getNotes(id)
+        setClient((prev) => ({ ...prev, notes }))
+        setForm((prev) => ({ ...prev, notes })) // синхронізуємо form.notes
+      } catch (error) {
+        console.log(error)
+      }
+    }
+    fetchNotes(client.id)
+  }, [client.id])
+
+  useEffect(() => {
+    setForm(client)
+  }, [client])
 
   //#region Validate
   const validateForm = (): boolean => {
@@ -96,20 +112,33 @@ export const ClientDetails: React.FC<Props> = ({ client, setClient, exit }) => {
     exit()
   }
 
-  const handleSubmitNote = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmitNote = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     if (!newNote.trim()) return
 
-    const noteToAdd = {
-      id: Date.now().toString(),
-      content: newNote.trim(),
-    }
+    try {
+      const createdNote = await clientService.addNote(client.id, {
+        id: client.id,
+        description: newNote.trim(),
+      })
 
-    setForm((prev) => ({
-      ...prev,
-      notes: prev.notes ? [noteToAdd, ...prev.notes] : [noteToAdd],
-    }))
-    setNewNote('')
+      setForm((prev) => ({
+        ...prev,
+        notes: prev.notes
+          ? [{ id: createdNote.id.toString(), description: createdNote.description }, ...prev.notes]
+          : [{ id: createdNote.id.toString(), description: createdNote.description }],
+      }))
+      setClient((prev) => ({
+        ...prev,
+        notes: prev.notes
+          ? [{ id: createdNote.id.toString(), description: createdNote.description }, ...prev.notes]
+          : [{ id: createdNote.id.toString(), description: createdNote.description }],
+      }))
+
+      setNewNote('')
+    } catch (error) {
+      console.log(error)
+    }
   }
 
   return (
@@ -146,7 +175,7 @@ export const ClientDetails: React.FC<Props> = ({ client, setClient, exit }) => {
                 type="text"
                 value={form.last_name ?? ''}
                 {...changeAtributes('last_name')}
-                className={errors.first_name ? 'errorInput' : ''}
+                className={errors.last_name ? 'errorInput' : ''}
               />
             ) : (
               <span>{form.last_name}</span>
@@ -302,13 +331,15 @@ export const ClientDetails: React.FC<Props> = ({ client, setClient, exit }) => {
                 </button>
               </div>
             </form>
-            {form.notes
-              ? form.notes.map((note) => (
-                  <div key={note.id} className={s.client_notes__row}>
-                    {note.content}
-                  </div>
-                ))
-              : 'Empty'}
+            {form.notes?.length ? (
+              form.notes.map((note) => (
+                <div key={note.id} className={s.client_notes__row}>
+                  {note.description}
+                </div>
+              ))
+            ) : (
+              <p>Empty</p>
+            )}
           </div>
         </div>
       </Modal>

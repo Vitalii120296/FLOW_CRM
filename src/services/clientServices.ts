@@ -1,5 +1,5 @@
 import { httpClient as client } from '../shared/api/httpClient'
-import type { Client } from '../types'
+import type { Client, ClientNote, ClientNoteResponse } from '../types'
 
 export const clientService = {
   getAll: (): Promise<Client[]> => {
@@ -24,5 +24,13 @@ export const clientService = {
 
   updateClientStatus: (clientId: string, status: string): Promise<Client> => {
     return client.patch(`/clients/${clientId}/`, { status })
+  },
+
+  getNotes: (id: string): Promise<ClientNote[]> => {
+    return client.get(`notes/?client=${id}`)
+  },
+
+  addNote: (id: string, data: ClientNote): Promise<ClientNoteResponse> => {
+    return client.post(`notes/?client=${id}`, data)
   },
 }
