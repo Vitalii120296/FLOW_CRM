@@ -122,6 +122,7 @@ export const ClientDetails: React.FC<Props> = ({ client, setClient, exit }) => {
         description: newNote.trim(),
       })
 
+      // оновлюємо і form, і client
       setForm((prev) => ({
         ...prev,
         notes: prev.notes
