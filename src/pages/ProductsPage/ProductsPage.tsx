@@ -2,11 +2,12 @@ import { useEffect, useState } from 'react'
 import s from './ProductsPage.module.scss'
 import cn from 'classnames'
 import type { Product } from '../../types/product'
-import { getProductsTestApi } from '../../shared/api/products.test-api'
+// import { getProductsTestApi } from '../../shared/api/products.test-api'
 import { ProductCard } from '../../app/Components/ProductCard/ProductCard'
 import { Loader } from '../../app/Components/Loader/Loader'
 import { useNavigate } from 'react-router-dom'
 import { BsPencilSquare, BsTrash3Fill, BsFillBagPlusFill } from 'react-icons/bs'
+import { productService } from '../../services/productService'
 
 export const ProductsPage = () => {
   const [products, setProducts] = useState<Product[]>([])
@@ -17,7 +18,8 @@ export const ProductsPage = () => {
   const navigate = useNavigate()
 
   useEffect(() => {
-    getProductsTestApi()
+    productService
+      .getAll()
       .then((res) => {
         setProducts(res)
       })
@@ -26,7 +28,8 @@ export const ProductsPage = () => {
       })
 
     if (showTrash) {
-      getProductsTestApi()
+      productService
+        .getAll()
         .then((res) => {
           setTrash(res)
         })

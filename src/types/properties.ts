@@ -4,5 +4,5 @@ export interface PropertiesInfo {
   type: string
   email: string
   phone: string
-  img: string | null
+  img?: string | null
 }

@@ -29,7 +29,6 @@ export const Properties = () => {
     type: '',
     email: '',
     phone: '',
-    img: '',
   })
 
   const [logoFile, setLogoFile] = useState<File | null>(null)
